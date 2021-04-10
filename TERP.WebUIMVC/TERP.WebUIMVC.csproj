@@ -89,7 +89,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
-    <Content Include="layout\html\test.html" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -115,6 +114,7 @@
     <Folder Include="layout\assets\css\" />
     <Folder Include="layout\assets\img\" />
     <Folder Include="layout\assets\js\" />
+    <Folder Include="layout\html\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <PropertyGroup>
