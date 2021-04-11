@@ -1,0 +1,46 @@
+/* Custom CSS Start */
+/* BALZEN*/
+.color-bal {
+    color: #93329e !important;
+  }
+  
+  .color-zen {
+    color: #5eaaa8 !important;
+  }
+  
+  .header-text-left {
+    color: #3f3f3f;
+  }
+  
+  .hcardp {
+    padding: 0.75rem 2.25rem !important;
+  }
+  
+  .header-minicard {
+    margin-right: 20px;
+    margin-top: 20px;
+  }
+  
+  .hp-title {
+    display: flex;
+  }
+  
+  .koneks-sun {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .hp-h4 {
+    margin-left: 10px;
+  }
+  
+  /* icon position*/
+  .itpot{
+    position: relative;
+    top: 2px;
+  }
+  
+  .hp-word-card{
+    border-radius: 0.5rem !important;
+  }
+  /* Custom CSS End */
