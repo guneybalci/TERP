@@ -37,7 +37,7 @@
                 end: n,
                 allDay: !1,
                 className: a
-            }, !0), o.$modal.modal("hide")) : alert("You have to give a title to your event"), !1
+            }, !0), o.$modal.modal("hide")) : /*alert("Etkinliğinize bir başlık girmediniz.")*/"", !1
         }), o.$calendarObj.fullCalendar("unselect")
     }, t.prototype.enableDrag = function () {
         e(this.$event).each(function () {
