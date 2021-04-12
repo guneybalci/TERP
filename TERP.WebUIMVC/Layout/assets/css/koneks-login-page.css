@@ -200,6 +200,8 @@
     text-align: center;
   }
   .login img {
+    position: relative;
+    right: 2px;
     margin-bottom: 25px;
   }
   

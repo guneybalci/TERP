@@ -314,9 +314,10 @@ a[data-goto]:hover {
 }
 
 .fc-scroller::-webkit-scrollbar {
-    border-left: 1px solid #c8cacc;
+    border-left: 1px solid #ddd;
     border-radius: 10px;
-    border-radius-top:0;
+    border-top-left-radius: 0px !important;
+    border-bottom-left-radius: 0px !important;
     height: 10px;
     width: 8px;
 }

@@ -1,59 +1,3 @@
-/*
-    Table of Contents
-
-    Name                 : Mophy
-    Author               : DexignZone
-    Author Portfolio     : https://themeforest.net/user/dexignzone/portfolio
-    
-
-
-    Table of Sass Contents
-
-    1. Abstracts
-        _bs-custom
-        _inheritance
-        _maps
-        _mixin
-        _variable
-
-    2. bootstrap 
-        -Here goes all official bootstrap scss files
-
-    3. Global/Base
-        _color
-        _custom-grid
-        _fonts
-        _helper
-        _reset
-
-    4. layout
-        +footer
-        +header
-        +rtl
-        +sidebar
-        +tables
-        +theme
-        +version-dark
-
-    5. Conponents
-        +app
-        +charts
-        +forms
-        +map
-        +uc
-        +ui
-        +widget
-
-    6. Page
-        _index-1
-        _page-error
-        _page-register
-        _page-signin
-        _page-user-lock
-        _page-user-lock
-
-*/
-/*$primary  : #7356f1 !default;*/
 @import url("../icons/simple-line-icons/css/simple-line-icons.css");
 @import url("../icons/font-awesome-old/css/font-awesome.min.css");
 @import url("../icons/material-design-iconic-font/css/materialdesignicons.min.css");
@@ -68,7 +12,7 @@
 body::-webkit-scrollbar {
   border-radius: 10px;
   height: 10px;
-  width: 8px;
+  width: 10px;
 }
 body::-webkit-scrollbar-thumb {
   background: #c8cacc;
