@@ -11,7 +11,7 @@
     }, t.prototype.onEventClick = function (t, n, a) {
         var o = this,
             i = e("<form></form>");
-        i.append("<label>Etkinlik Adını Değiştir</label>"), i.append("<div class='input-group'><input class='form-control edit-trenchancy' type=text value='" + t.title + "' /><span class='input-group-btn'><button type='submit' class='btn edit-save waves-effect waves-light'><i class='fa fa-check'></i> Kaydet</button></span></div>"), o.$modal.modal({
+        i.append("<label>Etkinlik Adını Değiştir</label>"), i.append("<div class='input-group'><input class='form-control edit-trenchancy boradi-0' type=text value='" + t.title + "' /><span class='input-group-btn'><button type='submit' class='btn edit-save waves-effect waves-light boxshan boradi-4'><i class='fa fa-check'></i> Kaydet</button></span></div>"), o.$modal.modal({
             backdrop: "static"
         }), o.$modal.find(".delete-event").show().end().find(".save-event").hide().end().find(".modal-body").empty().prepend(i).end().find(".delete-event").unbind("click").on("click", function () {
             o.$calendarObj.fullCalendar("removeEvents", function (e) {

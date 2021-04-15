@@ -1205,12 +1205,15 @@ a.fc-more:hover {
 }
 
 .modal-body {
-    color: #3d4465 !important;
+    /* color: #3d4465 !important; */
+    color: #181818 !important;
 }
 
 .btn-ecreate {
-    background-color: #3d4465 !important;
-    border-color: #3d4465 !important;
+    /* background-color: #3d4465 !important; */
+    /* border-color: #3d4465 !important; */
+    background-color: #3b3289 !important;
+    border-color: #3b3289 !important;
     color: #fff !important;
 }
 

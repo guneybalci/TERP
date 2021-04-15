@@ -1,51 +1,171 @@
 /* Custom CSS Start */
 /* BALZEN*/
 .color-bal {
-    color: #93329e !important;
-  }
-  
-  .color-zen {
-    color: #5eaaa8 !important;
-  }
-  
-  .header-text-left {
-    color: #3f3f3f;
-  }
-  
-  .hcardp {
-    padding: 0.75rem 2.25rem !important;
-  }
-  
-  .header-minicard {
-    margin-right: 20px;
-    margin-top: 20px;
-  }
-  
-  .hp-title {
-    display: flex;
-  }
-  
-  .koneks-sun {
-    width: 32px;
-    height: 32px;
-  }
-  
-  .hp-h4 {
-    margin-left: 10px;
-  }
-  
-  /* icon position*/
-  .itpot{
-    position: relative;
-    top: 2px;
-  }
-  
-  .hp-word-card{
-    border-radius: 0.5rem !important;
-  }
+  color: #93329e !important;
+}
 
-  .kc-card{
-    border-radius: 0.5rem !important;
-  }
-  /* Custom CSS End */
+.color-zen {
+  color: #5eaaa8 !important;
+}
+.boradi-0 {
+  border-radius: 0px !important;
+}
+.boradi-2 {
+  border-radius: 2px !important;
+}
+.boradi-4 {
+  border-radius: 4px !important;
+}
+.boradi-6 {
+  border-radius: 6px !important;
+}
+.boradi-8 {
+  border-radius: 8px !important;
+}
+.boradi-10 {
+  border-radius: 10px !important;
+}
+.boradi-btn{
+   border-radius: 1.25rem;
+}
 
+.boxshan{
+box-shadow: none !important;
+}
+
+.border-bn{
+  border-bottom: none !important;
+}
+.border-tn{
+  border-top: none !important;
+}
+
+.header-text-left {
+  color: #3f3f3f;
+}
+
+.hcardp {
+  padding: 0.75rem 2.25rem !important;
+}
+
+.header-minicard {
+  margin-right: 20px;
+  margin-top: 20px;
+  margin-left: 40px;
+}
+
+.ppin{
+  position: absolute;
+  display: block;
+  width: 100%;
+  margin: auto;
+}
+
+.hp-title {
+  display: flex;
+}
+
+.koneks-sun {
+  width: 32px;
+  height: 32px;
+}
+
+.hp-h4 {
+  margin-left: 10px;
+}
+
+/* icon position*/
+.itpot {
+  position: relative;
+  top: 2px;
+}
+
+.hp-word-card {
+  border-radius: 0.5rem !important;
+}
+
+.kc-card {
+  border-radius: 0.5rem !important;
+}
+
+.car-list-card {
+  border-radius: 0.5rem !important;
+  transition: none !important;
+}
+
+.cp-sedet:hover {
+  background-color: #f4f5f9;
+}
+
+.cp-br {
+  border-radius: 4px;
+}
+
+.cp-br-6 {
+  border-radius: 6px;
+}
+
+.cp-custdd {
+  top: 5px !important;
+  left: 7px !important;
+}
+
+.cp-btn-add {
+  background-color: #fff;
+  border-color: #81879e;
+  color: #3b3289;
+}
+.cp-btn-add:hover {
+  background-color: #fff;
+}
+
+.cp-new-add{
+  width: 100%;
+    background: #fff;
+    border: none;
+    outline: none;
+    padding: 15px 30px;
+    border-bottom: 1px solid #f3f3f5;
+}
+.cp-cdd-menu{
+  padding: 0px !important;
+  top: 4px !important;
+  left: 6px !important;
+  border-radius: 4px !important;
+
+}
+
+.cp-new-add{
+  color: #3b3289 !important;
+
+}
+.cp-new-add:hover{
+  background-color: #f3f3f5;
+  color: #ef7f1b !important;
+  border-radius: 4px!important;
+}
+.cp-new-add:focus{
+  box-shadow: none !important;
+}
+
+.cp-modal-dialog{
+  max-width: 750px !important;
+  /* top: 15% !important; */
+}
+
+.cp-anc-cont{
+  padding-left: 0px;
+  padding-right: 0px;
+}
+.cp-anc-ta{
+  resize: none;
+}
+
+.cp-anc-modal-body{
+  padding-top: 0px;
+  padding-bottom: 1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+/* Custom CSS End */
