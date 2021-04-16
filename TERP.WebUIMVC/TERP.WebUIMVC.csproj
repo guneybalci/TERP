@@ -314,7 +314,12 @@
     <Content Include="Layout\assets\vendor\toastr\css\toastr.min.css" />
     <Content Include="Layout\assets\vendor\toastr\js\toastr.min.js" />
     <Content Include="Layout\assets\vendor\wnumb\wNumb.js" />
+    <Content Include="Layout\html\terp-anasayfa.html" />
+    <Content Include="Layout\html\terp-arac-listesi-detayli.html" />
+    <Content Include="Layout\html\terp-arac-listesi.html" />
     <Content Include="Layout\html\terp-cnavigation.html" />
+    <Content Include="Layout\html\terp-page-login.html" />
+    <Content Include="Layout\html\terp-takvim.html" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
