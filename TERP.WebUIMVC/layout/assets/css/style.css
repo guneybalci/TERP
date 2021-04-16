@@ -37128,6 +37128,7 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
   background-color: transparent !important;
   font-weight: 400;
   color: #3f3f3f !important;
+  padding: 0.938rem 0.7rem;
 }
 [data-theme-version="dark"] .bootstrap-select .btn {
   border-color: #333a54 !important;

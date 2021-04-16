@@ -1,5 +1,6 @@
 /* Custom CSS Start */
 /* BALZEN*/
+
 .color-bal {
   color: #93329e !important;
 }
@@ -7,6 +8,23 @@
 .color-zen {
   color: #5eaaa8 !important;
 }
+
+.show::-webkit-scrollbar {
+  border-radius: 10px;
+  height: 10px;
+  width: 8px;
+}
+
+.show::-webkit-scrollbar-thumb {
+  background: #c8cacc;
+  background-color: #c8cacc;
+  border-radius: 10px;
+}
+
+.show::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
 .boradi-0 {
   border-radius: 0px !important;
 }
@@ -126,6 +144,9 @@ box-shadow: none !important;
     outline: none;
     padding: 15px 30px;
     border-bottom: 1px solid #f3f3f5;
+}
+.cp-new-add:last-child{
+   border-bottom: none !important;
 }
 .cp-cdd-menu{
   padding: 0px !important;
