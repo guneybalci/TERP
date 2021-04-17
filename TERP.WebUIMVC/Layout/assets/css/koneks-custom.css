@@ -137,10 +137,12 @@ box-shadow: none !important;
 
 .hp-word-card {
   border-radius: 0.5rem !important;
+  transition: none !important;
 }
 
 .kc-card {
   border-radius: 0.5rem !important;
+  transition: none !important;
 }
 
 .car-list-card {
@@ -242,6 +244,7 @@ box-shadow: none !important;
 
 .uc-card{
   border-radius: 0.5rem !important;
+  transition: none !important;
 }
 
 .us-tarea{
@@ -253,4 +256,14 @@ box-shadow: none !important;
   top: -1px;
 }
 
+.chap-card{
+  transition: none !important;
+  border-radius: 0.5rem !important;
+}
+
+
+.po-card{
+  transition: none !important;
+  border-radius: 0.5rem !important;
+}
 /* Custom CSS End */
