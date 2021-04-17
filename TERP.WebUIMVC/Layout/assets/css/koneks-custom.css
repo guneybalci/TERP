@@ -1,5 +1,38 @@
 /* Custom CSS Start */
 /* BALZEN*/
+.clr-facebook{
+  color: #3b5998 !important;
+  border-color: #3b5998 !important;
+  
+}
+.clr-twitter{
+  color: #1da1f2 !important;
+  border-color: #1da1f2 !important;
+}
+.clr-youtube{
+  color: #ff0000 !important;
+  border-color: #ff0000 !important;
+}
+.clr-instagram{
+  color: #c32aa3 !important;
+  border-color: #c32aa3 !important;
+}
+.clr-linkedin{
+  color: #007bb6 !important;
+  border-color: #007bb6 !important;
+}
+.clr-yahoo{
+  color: #430297 !important;
+  border-color: #430297 !important;
+}
+.clr-skype{
+  color: #00aff0 !important;
+  border-color: #00aff0 !important;
+}
+.clr-gmail{
+  color: #db4439 !important;
+  border-color: #db4439 !important;
+}
 
 .color-bal {
   color: #93329e !important;
@@ -83,13 +116,17 @@ box-shadow: none !important;
   display: flex;
 }
 
+.hp-title > img{
+  margin-right: 10px;
+}
+
 .koneks-sun {
   width: 32px;
   height: 32px;
 }
 
 .hp-h4 {
-  margin-left: 10px;
+  /* margin-left: 10px; */
 }
 
 /* icon position*/
@@ -176,7 +213,7 @@ box-shadow: none !important;
 
 .cp-anc-cont{
   padding-left: 0px;
-  padding-right: 0px;
+  padding-right: 5px;
 }
 .cp-anc-ta{
   resize: none;
@@ -187,6 +224,33 @@ box-shadow: none !important;
   padding-bottom: 1rem;
   padding-left: 1rem;
   padding-right: 1rem;
+}
+
+.sm-cont{
+  padding-right: 0px;
+  padding-left: 0px;
+}
+
+.sm-card{
+  transition: none !important;
+  border-radius: 0.5rem !important;
+}
+
+.sm-txt{
+  color: #656773;
+}
+
+.uc-card{
+  border-radius: 0.5rem !important;
+}
+
+.us-tarea{
+  resize: none !important;
+}
+
+.us-tterms{
+  position: relative;
+  top: -1px;
 }
 
 /* Custom CSS End */

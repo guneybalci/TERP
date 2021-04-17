@@ -8,17 +8,14 @@
     <title>TERP - Anasayfa</title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon/favicon.ico">
+	<link href="../assets/vendor/jqvmap/css/jqvmap.min.css" rel="stylesheet">
 
-	<link href="../assets/vendor/fullcalendar/css/fullcalendar.min.css" rel="stylesheet">
-	<link href="../assets/vendor/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet">
 	<!-- <link href="../assets/vendor/lightgallery/css/lightgallery.min.css" rel="stylesheet"> -->
 
+	<link href="../assets/vendor/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet">
 	<link href="../assets/css/style.css" rel="stylesheet">
 	<link href="../assets/css/koneks-login-page.css" rel="stylesheet">
 	<link href="../assets/css/koneks-custom.css" rel="stylesheet">
-
-
-
 </head>
 
 <body>
@@ -187,7 +184,7 @@
                 <nav class="navbar navbar-expand">
                     <div class="collapse navbar-collapse justify-content-between">
                         <div class="header-left">
-							<div class="header-minicard">
+                            <div class="header-minicard">
                                 <div class="card mb-0 boradi-6">
 									<img class="ppin" src="../assets/icons/flaticon/push-pin.svg" width="20" height="20" alt="İçeriğe Ulaşılamıyor">
                                     <div class="card-body hcardp">
@@ -369,7 +366,7 @@
             </div>
         </div>
 
-		<div class="deznav">
+        <div class="deznav">
             <div class="deznav-scroll">
 				<ul class="metismenu" id="menu">
 					<li><a href="terp-takvim.html" class="ai-icon" aria-expanded="false">
@@ -386,6 +383,16 @@
 				<li><a href="terp-arac-listesi-detayli.html">Araç Listesi Detaylı</a></li>
 			</ul> -->
 		</li>
+		<li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+			<i class="flaticon-381-television"></i>
+			<span class="nav-text">Email</span>
+		</a>
+		<ul aria-expanded="false">
+			<li><a href="email-compose.html">E-posta yaz</a></li>
+			<li><a href="email-inbox.html">Gelen Kutusu</a></li>
+		
+		</ul>
+	</li>
 				<li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
 					<i class="flaticon-381-internet"></i>
 					<span class="nav-text">Bootstrap</span>
@@ -504,13 +511,13 @@
                             <li><a href="page-lock-screen.html">Lock Screen</a></li>
                         </ul>
                     </li>
-				    <li><a href="#" class="has-arrow ai-icon" aria-expanded="false">
+				    <li><a href="terp-ayarlar-sosyal-medya.html" class="has-arrow ai-icon" aria-expanded="false">
 						<i class="flaticon-381-settings-2"></i>
 						<span class="nav-text">Ayarlar</span>
 					</a>
 					<ul aria-expanded="false">
-						<li><a href="table-bootstrap-basic.html">?</a></li>
-						<li><a href="table-datatable-basic.html">Sosyal Medya</a></li>
+						<li><a href="table-bootstrap-basic.html">Kullanıcı Oluşturma</a></li>
+						<li><a href="terp-ayarlar-sosyal-medya.html">Sosyal Medya</a></li>
 					</ul>
 				</li>
                 </ul>
@@ -522,49 +529,130 @@
 			</div>
         </div>
         <div class="content-body">
-			<div class="container-fluid">
+            <div class="container-fluid">
                 <div class="page-titles">
-				<h4>Takvim</h4>
-				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="javascript:void(0)">Anasayfa</a></li>
-					<li class="breadcrumb-item active"><a href="javascript:void(0)">Takvim</a></li>
-				</ol>
+					<div class="hp-title">
+						<h4 class="hp-h4">Kullanıcı Oluşturma</h4>
+					</div>
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="javascript:void(0)">Anasayfa</a></li>
+						<li class="breadcrumb-item active"><a href="javascript:void(0)">Kullanıcı Oluşturma</a></li>
+					</ol>
                 </div>
-                <!-- row -->
-
-
                 <div class="row">
-                    <div class="col-xl-12 koncalender">
-                        <div class="card kc-card">
+                    <div class="col-lg-12">
+                        <div class="card uc-card">
+                            <div class="card-header">
+                                <h4 class="card-title">Yeni Kullanıcı Oluşturma</h4>
+                            </div>
                             <div class="card-body">
-                                <div id="calendar" class="app-fullcalendar"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- BEGIN MODAL -->
-                    <div class="modal fade none-border" id="event-modal">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h4 class="modal-title"><strong>Etkinlik Ekle</strong></h4>
-                                </div>
-                                <div class="modal-body"></div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-eclose waves-effect boradi-4" data-dismiss="modal">Kapat</button>
-                                    <button type="button" class="btn btn-ecreate save-event waves-effect waves-light boradi-4">Etkinlik Oluştur</button>
-                                    <button type="button" class="btn btn-danger delete-event waves-effect waves-light boradi-4" data-dismiss="modal">Sil</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                                <div class="form-validation">
+                                    <form class="form-valide" action="#" method="post">
+                                        <div class="row">
+                                            <div class="col-xl-6">
+                                                <div class="form-group row">
+                                                    <label class="col-lg-4 col-form-label" for="val-username">Kullanıcı Adı
+                                                        <span class="text-danger">*</span>
+                                                    </label>
+                                                    <div class="col-lg-6">
+                                                        <input type="text" class="form-control" id="val-username" name="val-username" placeholder="Kullanıcı adı..">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-lg-4 col-form-label" for="val-email">E-Posta <span
+                                                            class="text-danger">*</span>
+                                                    </label>
+                                                    <div class="col-lg-6">
+                                                        <input type="text" class="form-control" id="val-email" name="val-email" placeholder="Email adresini giriniz..">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-lg-4 col-form-label" for="val-password">Şife
+                                                        <span class="text-danger">*</span>
+                                                    </label>
+                                                    <div class="col-lg-6">
+                                                        <input type="password" class="form-control" id="val-password" name="val-password" placeholder="Şifre giriniz..">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-lg-4 col-form-label" for="val-confirm-password">Şifre (Tekrar) <span
+                                                            class="text-danger">*</span>
+                                                    </label>
+                                                    <div class="col-lg-6">
+                                                        <input type="password" class="form-control" id="val-confirm-password" name="val-confirm-password" placeholder="Şifre tekrar giriniz..">
+                                                    </div>
+                                                </div>
+                                            
+                                            </div>
+                                            <div class="col-xl-6">
+                                                <div class="form-group row">
+                                                    <label class="col-lg-4 col-form-label" for="val-skill">Yetkilendirme
+                                                        <span class="text-danger">*</span>
+                                                    </label>
+                                                    <div class="col-lg-6">
+                                                        <select class="form-control default-select" id="val-skill" name="val-skill">
+                                                            <option value="">Rol Seçiniz</option>
+                                                            <option value="html">Koneks Admin</option>
+                                                            <option value="css">Koneks Personel</option>
+                                                            <option value="css">Koneks Muhasebe</option>
+                                                            <option value="css">Koneks Misafir</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            
+                                          
+                                                <div class="form-group row">
+                                                    <label class="col-lg-4 col-form-label" for="val-phoneus">Telefon
+                                                        <span class="text-danger">*</span>
+                                                    </label>
+                                                    <div class="col-lg-6">
+                                                        <input type="text" class="form-control" id="val-phoneus" name="val-phoneus" placeholder="0542 636 35 42" pattern="[0-9]{4}-[0-9]{3}-[0-9]{4}" >
+                                                        
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label class="col-lg-4 col-form-label" for="val-suggestions">Adres <span
+                                                            class="text-danger">*</span>
+                                                    </label>
+                                                    <div class="col-lg-6">
+                                                        <textarea class="form-control us-tarea" id="val-suggestions" name="val-suggestions" rows="6" placeholder="Adres giriniz.."></textarea>
+                                                    </div>
+                                                </div>
+                                          
+                                                <div class="form-group row">
+                                                    <label class="col-lg-4 col-form-label pt-0"><a
+                                                            href="javascript:void()">Şartlar&amp;Koşullar</a> <span
+                                                            class="text-danger">*</span>
+                                                    </label>
+                                                    <div class="col-lg-8">
+                                                        <label class="css-control css-control-primary css-checkbox" for="val-terms">
+                                                            <input type="checkbox" class="css-control-input mr-2 us-tterms"
+                                                                id="val-terms" name="val-terms" value="1">
+                                                            <span class="css-control-indicator"></span> Kabul Ediyorum</label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <div class="col-lg-8 ml-auto">
+                                                        <button type="submit" class="btn btn-primary boradi-4">Oluştur</button>
 
+                                                        <button type="submit" class="btn btn-light boradi-4 ml-2">Vazgeç</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+               
+                </div>
             </div>
         </div>
 		
         <!-- <div class="footer">
             <div class="copyright">
-                <p>Copyright © Designed &amp; Developed by <a href="#" target="_blank"><span class="color-bal">BAL</span><span class="color-zen">ZEN</span></a> 2021</p>
+                <p>Copyright © Designed &amp; Developed by <a href="#" target="_blank"><span class="color-bal">Bal</span><span class="color-zen">Zen</span></a> 2021</p>
             </div>
         </div> -->
 
@@ -577,12 +665,11 @@
 	<script src="../assets/js/deznav-init.js"></script>
 	<!-- <script src="../assets/vendor/lightgallery/js/lightgallery-all.min.js"></script> -->
 
-        <!-- Calender -->
-		<script src="../assets/vendor/jqueryui/js/jquery-ui.min.js"></script>
-		<script src="../assets/vendor/moment/moment.min.js"></script>
-	
-		<script src="../assets/vendor/fullcalendar/js/fullcalendar.min.js"></script>
-		<script src="../assets/js/plugins-init/fullcalendar-init.js"></script>
+    	
+    <!-- Jquery Validation -->
+    <script src="vendor/jquery-validation/jquery.validate.min.js"></script>
+    <!-- Form validate init -->
+    <script src="js/plugins-init/jquery.validate-init.js"></script>
 </body>
 
 

@@ -11508,6 +11508,9 @@ body {
   body {
     font-size: 0.875rem;
   }
+  .cp-anc-cont{
+    padding-right: 0px !important;
+  }
 }
 
 @media only screen and (max-width: 1400px) {
@@ -39457,8 +39460,9 @@ button:focus {
 .btn-light:active,
 .btn-light:focus,
 .btn-light:hover {
-  background: white;
-  border-color: white;
+  color: #212529;
+  background-color: #dbdfec;
+  border-color: #d3d7e7;
 }
 
 .btn-outline-primary:hover {
@@ -43876,7 +43880,7 @@ span#counter {
   background-color: #db4439;
 }
 .social-graph-wrapper.widget-instagram {
-  background-color: #833AB4;
+  background-color: #c32aa3;
 }
 .social-graph-wrapper .s-icon {
   font-size: 24px;

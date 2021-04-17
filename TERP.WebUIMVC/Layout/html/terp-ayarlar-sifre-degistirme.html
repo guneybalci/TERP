@@ -8,17 +8,14 @@
     <title>TERP - Anasayfa</title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon/favicon.ico">
+	<link href="../assets/vendor/jqvmap/css/jqvmap.min.css" rel="stylesheet">
 
-	<link href="../assets/vendor/fullcalendar/css/fullcalendar.min.css" rel="stylesheet">
-	<link href="../assets/vendor/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet">
 	<!-- <link href="../assets/vendor/lightgallery/css/lightgallery.min.css" rel="stylesheet"> -->
 
+	<link href="../assets/vendor/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet">
 	<link href="../assets/css/style.css" rel="stylesheet">
 	<link href="../assets/css/koneks-login-page.css" rel="stylesheet">
 	<link href="../assets/css/koneks-custom.css" rel="stylesheet">
-
-
-
 </head>
 
 <body>
@@ -187,7 +184,7 @@
                 <nav class="navbar navbar-expand">
                     <div class="collapse navbar-collapse justify-content-between">
                         <div class="header-left">
-							<div class="header-minicard">
+                            <div class="header-minicard">
                                 <div class="card mb-0 boradi-6">
 									<img class="ppin" src="../assets/icons/flaticon/push-pin.svg" width="20" height="20" alt="İçeriğe Ulaşılamıyor">
                                     <div class="card-body hcardp">
@@ -369,7 +366,7 @@
             </div>
         </div>
 
-		<div class="deznav">
+        <div class="deznav">
             <div class="deznav-scroll">
 				<ul class="metismenu" id="menu">
 					<li><a href="terp-takvim.html" class="ai-icon" aria-expanded="false">
@@ -386,6 +383,16 @@
 				<li><a href="terp-arac-listesi-detayli.html">Araç Listesi Detaylı</a></li>
 			</ul> -->
 		</li>
+		<li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+			<i class="flaticon-381-television"></i>
+			<span class="nav-text">Email</span>
+		</a>
+		<ul aria-expanded="false">
+			<li><a href="email-compose.html">E-posta yaz</a></li>
+			<li><a href="email-inbox.html">Gelen Kutusu</a></li>
+		
+		</ul>
+	</li>
 				<li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
 					<i class="flaticon-381-internet"></i>
 					<span class="nav-text">Bootstrap</span>
@@ -504,13 +511,13 @@
                             <li><a href="page-lock-screen.html">Lock Screen</a></li>
                         </ul>
                     </li>
-				    <li><a href="#" class="has-arrow ai-icon" aria-expanded="false">
+				    <li><a href="terp-ayarlar-sosyal-medya.html" class="has-arrow ai-icon" aria-expanded="false">
 						<i class="flaticon-381-settings-2"></i>
 						<span class="nav-text">Ayarlar</span>
 					</a>
 					<ul aria-expanded="false">
-						<li><a href="table-bootstrap-basic.html">?</a></li>
-						<li><a href="table-datatable-basic.html">Sosyal Medya</a></li>
+						<li><a href="table-bootstrap-basic.html">Kullanıcı Oluşturma</a></li>
+						<li><a href="terp-ayarlar-sosyal-medya.html">Sosyal Medya</a></li>
 					</ul>
 				</li>
                 </ul>
@@ -522,49 +529,95 @@
 			</div>
         </div>
         <div class="content-body">
-			<div class="container-fluid">
+            <div class="container-fluid">
                 <div class="page-titles">
-				<h4>Takvim</h4>
-				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="javascript:void(0)">Anasayfa</a></li>
-					<li class="breadcrumb-item active"><a href="javascript:void(0)">Takvim</a></li>
-				</ol>
+					<div class="hp-title">
+						<h4 class="hp-h4">Şifre Değiştirme</h4>
+					</div>
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="javascript:void(0)">Anasayfa</a></li>
+						<li class="breadcrumb-item active"><a href="javascript:void(0)">Şifre Değiştirme</a></li>
+					</ol>
                 </div>
-                <!-- row -->
-
-
                 <div class="row">
-                    <div class="col-xl-12 koncalender">
-                        <div class="card kc-card">
-                            <div class="card-body">
-                                <div id="calendar" class="app-fullcalendar"></div>
+                
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Parola Güncelleme</h4>
                             </div>
-                        </div>
-                    </div>
-                    <!-- BEGIN MODAL -->
-                    <div class="modal fade none-border" id="event-modal">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h4 class="modal-title"><strong>Etkinlik Ekle</strong></h4>
-                                </div>
-                                <div class="modal-body"></div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-eclose waves-effect boradi-4" data-dismiss="modal">Kapat</button>
-                                    <button type="button" class="btn btn-ecreate save-event waves-effect waves-light boradi-4">Etkinlik Oluştur</button>
-                                    <button type="button" class="btn btn-danger delete-event waves-effect waves-light boradi-4" data-dismiss="modal">Sil</button>
+                            <div class="card-body">
+                                <div class="basic-form">
+                                    <form class="form-valide-with-icon" action="#" method="post">
+                                        <div class="form-group">
+                                            <label class="text-label">Kullanıcı Adı</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                                                </div>
+                                                <input type="text" class="form-control" id="val-username1" name="val-username" placeholder="Kullanıcı adı...">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="text-label">Eski Şifre:</label>
+                                            <div class="input-group transparent-append">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                                                </div>
+                                                <input type="password" class="form-control" id="dz-password" name="val-password" placeholder="Eski şifre...">
+                                                <div class="input-group-append show-pass ">
+                                                    <span class="input-group-text "> 
+														<i class="fa fa-eye-slash"></i>
+														<i class="fa fa-eye"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="text-label">Yeni Şifre:</label>
+                                            <div class="input-group transparent-append">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                                                </div>
+                                                <input type="password" class="form-control" id="dz-password" name="val-password" placeholder="Yeni şifre...">
+                                                <div class="input-group-append show-pass ">
+                                                    <span class="input-group-text "> 
+														<i class="fa fa-eye-slash"></i>
+														<i class="fa fa-eye"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="text-label">Yeni Şifre (Tekrar):</label>
+                                            <div class="input-group transparent-append">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                                                </div>
+                                                <input type="password" class="form-control" id="dz-password" name="val-password" placeholder="Yeni şifre tekrar...">
+                                                <div class="input-group-append show-pass ">
+                                                    <span class="input-group-text "> 
+														<i class="fa fa-eye-slash"></i>
+														<i class="fa fa-eye"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    
+                                        <button type="submit" class="btn mr-2 btn-primary boradi-4">Güncelle</button>
+                                        <button type="submit" class="btn btn-light boradi-4">Vazgeç</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
 		
         <!-- <div class="footer">
             <div class="copyright">
-                <p>Copyright © Designed &amp; Developed by <a href="#" target="_blank"><span class="color-bal">BAL</span><span class="color-zen">ZEN</span></a> 2021</p>
+                <p>Copyright © Designed &amp; Developed by <a href="#" target="_blank"><span class="color-bal">Bal</span><span class="color-zen">Zen</span></a> 2021</p>
             </div>
         </div> -->
 
@@ -577,12 +630,11 @@
 	<script src="../assets/js/deznav-init.js"></script>
 	<!-- <script src="../assets/vendor/lightgallery/js/lightgallery-all.min.js"></script> -->
 
-        <!-- Calender -->
-		<script src="../assets/vendor/jqueryui/js/jquery-ui.min.js"></script>
-		<script src="../assets/vendor/moment/moment.min.js"></script>
-	
-		<script src="../assets/vendor/fullcalendar/js/fullcalendar.min.js"></script>
-		<script src="../assets/js/plugins-init/fullcalendar-init.js"></script>
+    	
+    <!-- Jquery Validation -->
+    <script src="vendor/jquery-validation/jquery.validate.min.js"></script>
+    <!-- Form validate init -->
+    <script src="js/plugins-init/jquery.validate-init.js"></script>
 </body>
 
 
