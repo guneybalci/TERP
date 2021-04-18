@@ -657,7 +657,7 @@
                                     </div>
                                     <div class="dropdown-menu dropdown-menu-right ">
                                         <button type="button " class="cp-new-add" data-toggle="modal"
-                                            data-target="#modalGrid">Yeni Ekle</button>
+                                            data-target="#modalGrid2">Yeni Personel Ekle</button>
                                     </div>
                                 </div>
                             </div>
@@ -1246,6 +1246,61 @@
                 <div class="modal-dialog cp-modal-dialog" role="document">
                     <div class="modal-content boradi-4">
                         <div class="modal-header">
+                            <h4 class="modal-title"> <strong>Personel Düzenle</strong> </h4>
+                            <button type="button" class="close" data-dismiss="modal"><span>×</span>
+                            </button>
+                        </div>
+                        <div class="modal-body cp-anc-modal-body">
+                            <div class="container">
+                                <form>
+
+                                    <div class="form-row">
+
+
+
+
+                                        <div class="form-group col-md-6">
+                                            <label>Ad</label>
+                                            <input type="text" class="form-control" value="Yıldırım" required>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label>Soyad</label>
+                                            <input type="text" class="form-control" value="Kılıç" required>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label>E-Posta</label>
+                                            <input type="E-Posta" class="form-control" value="yildirim@koneks.com">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label>Telefon</label>
+                                            <input type="tel" id="phone" name="phone" class="form-control"
+                                                value="0542 636 35 42" pattern="[0-9]{4}-[0-9]{3}-[0-9]{4}" required>
+                                        </div>
+
+
+                                        <div class="form-group col-md-12">
+                                            <label>Adres</label>
+                                            <textarea class="form-control cp-anc-ta" rows="4"
+                                                id="comment">2289 5th Avenue, New York</textarea>
+                                        </div>
+                                    </div>
+
+
+                                </form>
+                            </div>
+                        </div>
+                        <div class="modal-footer pr-25 border-tn">
+                            <button type="button" class="btn btn-danger light boradi-4"
+                                data-dismiss="modal">Vazgeç</button>
+                            <button type="button" class="btn btn-primary boradi-4">Güncelle</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="modalGrid2" style="display: none;" aria-hidden="true">
+                <div class="modal-dialog cp-modal-dialog" role="document">
+                    <div class="modal-content boradi-4">
+                        <div class="modal-header">
                             <h4 class="modal-title"> <strong>Yeni Personel Ekle</strong> </h4>
                             <button type="button" class="close" data-dismiss="modal"><span>×</span>
                             </button>
@@ -1289,10 +1344,10 @@
                                 </form>
                             </div>
                         </div>
-                        <div class="modal-footer border-tn">
+                        <div class="modal-footer border-tn pr-25">
                             <button type="button" class="btn btn-danger light boradi-4"
                                 data-dismiss="modal">Vazgeç</button>
-                            <button type="button" class="btn btn-primary boradi-4">Kaydet</button>
+                            <button type="button" class="btn btn-primary boradi-4">Ekle</button>
                         </div>
                     </div>
                 </div>

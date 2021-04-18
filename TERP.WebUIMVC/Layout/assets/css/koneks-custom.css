@@ -213,6 +213,11 @@ box-shadow: none !important;
   /* top: 15% !important; */
 }
 
+.mc-modal-dialog{
+  max-width: 750px !important;
+  /* top: 15% !important; */
+}
+
 .cp-anc-cont{
   padding-left: 0px;
   padding-right: 5px;
@@ -226,6 +231,28 @@ box-shadow: none !important;
   padding-bottom: 1rem;
   padding-left: 1rem;
   padding-right: 1rem;
+}
+
+.mc-modal-body{
+  padding-top: 0px;
+  padding-bottom: 1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+.mc-title{
+  font-size: 1.125rem !important;
+  font-weight: normal !important;
+}
+.mc-title{
+ margin: 0 !important;
+}
+
+.mc-tarea{
+  margin-top: 20px !important;
+}
+.mc-tarea > textarea{
+  resize: none !important;
+
 }
 
 .sm-cont{
@@ -265,5 +292,36 @@ box-shadow: none !important;
 .po-card{
   transition: none !important;
   border-radius: 0.5rem !important;
+}
+
+.pr-25{
+  padding-right: 25px !important;
+}
+
+
+.ae-cont{
+  margin-top: 20px !important;
+}
+.ae-boltb{
+  border-top-left-radius: 4px !important;
+  border-bottom-left-radius: 4px !important;
+}
+
+.ae-bortb{
+  border-top-right-radius: 4px !important;
+  border-bottom-right-radius: 4px !important;
+}
+
+.ae-finp{
+  display:block;
+  width:100%;
+  height: 41px;
+  position: relative;
+  top: 1px;
+  border: none;
+}
+
+.ae-tarea{
+  resize: none !important;
 }
 /* Custom CSS End */

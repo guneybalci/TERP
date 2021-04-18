@@ -7,14 +7,16 @@
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 	<title>TERP - Anasayfa</title>
 	<!-- Favicon icon -->
-	<link rel="shortcut icon" type="image/x-icon"  href="../assets/icons/favicon/favicon.ico">
-	<link href="../assets/vendor/jqvmap/css/jqvmap.min.css" rel="stylesheet">
+	<link rel="shortcut icon" type="image/x-icon" href="../assets/icons/favicon/favicon.ico">
 
-	<!-- <link href="../assets/vendor/lightgallery/css/lightgallery.min.css" rel="stylesheet"> -->
+	<link href="../assets/vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="../assets/vendor/chartist/css/chartist.min.css">
+	<!-- Daterange picker -->
+	<link rel="stylesheet" href="../assets/vendor/pickadate/themes/default.css">
+	<link rel="stylesheet" href="../assets/vendor/pickadate/themes/default.date.css">
 
 	<link href="../assets/vendor/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet">
 	<link href="../assets/css/style.css" rel="stylesheet">
-	<link href="../assets/css/koneks-login-page.css" rel="stylesheet">
 	<link href="../assets/css/koneks-custom.css" rel="stylesheet">
 </head>
 
@@ -419,7 +421,7 @@
 										</svg>
 										<span class="ml-2 itpot">Profil </span>
 									</a>
-									<a href="E-Posta-inbox.html" class="dropdown-item ai-icon">
+									<a href="email-inbox.html" class="dropdown-item ai-icon">
 										<svg id="icon-inbox" xmlns="http://www.w3.org/2000/svg" class="text-success"
 											width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
 											stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -579,7 +581,7 @@
 						<ul aria-expanded="false">
 							<li><a href="form-element.html">Form Elements</a></li>
 							<li><a href="form-wizard.html">Wizard</a></li>
-							<li><a href="form-editor-summernote.html">Summernote</a></li>
+							<li><a href="form-Silor-summernote.html">Summernote</a></li>
 							<li><a href="form-pickers.html">Pickers</a></li>
 							<li><a href="form-validation-jquery.html">Jquery Validate</a></li>
 						</ul>
@@ -634,679 +636,656 @@
 		<div class="content-body">
 			<div class="container-fluid">
 				<div class="page-titles">
-					<h4>Araç Kontrol</h4>
+					<div class="hp-title">
+						<h4 class="hp-h4">Masraf Yönetimi</h4>
+					</div>
 					<ol class="breadcrumb">
 						<li class="breadcrumb-item"><a href="javascript:void(0)">Anasayfa</a></li>
-						<li class="breadcrumb-item active"><a href="javascript:void(0)">Araç Listesi</a></li>
+						<li class="breadcrumb-item active"><a href="javascript:void(0)">Muhasebe</a></li>
+						<li class="breadcrumb-item active"><a href="javascript:void(0)">Masraf Yönetimi</a></li>
 					</ol>
 				</div>
+				<!-- row -->
+				<div class="page-titles form-head d-flex flex-wrap justify-content-end align-items-center mb-4">
 
-				<!-- Araç Kontrol-->
-				<div class="row">
-					<div class="col-xl-12">
-						<div class="row">
-							<div class="col-xl-12">
-								<div class="card car-list-card">
-									<div class="card-header d-sm-flex d-block border-0 pb-0">
-										<div>
-											<h4 class="fs-20 text-black">Araç Listesi</h4>
-											<span class="fs-12">Bu departmanda araçlarızın bilgi, statü ve yeni araç
-												giriş kontrolünü sağlayabilirsiniz.</span>
-										</div>
-										<div class="dropdown custom-dropdown mb-0 mt-3 mt-sm-0 cp-respdd">
-											<div class="btn cp-btn-add  cp-sedet cp-br-6" role="button"
-												data-toggle="dropdown" aria-expanded="false">
-												Araç Ekle
-												<i class="fa fa-caret-down text-primary ml-3" aria-hidden="true"></i>
+					<a href="javascript:void(0)" class="btn btn-primary btn-rounded mr-3  mb-2" data-toggle="modal"
+						data-target="#exampledownload">
+						<i class="las la-coins scale5 mr-3"></i>
+						Masraf Ekle</a>
+
+					<!-- Modal -->
+					<div class="modal fade" id="exampledownload" style="display: none;" aria-hidden="true">
+						<div class="modal-dialog mc-modal-dialog" role="document">
+							<div class="modal-content boradi-4">
+								<div class="modal-header ">
+									<h4 class="modal-title mc-title"> <strong>Yeni Masraf Ekle</strong> </h4>
+									<button type="button" class="close" data-dismiss="modal"><span>×</span>
+									</button>
+								</div>
+								<div class="modal-body mc-modal-body">
+									<div class="container">
+										<form>
+
+											<div class="form-row">
+												<div class="   col-md-6">
+													<div class="form-group">
+														<label>Araç Plaka:</label>
+														<input type="text" class="form-control" placeholder="42 TST 42"
+															required>
+													</div>
+
+												</div>
+
+												<div class="    col-md-6">
+													<div class="form-group ">
+														<label>Ödeme Tipi:</label>
+														<select class="form-control default-select" id="sel1">
+															<option>Ödeme Tipi</option>
+															<option>Borç</option>
+															<option>Taksit</option>
+															<option>Yakıt</option>
+															<option>Gider</option>
+														</select>
+													</div>
+												</div>
+												<div class="   col-md-6">
+													<div class="form-group">
+														<label>Tarih:</label>
+														<input name="datepicker" class="datepicker-default form-control"
+															placeholder="1 Ocak 1978" id="datepicker">
+													</div>
+
+												</div>
+												<div class="    col-md-6">
+													<div class="form-group">
+														<label>Para Birimi:</label>
+														<form action="#">
+															<div class="input-group">
+																<input type="text" class="form-control" placeholder="0.00">
+																<div class="input-group-append">
+																	<button class="btn btn-primary dropdown-toggle ae-bortb"
+																		type="button"
+																		data-toggle="dropdown">Birim</button>
+																	<div class="dropdown-menu">
+																		<a class="dropdown-item" href="#">₺ : TRY</a>
+																		<a class="dropdown-item" href="#">€ : EUR</a>
+																		<a class="dropdown-item" href="#">$ : USD</a>
+																	</div>
+																</div>
+															</div>
+														</form>
+													</div>
+
+												</div>
+												<div class="col-md-12 ae-cont">
+													<div class="input-group">
+														<div class="input-group-prepend">
+															<button class="btn btn-primary btn-sm ae-boltb ae-input-btn" type="button">Fatura</button>
+														</div>
+														<div class="custom-file">
+															<!-- <input type="file" class="custom-file-input">
+															<label class="custom-file-label">Dosya Ekle</label> -->
+															<button class="ae-finp" onclick="document.getElementById('getFile').click()">Yüklemek İçin Buraya Tıklayın</button>
+															<input type='file' id="getFile" style="display:none">
+														</div>
+													</div>
+												</div>
+												<div class="   col-md-12 mc-tarea">
+													<div class="form-group">
+														<label>Açıklama:</label>
+														<textarea class="form-control ae-tarea" rows="4"
+															id="comment">Ödemelerinizi detaylandırınız..</textarea>
+													</div>
+
+												</div>
+
 											</div>
-											<div class="dropdown-menu dropdown-menu-right cp-cdd-menu">
-												<button type="button " class="cp-new-add" data-toggle="modal"
-													data-target="#modalGrid">Yeni Ekle</button>
-											</div>
-										</div>
+
+
+										</form>
 									</div>
-
-									<div class="card-body pb-0">
-
-										<div
-											class="d-flex mb-3 border-bottom justify-content-between flex-wrap align-items-center">
-											<div class="d-flex pb-3 align-items-center">
-												<img src="../assets/images/card/mercedes-axor.png" alt=""
-													class="mr-3 cp-br" width="130">
-												<div class="mr-3">
-													<p class="fs-14 mb-1">Araç Plaka</p>
-													<span class="text-black font-w500">42 AHE 87</span>
-												</div>
-											</div>
-											<div class="mr-3 pb-3">
-												<p class="fs-14 mb-1">Araç Statü</p>
-												<span class="text-black font-w500">Aktif</span>
-											</div>
-											<div class="mr-3 pb-3">
-												<p class="fs-14 mb-1">Araç Tipi</p>
-												<span class="text-black font-w500">Tenteli</span>
-											</div>
-											<div class="mr-3 pb-3">
-												<p class="fs-14 mb-1">Araç Sürücü</p>
-												<span class="text-black font-w500">Yıldırım Kılıç</span>
-											</div>
-
-
-											<div class="dropdown pb-3">
-												<div class="btn-link" role="button" data-toggle="dropdown"
-													aria-expanded="false">
-													<svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-														xmlns="http://www.w3.org/2000/svg">
-														<path
-															d="M10 11.9999C10 13.1045 10.8954 13.9999 12 13.9999C13.1046 13.9999 14 13.1045 14 11.9999C14 10.8954 13.1046 9.99994 12 9.99994C10.8954 9.99994 10 10.8954 10 11.9999Z"
-															fill="black"></path>
-														<path
-															d="M10 4.00006C10 5.10463 10.8954 6.00006 12 6.00006C13.1046 6.00006 14 5.10463 14 4.00006C14 2.89549 13.1046 2.00006 12 2.00006C10.8954 2.00006 10 2.89549 10 4.00006Z"
-															fill="black"></path>
-														<path
-															d="M10 20C10 21.1046 10.8954 22 12 22C13.1046 22 14 21.1046 14 20C14 18.8954 13.1046 18 12 18C10.8954 18 10 18.8954 10 20Z"
-															fill="black"></path>
-													</svg>
-												</div>
-												<div class="dropdown-menu dropdown-menu-right p-0">
-													<button type="button " class="cp-new-add" data-toggle="modal"
-														data-target="#modalGrid2">Düzenle</button>
-													<button type="button " class="cp-new-add">Sil</button>
-												</div>
-											</div>
-										</div>
-										<div
-											class="d-flex mb-3 border-bottom justify-content-between flex-wrap align-items-center">
-											<div class="d-flex pb-3 align-items-center">
-												<img src="../assets/images/card/mercedes-axor.png" alt=""
-													class="mr-3 cp-br" width="130">
-												<div class="mr-3">
-													<p class="fs-14 mb-1">Araç Plaka</p>
-													<span class="text-black font-w500">42 AHE 87</span>
-												</div>
-											</div>
-											<div class="mr-3 pb-3">
-												<p class="fs-14 mb-1">Araç Statü</p>
-												<span class="text-black font-w500">Aktif</span>
-											</div>
-											<div class="mr-3 pb-3">
-												<p class="fs-14 mb-1">Araç Tipi</p>
-												<span class="text-black font-w500">Tenteli</span>
-											</div>
-											<div class="mr-3 pb-3">
-												<p class="fs-14 mb-1">Araç Sürücü</p>
-												<span class="text-black font-w500">Yıldırım Kılıç</span>
-											</div>
-
-
-											<div class="dropdown pb-3">
-												<div class="btn-link" role="button" data-toggle="dropdown"
-													aria-expanded="false">
-													<svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-														xmlns="http://www.w3.org/2000/svg">
-														<path
-															d="M10 11.9999C10 13.1045 10.8954 13.9999 12 13.9999C13.1046 13.9999 14 13.1045 14 11.9999C14 10.8954 13.1046 9.99994 12 9.99994C10.8954 9.99994 10 10.8954 10 11.9999Z"
-															fill="black"></path>
-														<path
-															d="M10 4.00006C10 5.10463 10.8954 6.00006 12 6.00006C13.1046 6.00006 14 5.10463 14 4.00006C14 2.89549 13.1046 2.00006 12 2.00006C10.8954 2.00006 10 2.89549 10 4.00006Z"
-															fill="black"></path>
-														<path
-															d="M10 20C10 21.1046 10.8954 22 12 22C13.1046 22 14 21.1046 14 20C14 18.8954 13.1046 18 12 18C10.8954 18 10 18.8954 10 20Z"
-															fill="black"></path>
-													</svg>
-												</div>
-												<div class="dropdown-menu dropdown-menu-right p-0">
-													<button type="button " class="cp-new-add" data-toggle="modal"
-														data-target="#modalGrid2">Düzenle</button>
-													<button type="button " class="cp-new-add">Sil</button>
-												</div>
-											</div>
-										</div>
-										<div
-											class="d-flex mb-3 border-bottom justify-content-between flex-wrap align-items-center">
-											<div class="d-flex pb-3 align-items-center">
-												<img src="../assets/images/card/mercedes-axor.png" alt=""
-													class="mr-3 cp-br" width="130">
-												<div class="mr-3">
-													<p class="fs-14 mb-1">Araç Plaka</p>
-													<span class="text-black font-w500">42 AHE 87</span>
-												</div>
-											</div>
-											<div class="mr-3 pb-3">
-												<p class="fs-14 mb-1">Araç Statü</p>
-												<span class="text-black font-w500">Aktif</span>
-											</div>
-											<div class="mr-3 pb-3">
-												<p class="fs-14 mb-1">Araç Tipi</p>
-												<span class="text-black font-w500">Tenteli</span>
-											</div>
-											<div class="mr-3 pb-3">
-												<p class="fs-14 mb-1">Araç Sürücü</p>
-												<span class="text-black font-w500">Yıldırım Kılıç</span>
-											</div>
-
-
-											<div class="dropdown pb-3">
-												<div class="btn-link" role="button" data-toggle="dropdown"
-													aria-expanded="false">
-													<svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-														xmlns="http://www.w3.org/2000/svg">
-														<path
-															d="M10 11.9999C10 13.1045 10.8954 13.9999 12 13.9999C13.1046 13.9999 14 13.1045 14 11.9999C14 10.8954 13.1046 9.99994 12 9.99994C10.8954 9.99994 10 10.8954 10 11.9999Z"
-															fill="black"></path>
-														<path
-															d="M10 4.00006C10 5.10463 10.8954 6.00006 12 6.00006C13.1046 6.00006 14 5.10463 14 4.00006C14 2.89549 13.1046 2.00006 12 2.00006C10.8954 2.00006 10 2.89549 10 4.00006Z"
-															fill="black"></path>
-														<path
-															d="M10 20C10 21.1046 10.8954 22 12 22C13.1046 22 14 21.1046 14 20C14 18.8954 13.1046 18 12 18C10.8954 18 10 18.8954 10 20Z"
-															fill="black"></path>
-													</svg>
-												</div>
-												<div class="dropdown-menu dropdown-menu-right p-0">
-													<button type="button " class="cp-new-add" data-toggle="modal"
-														data-target="#modalGrid2">Düzenle</button>
-													<button type="button " class="cp-new-add">Sil</button>
-												</div>
-											</div>
-										</div>
-										<div
-											class="d-flex mb-3 border-bottom justify-content-between flex-wrap align-items-center">
-											<div class="d-flex pb-3 align-items-center">
-												<img src="../assets/images/card/mercedes-axor.png" alt=""
-													class="mr-3 cp-br" width="130">
-												<div class="mr-3">
-													<p class="fs-14 mb-1">Araç Plaka</p>
-													<span class="text-black font-w500">42 AHE 87</span>
-												</div>
-											</div>
-											<div class="mr-3 pb-3">
-												<p class="fs-14 mb-1">Araç Statü</p>
-												<span class="text-black font-w500">Aktif</span>
-											</div>
-											<div class="mr-3 pb-3">
-												<p class="fs-14 mb-1">Araç Tipi</p>
-												<span class="text-black font-w500">Tenteli</span>
-											</div>
-											<div class="mr-3 pb-3">
-												<p class="fs-14 mb-1">Araç Sürücü</p>
-												<span class="text-black font-w500">Yıldırım Kılıç</span>
-											</div>
-
-
-											<div class="dropdown pb-3">
-												<div class="btn-link" role="button" data-toggle="dropdown"
-													aria-expanded="false">
-													<svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-														xmlns="http://www.w3.org/2000/svg">
-														<path
-															d="M10 11.9999C10 13.1045 10.8954 13.9999 12 13.9999C13.1046 13.9999 14 13.1045 14 11.9999C14 10.8954 13.1046 9.99994 12 9.99994C10.8954 9.99994 10 10.8954 10 11.9999Z"
-															fill="black"></path>
-														<path
-															d="M10 4.00006C10 5.10463 10.8954 6.00006 12 6.00006C13.1046 6.00006 14 5.10463 14 4.00006C14 2.89549 13.1046 2.00006 12 2.00006C10.8954 2.00006 10 2.89549 10 4.00006Z"
-															fill="black"></path>
-														<path
-															d="M10 20C10 21.1046 10.8954 22 12 22C13.1046 22 14 21.1046 14 20C14 18.8954 13.1046 18 12 18C10.8954 18 10 18.8954 10 20Z"
-															fill="black"></path>
-													</svg>
-												</div>
-												<div class="dropdown-menu dropdown-menu-right p-0">
-													<button type="button " class="cp-new-add" data-toggle="modal"
-														data-target="#modalGrid2">Düzenle</button>
-													<button type="button " class="cp-new-add">Sil</button>
-												</div>
-											</div>
-										</div>
-										<div
-											class="d-flex mb-3 border-bottom justify-content-between flex-wrap align-items-center">
-											<div class="d-flex pb-3 align-items-center">
-												<img src="../assets/images/card/mercedes-axor.png" alt=""
-													class="mr-3 cp-br" width="130">
-												<div class="mr-3">
-													<p class="fs-14 mb-1">Araç Plaka</p>
-													<span class="text-black font-w500">42 AHE 87</span>
-												</div>
-											</div>
-											<div class="mr-3 pb-3">
-												<p class="fs-14 mb-1">Araç Statü</p>
-												<span class="text-black font-w500">Aktif</span>
-											</div>
-											<div class="mr-3 pb-3">
-												<p class="fs-14 mb-1">Araç Tipi</p>
-												<span class="text-black font-w500">Tenteli</span>
-											</div>
-											<div class="mr-3 pb-3">
-												<p class="fs-14 mb-1">Araç Sürücü</p>
-												<span class="text-black font-w500">Yıldırım Kılıç</span>
-											</div>
-
-
-											<div class="dropdown pb-3">
-												<div class="btn-link" role="button" data-toggle="dropdown"
-													aria-expanded="false">
-													<svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-														xmlns="http://www.w3.org/2000/svg">
-														<path
-															d="M10 11.9999C10 13.1045 10.8954 13.9999 12 13.9999C13.1046 13.9999 14 13.1045 14 11.9999C14 10.8954 13.1046 9.99994 12 9.99994C10.8954 9.99994 10 10.8954 10 11.9999Z"
-															fill="black"></path>
-														<path
-															d="M10 4.00006C10 5.10463 10.8954 6.00006 12 6.00006C13.1046 6.00006 14 5.10463 14 4.00006C14 2.89549 13.1046 2.00006 12 2.00006C10.8954 2.00006 10 2.89549 10 4.00006Z"
-															fill="black"></path>
-														<path
-															d="M10 20C10 21.1046 10.8954 22 12 22C13.1046 22 14 21.1046 14 20C14 18.8954 13.1046 18 12 18C10.8954 18 10 18.8954 10 20Z"
-															fill="black"></path>
-													</svg>
-												</div>
-												<div class="dropdown-menu dropdown-menu-right p-0">
-													<button type="button " class="cp-new-add" data-toggle="modal"
-														data-target="#modalGrid2">Düzenle</button>
-													<button type="button " class="cp-new-add">Sil</button>
-												</div>
-											</div>
-										</div>
-										<div
-											class="d-flex mb-3 border-bottom justify-content-between flex-wrap align-items-center">
-											<div class="d-flex pb-3 align-items-center">
-												<img src="../assets/images/card/mercedes-axor.png" alt=""
-													class="mr-3 cp-br" width="130">
-												<div class="mr-3">
-													<p class="fs-14 mb-1">Araç Plaka</p>
-													<span class="text-black font-w500">42 AHE 87</span>
-												</div>
-											</div>
-											<div class="mr-3 pb-3">
-												<p class="fs-14 mb-1">Araç Statü</p>
-												<span class="text-black font-w500">Aktif</span>
-											</div>
-											<div class="mr-3 pb-3">
-												<p class="fs-14 mb-1">Araç Tipi</p>
-												<span class="text-black font-w500">Tenteli</span>
-											</div>
-											<div class="mr-3 pb-3">
-												<p class="fs-14 mb-1">Araç Sürücü</p>
-												<span class="text-black font-w500">Yıldırım Kılıç</span>
-											</div>
-
-
-											<div class="dropdown pb-3">
-												<div class="btn-link" role="button" data-toggle="dropdown"
-													aria-expanded="false">
-													<svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-														xmlns="http://www.w3.org/2000/svg">
-														<path
-															d="M10 11.9999C10 13.1045 10.8954 13.9999 12 13.9999C13.1046 13.9999 14 13.1045 14 11.9999C14 10.8954 13.1046 9.99994 12 9.99994C10.8954 9.99994 10 10.8954 10 11.9999Z"
-															fill="black"></path>
-														<path
-															d="M10 4.00006C10 5.10463 10.8954 6.00006 12 6.00006C13.1046 6.00006 14 5.10463 14 4.00006C14 2.89549 13.1046 2.00006 12 2.00006C10.8954 2.00006 10 2.89549 10 4.00006Z"
-															fill="black"></path>
-														<path
-															d="M10 20C10 21.1046 10.8954 22 12 22C13.1046 22 14 21.1046 14 20C14 18.8954 13.1046 18 12 18C10.8954 18 10 18.8954 10 20Z"
-															fill="black"></path>
-													</svg>
-												</div>
-												<div class="dropdown-menu dropdown-menu-right p-0">
-													<button type="button " class="cp-new-add" data-toggle="modal"
-														data-target="#modalGrid2">Düzenle</button>
-													<button type="button " class="cp-new-add">Sil</button>
-												</div>
-											</div>
-										</div>
-										<div
-											class="d-flex mb-3 border-bottom justify-content-between flex-wrap align-items-center">
-											<div class="d-flex pb-3 align-items-center">
-												<img src="../assets/images/card/mercedes-axor.png" alt=""
-													class="mr-3 cp-br" width="130">
-												<div class="mr-3">
-													<p class="fs-14 mb-1">Araç Plaka</p>
-													<span class="text-black font-w500">42 AHE 87</span>
-												</div>
-											</div>
-											<div class="mr-3 pb-3">
-												<p class="fs-14 mb-1">Araç Statü</p>
-												<span class="text-black font-w500">Aktif</span>
-											</div>
-											<div class="mr-3 pb-3">
-												<p class="fs-14 mb-1">Araç Tipi</p>
-												<span class="text-black font-w500">Tenteli</span>
-											</div>
-											<div class="mr-3 pb-3">
-												<p class="fs-14 mb-1">Araç Sürücü</p>
-												<span class="text-black font-w500">Yıldırım Kılıç</span>
-											</div>
-
-
-											<div class="dropdown pb-3">
-												<div class="btn-link" role="button" data-toggle="dropdown"
-													aria-expanded="false">
-													<svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-														xmlns="http://www.w3.org/2000/svg">
-														<path
-															d="M10 11.9999C10 13.1045 10.8954 13.9999 12 13.9999C13.1046 13.9999 14 13.1045 14 11.9999C14 10.8954 13.1046 9.99994 12 9.99994C10.8954 9.99994 10 10.8954 10 11.9999Z"
-															fill="black"></path>
-														<path
-															d="M10 4.00006C10 5.10463 10.8954 6.00006 12 6.00006C13.1046 6.00006 14 5.10463 14 4.00006C14 2.89549 13.1046 2.00006 12 2.00006C10.8954 2.00006 10 2.89549 10 4.00006Z"
-															fill="black"></path>
-														<path
-															d="M10 20C10 21.1046 10.8954 22 12 22C13.1046 22 14 21.1046 14 20C14 18.8954 13.1046 18 12 18C10.8954 18 10 18.8954 10 20Z"
-															fill="black"></path>
-													</svg>
-												</div>
-												<div class="dropdown-menu dropdown-menu-right p-0">
-													<button type="button " class="cp-new-add" data-toggle="modal"
-														data-target="#modalGrid2">Düzenle</button>
-													<button type="button " class="cp-new-add">Sil</button>
-												</div>
-											</div>
-										</div>
-										<div
-											class="d-flex mb-3 border-bottom justify-content-between flex-wrap align-items-center">
-											<div class="d-flex pb-3 align-items-center">
-												<img src="../assets/images/card/mercedes-axor.png" alt=""
-													class="mr-3 cp-br" width="130">
-												<div class="mr-3">
-													<p class="fs-14 mb-1">Araç Plaka</p>
-													<span class="text-black font-w500">42 AHE 87</span>
-												</div>
-											</div>
-											<div class="mr-3 pb-3">
-												<p class="fs-14 mb-1">Araç Statü</p>
-												<span class="text-black font-w500">Aktif</span>
-											</div>
-											<div class="mr-3 pb-3">
-												<p class="fs-14 mb-1">Araç Tipi</p>
-												<span class="text-black font-w500">Tenteli</span>
-											</div>
-											<div class="mr-3 pb-3">
-												<p class="fs-14 mb-1">Araç Sürücü</p>
-												<span class="text-black font-w500">Yıldırım Kılıç</span>
-											</div>
-
-
-											<div class="dropdown pb-3">
-												<div class="btn-link" role="button" data-toggle="dropdown"
-													aria-expanded="false">
-													<svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-														xmlns="http://www.w3.org/2000/svg">
-														<path
-															d="M10 11.9999C10 13.1045 10.8954 13.9999 12 13.9999C13.1046 13.9999 14 13.1045 14 11.9999C14 10.8954 13.1046 9.99994 12 9.99994C10.8954 9.99994 10 10.8954 10 11.9999Z"
-															fill="black"></path>
-														<path
-															d="M10 4.00006C10 5.10463 10.8954 6.00006 12 6.00006C13.1046 6.00006 14 5.10463 14 4.00006C14 2.89549 13.1046 2.00006 12 2.00006C10.8954 2.00006 10 2.89549 10 4.00006Z"
-															fill="black"></path>
-														<path
-															d="M10 20C10 21.1046 10.8954 22 12 22C13.1046 22 14 21.1046 14 20C14 18.8954 13.1046 18 12 18C10.8954 18 10 18.8954 10 20Z"
-															fill="black"></path>
-													</svg>
-												</div>
-												<div class="dropdown-menu dropdown-menu-right p-0">
-													<button type="button " class="cp-new-add" data-toggle="modal"
-														data-target="#modalGrid2">Düzenle</button>
-													<button type="button " class="cp-new-add">Sil</button>
-												</div>
-											</div>
-										</div>
-										<div
-											class="d-flex mb-3 border-bottom justify-content-between flex-wrap align-items-center">
-											<div class="d-flex pb-3 align-items-center">
-												<img src="../assets/images/card/mercedes-axor.png" alt=""
-													class="mr-3 cp-br" width="130">
-												<div class="mr-3">
-													<p class="fs-14 mb-1">Araç Plaka</p>
-													<span class="text-black font-w500">42 AHE 87</span>
-												</div>
-											</div>
-											<div class="mr-3 pb-3">
-												<p class="fs-14 mb-1">Araç Statü</p>
-												<span class="text-black font-w500">Aktif</span>
-											</div>
-											<div class="mr-3 pb-3">
-												<p class="fs-14 mb-1">Araç Tipi</p>
-												<span class="text-black font-w500">Tenteli</span>
-											</div>
-											<div class="mr-3 pb-3">
-												<p class="fs-14 mb-1">Araç Sürücü</p>
-												<span class="text-black font-w500">Yıldırım Kılıç</span>
-											</div>
-
-
-											<div class="dropdown pb-3">
-												<div class="btn-link" role="button" data-toggle="dropdown"
-													aria-expanded="false">
-													<svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-														xmlns="http://www.w3.org/2000/svg">
-														<path
-															d="M10 11.9999C10 13.1045 10.8954 13.9999 12 13.9999C13.1046 13.9999 14 13.1045 14 11.9999C14 10.8954 13.1046 9.99994 12 9.99994C10.8954 9.99994 10 10.8954 10 11.9999Z"
-															fill="black"></path>
-														<path
-															d="M10 4.00006C10 5.10463 10.8954 6.00006 12 6.00006C13.1046 6.00006 14 5.10463 14 4.00006C14 2.89549 13.1046 2.00006 12 2.00006C10.8954 2.00006 10 2.89549 10 4.00006Z"
-															fill="black"></path>
-														<path
-															d="M10 20C10 21.1046 10.8954 22 12 22C13.1046 22 14 21.1046 14 20C14 18.8954 13.1046 18 12 18C10.8954 18 10 18.8954 10 20Z"
-															fill="black"></path>
-													</svg>
-												</div>
-												<div class="dropdown-menu dropdown-menu-right p-0">
-													<button type="button " class="cp-new-add" data-toggle="modal"
-														data-target="#modalGrid2">Düzenle</button>
-													<button type="button " class="cp-new-add">Sil</button>
-												</div>
-											</div>
-										</div>
-
-										<div
-											class="d-flex border-bottom justify-content-between flex-wrap align-items-center">
-											<div class="d-flex pb-3 align-items-center">
-												<img src="../assets/images/card/mercedes-axor.png" alt=""
-													class="mr-3 cp-br" width="130">
-												<div class="mr-3">
-													<p class="fs-14 mb-1">Araç Plaka</p>
-													<span class="text-black font-w500">42 AHE 87</span>
-												</div>
-											</div>
-											<div class="mr-3 pb-3">
-												<p class="fs-14 mb-1">Araç Statü</p>
-												<span class="text-black font-w500">Aktif</span>
-											</div>
-											<div class="mr-3 pb-3">
-												<p class="fs-14 mb-1">Araç Tipi</p>
-												<span class="text-black font-w500">Tenteli</span>
-											</div>
-											<div class="mr-3 pb-3">
-												<p class="fs-14 mb-1">Araç Sürücü</p>
-												<span class="text-black font-w500">Yıldırım Kılıç</span>
-											</div>
-
-
-											<div class="dropdown pb-3">
-												<div class="btn-link" role="button" data-toggle="dropdown"
-													aria-expanded="false">
-													<svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-														xmlns="http://www.w3.org/2000/svg">
-														<path
-															d="M10 11.9999C10 13.1045 10.8954 13.9999 12 13.9999C13.1046 13.9999 14 13.1045 14 11.9999C14 10.8954 13.1046 9.99994 12 9.99994C10.8954 9.99994 10 10.8954 10 11.9999Z"
-															fill="black"></path>
-														<path
-															d="M10 4.00006C10 5.10463 10.8954 6.00006 12 6.00006C13.1046 6.00006 14 5.10463 14 4.00006C14 2.89549 13.1046 2.00006 12 2.00006C10.8954 2.00006 10 2.89549 10 4.00006Z"
-															fill="black"></path>
-														<path
-															d="M10 20C10 21.1046 10.8954 22 12 22C13.1046 22 14 21.1046 14 20C14 18.8954 13.1046 18 12 18C10.8954 18 10 18.8954 10 20Z"
-															fill="black"></path>
-													</svg>
-												</div>
-												<div class="dropdown-menu dropdown-menu-right p-0">
-													<button type="button " class="cp-new-add" data-toggle="modal"
-														data-target="#modalGrid2">Düzenle</button>
-													<button type="button " class="cp-new-add">Sil</button>
-												</div>
-											</div>
-										</div>
-
-
-
-									</div>
+								</div>
+								<div class="modal-footer border-tn mr-25">
+									<button type="button" class="btn btn-danger light boradi-4"
+										data-dismiss="modal">Vazgeç</button>
+									<button type="button" class="btn btn-primary boradi-4">Ekle</button>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-
-			</div>
-			<div class="modal fade" id="modalGrid" style="display: none;" aria-hidden="true">
-				<div class="modal-dialog cp-modal-dialog" role="document">
-					<div class="modal-content boradi-4">
-						<div class="modal-header ">
-							<h4 class="modal-title"> <strong>Araç Ekle</strong> </h4>
-							<button type="button" class="close" data-dismiss="modal"><span>×</span>
-							</button>
-						</div>
-						<div class="modal-body cp-anc-modal-body">
-							<div class="container">
-								<form>
-
-									<div class="form-row">
-
-
-										<div class="col-md-6">
-											<div class="form-group">
-												<label>Araç Plaka:</label>
-												<input type="text" class="form-control" placeholder="Araç Plakanız"
-													required>
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="table-responsive table-hover fs-14 card-table">
+							<table class="table display mb-4 dataTablesCard " id="example5">
+								<thead>
+									<tr>
+										<th>
+											<div class="checkbox mr-0 align-self-center">
+												<div class="custom-control custom-checkbox ">
+													<input type="checkbox" class="custom-control-input" id="checkAll"
+														required="">
+													<label class="custom-control-label" for="checkAll"></label>
+												</div>
 											</div>
-										</div>
-										<div class="col-md-6">
-											<div class="form-group">
-												<label>Sürücü:</label>
-												<select class="form-control default-select" id="sel2">
-													<option>Personel</option>
-													<option>Personel</option>
-													<option>Personel</option>
-													<option>Personel</option>
-													<option>Personel</option>
-													<option>Personel</option>
-													<option>Personel</option>
-													<option>Personel</option>
-												</select>
+										</th>
+										<th>Plaka</th>
+										<th>Tarih</th>
+										<th>Sürücü</th>
+										<th>Bütçe</th>
+										<th colspan="2">Açıklama</th>
+										<th>Statü</th>
+										<th>D/S</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>
+											<div class="checkbox mr-0 align-self-center">
+												<div class="custom-control custom-checkbox ">
+													<input type="checkbox" class="custom-control-input"
+														id="customCheckBox2" required="">
+													<label class="custom-control-label" for="customCheckBox2"></label>
+												</div>
 											</div>
-										</div>
-										<div class="col-md-6">
-											<div class="form-group">
-												<label>Araç Statü:</label>
-												<select class="form-control default-select" id="sel1">
-													<option>Aktif</option>
-													<option>Pasif</option>
-												</select>
+										</td>
+										<td><span class="text-black font-w500">42 AHE 87</span></td>
+										<td><span class="text-black text-nowrap">#June 1, 2020, 08:22 AM</span></td>
+										<td>
+											<div class="d-flex align-items-center">
+												<div>
+													<h6 class="fs-16 font-w600 mb-0 text-nowrap"><a
+															href="transactions-details.html" class="text-black">David
+															Oconner</a></h6>
+												</div>
 											</div>
-										</div>
-										<div class="col-md-6">
-											<div class="form-group">
-												<label>Araç Tipi:</label>
-												<select class="form-control default-select" id="sel2">
-													<option>Tenteli</option>
-													<option>Jumbo</option>
-													<option>Treylerli Normal</option>
-													<option>Treylerli Jumbo</option>
-													<option>Normal Açık</option>
-													<option>Damperli</option>
-													<option>Jumbo Açık</option>
-													<option>Lowbed</option>
-												</select>
+										</td>
+										<td><span class="text-black fs-20 font-w600">₺128.89</span></td>
+
+										<td colspan="2"><span class="text-black">Yakıt, <br>Gümrük</span></td>
+										<td><a href="javascript:void(0)"
+												class="btn btn-outline-warning btn-rounded">Pending</a></td>
+										<td>
+											<div class="dropdown mb-auto">
+												<div class="btn-link" role="button" data-toggle="dropdown"
+													aria-expanded="false">
+													<svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+														xmlns="http://www.w3.org/2000/svg">
+														<path
+															d="M10 11.9999C10 13.1045 10.8954 13.9999 12 13.9999C13.1046 13.9999 14 13.1045 14 11.9999C14 10.8954 13.1046 9.99994 12 9.99994C10.8954 9.99994 10 10.8954 10 11.9999Z"
+															fill="black"></path>
+														<path
+															d="M10 4.00006C10 5.10463 10.8954 6.00006 12 6.00006C13.1046 6.00006 14 5.10463 14 4.00006C14 2.89549 13.1046 2.00006 12 2.00006C10.8954 2.00006 10 2.89549 10 4.00006Z"
+															fill="black"></path>
+														<path
+															d="M10 20C10 21.1046 10.8954 22 12 22C13.1046 22 14 21.1046 14 20C14 18.8954 13.1046 18 12 18C10.8954 18 10 18.8954 10 20Z"
+															fill="black"></path>
+													</svg>
+												</div>
+												<div class="dropdown-menu dropdown-menu-right">
+													<a class="dropdown-item" href="javascript:void(0)">Düzenle</a>
+													<a class="dropdown-item" href="javascript:void(0)">Sil</a>
+												</div>
 											</div>
-										</div>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<div class="checkbox mr-0 align-self-center">
+												<div class="custom-control custom-checkbox ">
+													<input type="checkbox" class="custom-control-input"
+														id="customCheckBox21" required="">
+													<label class="custom-control-label" for="customCheckBox21"></label>
+												</div>
+											</div>
+										</td>
+										<td><span class="text-black font-w500">42 AHE 87</span></td>
+										<td><span class="text-black text-nowrap">#June 12, 2020, 08:22 AM</span></td>
+										<td>
+											<div class="d-flex align-items-center">
+												<div>
+													<h6 class="fs-16 font-w600 mb-0 text-nowrap"><a
+															href="transactions-details.html" class="text-black">Julia
+															Esteh</a></h6>
+												</div>
+											</div>
+										</td>
+										<td><span class="text-black fs-20 font-w600">₺128.89</span></td>
+										<td colspan="2"><span class="text-black">Yakıt, <br>Gümrük</span></td>
+										<td><a href="javascript:void(0)"
+												class="btn btn-outline-dark btn-rounded">Canceled</a></td>
+										<td>
+											<div class="dropdown mb-auto">
+												<div class="btn-link" role="button" data-toggle="dropdown"
+													aria-expanded="false">
+													<svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+														xmlns="http://www.w3.org/2000/svg">
+														<path
+															d="M10 11.9999C10 13.1045 10.8954 13.9999 12 13.9999C13.1046 13.9999 14 13.1045 14 11.9999C14 10.8954 13.1046 9.99994 12 9.99994C10.8954 9.99994 10 10.8954 10 11.9999Z"
+															fill="black"></path>
+														<path
+															d="M10 4.00006C10 5.10463 10.8954 6.00006 12 6.00006C13.1046 6.00006 14 5.10463 14 4.00006C14 2.89549 13.1046 2.00006 12 2.00006C10.8954 2.00006 10 2.89549 10 4.00006Z"
+															fill="black"></path>
+														<path
+															d="M10 20C10 21.1046 10.8954 22 12 22C13.1046 22 14 21.1046 14 20C14 18.8954 13.1046 18 12 18C10.8954 18 10 18.8954 10 20Z"
+															fill="black"></path>
+													</svg>
+												</div>
+												<div class="dropdown-menu dropdown-menu-right">
+													<a class="dropdown-item" href="javascript:void(0)">Düzenle</a>
+													<a class="dropdown-item" href="javascript:void(0)">Sil</a>
+												</div>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<div class="checkbox mr-0 align-self-center">
+												<div class="custom-control custom-checkbox ">
+													<input type="checkbox" class="custom-control-input"
+														id="customCheckBox23" required="">
+													<label class="custom-control-label" for="customCheckBox23"></label>
+												</div>
+											</div>
+										</td>
+										<td><span class="text-black font-w500">42 AHE 87</span></td>
+										<td><span class="text-black text-nowrap">#June 1, 2020, 08:22 AM</span></td>
+										<td>
+											<div class="d-flex align-items-center">
+												<div>
+													<h6 class="fs-16 font-w600 mb-0 text-nowrap"><a
+															href="transactions-details.html" class="text-black">Clown
+															Studio</a></h6>
+													<span class="fs-14">Freelancer</span>
+												</div>
+											</div>
+										</td>
+										<td><span class="text-black fs-20 font-w600">₺560.67</span></td>
 
-									</div>
-
-
-								</form>
-							</div>
-						</div>
-						<div class="modal-footer border-tn pr-25">
-							<button type="button" class="btn btn-danger light boradi-4"
-								data-dismiss="modal">Vazgeç</button>
-							<button type="button" class="btn btn-primary boradi-4">Araç Ekle</button>
+										<td colspan="2"><span class="text-black">Yakıt, <br>Gümrük</span></td>
+										<td><a href="javascript:void(0)"
+												class="btn btn-outline-success btn-rounded">Completed</a></td>
+										<td>
+											<div class="dropdown mb-auto">
+												<div class="btn-link" role="button" data-toggle="dropdown"
+													aria-expanded="false">
+													<svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+														xmlns="http://www.w3.org/2000/svg">
+														<path
+															d="M10 11.9999C10 13.1045 10.8954 13.9999 12 13.9999C13.1046 13.9999 14 13.1045 14 11.9999C14 10.8954 13.1046 9.99994 12 9.99994C10.8954 9.99994 10 10.8954 10 11.9999Z"
+															fill="black"></path>
+														<path
+															d="M10 4.00006C10 5.10463 10.8954 6.00006 12 6.00006C13.1046 6.00006 14 5.10463 14 4.00006C14 2.89549 13.1046 2.00006 12 2.00006C10.8954 2.00006 10 2.89549 10 4.00006Z"
+															fill="black"></path>
+														<path
+															d="M10 20C10 21.1046 10.8954 22 12 22C13.1046 22 14 21.1046 14 20C14 18.8954 13.1046 18 12 18C10.8954 18 10 18.8954 10 20Z"
+															fill="black"></path>
+													</svg>
+												</div>
+												<div class="dropdown-menu dropdown-menu-right">
+													<a class="dropdown-item" href="javascript:void(0)">Düzenle</a>
+													<a class="dropdown-item" href="javascript:void(0)">Sil</a>
+												</div>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<div class="checkbox mr-0 align-self-center">
+												<div class="custom-control custom-checkbox ">
+													<input type="checkbox" class="custom-control-input"
+														id="customCheckBox24" required="">
+													<label class="custom-control-label" for="customCheckBox24"></label>
+												</div>
+											</div>
+										</td>
+										<td><span class="text-black font-w500">42 AHE 87</span></td>
+										<td><span class="text-black text-nowrap">#June 1, 2020, 08:22 AM</span></td>
+										<td>
+											<div class="d-flex align-items-center">
+												<div>
+													<h6 class="fs-16 font-w600 mb-0 text-nowrap"><a
+															href="transactions-details.html" class="text-black">Jeremy
+															Tedy</a></h6>
+												</div>
+											</div>
+										</td>
+										<td><span class="text-black fs-20 font-w600">₺783.22</span></td>
+										<td colspan="2"><span class="text-black">Yakıt, <br>Gümrük</span></td>
+										<td><a href="javascript:void(0)"
+												class="btn btn-outline-warning btn-rounded">Pending</a></td>
+										<td>
+											<div class="dropdown mb-auto">
+												<div class="btn-link" role="button" data-toggle="dropdown"
+													aria-expanded="false">
+													<svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+														xmlns="http://www.w3.org/2000/svg">
+														<path
+															d="M10 11.9999C10 13.1045 10.8954 13.9999 12 13.9999C13.1046 13.9999 14 13.1045 14 11.9999C14 10.8954 13.1046 9.99994 12 9.99994C10.8954 9.99994 10 10.8954 10 11.9999Z"
+															fill="black"></path>
+														<path
+															d="M10 4.00006C10 5.10463 10.8954 6.00006 12 6.00006C13.1046 6.00006 14 5.10463 14 4.00006C14 2.89549 13.1046 2.00006 12 2.00006C10.8954 2.00006 10 2.89549 10 4.00006Z"
+															fill="black"></path>
+														<path
+															d="M10 20C10 21.1046 10.8954 22 12 22C13.1046 22 14 21.1046 14 20C14 18.8954 13.1046 18 12 18C10.8954 18 10 18.8954 10 20Z"
+															fill="black"></path>
+													</svg>
+												</div>
+												<div class="dropdown-menu dropdown-menu-right">
+													<a class="dropdown-item" href="javascript:void(0)">Düzenle</a>
+													<a class="dropdown-item" href="javascript:void(0)">Sil</a>
+												</div>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<div class="checkbox mr-0 align-self-center">
+												<div class="custom-control custom-checkbox ">
+													<input type="checkbox" class="custom-control-input"
+														id="customCheckBox25" required="">
+													<label class="custom-control-label" for="customCheckBox25"></label>
+												</div>
+											</div>
+										</td>
+										<td><span class="text-black font-w500">42 AHE 87</span></td>
+										<td><span class="text-black text-nowrap">#June 1, 2020, 08:22 AM</span></td>
+										<td>
+											<div class="d-flex align-items-center">
+												<div>
+													<h6 class="fs-16 font-w600 mb-0 text-nowrap"><a
+															href="transactions-details.html" class="text-black">Samuel
+															Bro</a></h6>
+												</div>
+											</div>
+										</td>
+										<td><span class="text-black fs-20 font-w600">₺128.89</span></td>
+										<td colspan="2"><span class="text-black">Yakıt, <br>Gümrük</span></td>
+										<td><a href="javascript:void(0)"
+												class="btn btn-outline-dark btn-rounded">Canceled</a></td>
+										<td>
+											<div class="dropdown mb-auto">
+												<div class="btn-link" role="button" data-toggle="dropdown"
+													aria-expanded="false">
+													<svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+														xmlns="http://www.w3.org/2000/svg">
+														<path
+															d="M10 11.9999C10 13.1045 10.8954 13.9999 12 13.9999C13.1046 13.9999 14 13.1045 14 11.9999C14 10.8954 13.1046 9.99994 12 9.99994C10.8954 9.99994 10 10.8954 10 11.9999Z"
+															fill="black"></path>
+														<path
+															d="M10 4.00006C10 5.10463 10.8954 6.00006 12 6.00006C13.1046 6.00006 14 5.10463 14 4.00006C14 2.89549 13.1046 2.00006 12 2.00006C10.8954 2.00006 10 2.89549 10 4.00006Z"
+															fill="black"></path>
+														<path
+															d="M10 20C10 21.1046 10.8954 22 12 22C13.1046 22 14 21.1046 14 20C14 18.8954 13.1046 18 12 18C10.8954 18 10 18.8954 10 20Z"
+															fill="black"></path>
+													</svg>
+												</div>
+												<div class="dropdown-menu dropdown-menu-right">
+													<a class="dropdown-item" href="javascript:void(0)">Düzenle</a>
+													<a class="dropdown-item" href="javascript:void(0)">Sil</a>
+												</div>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<div class="checkbox mr-0 align-self-center">
+												<div class="custom-control custom-checkbox ">
+													<input type="checkbox" class="custom-control-input"
+														id="customCheckBox27" required="">
+													<label class="custom-control-label" for="customCheckBox27"></label>
+												</div>
+											</div>
+										</td>
+										<td><span class="text-black font-w500">42 AHE 87</span></td>
+										<td><span class="text-black text-nowrap">#June 1, 2020, 08:22 AM</span></td>
+										<td>
+											<div class="d-flex align-items-center">
+												<div>
+													<h6 class="fs-16 font-w600 mb-0 text-nowrap"><a
+															href="transactions-details.html" class="text-black">Yellow
+															Caw</a></h6>
+													<span class="fs-14">Studio</span>
+												</div>
+											</div>
+										</td>
+										<td><span class="text-black fs-20 font-w600">₺560.67</span></td>
+										<td colspan="2"><span class="text-black">Yakıt, <br>Gümrük</span></td>
+										<td><a href="javascript:void(0)"
+												class="btn btn-outline-success btn-rounded">Completed</a></td>
+										<td>
+											<div class="dropdown mb-auto">
+												<div class="btn-link" role="button" data-toggle="dropdown"
+													aria-expanded="false">
+													<svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+														xmlns="http://www.w3.org/2000/svg">
+														<path
+															d="M10 11.9999C10 13.1045 10.8954 13.9999 12 13.9999C13.1046 13.9999 14 13.1045 14 11.9999C14 10.8954 13.1046 9.99994 12 9.99994C10.8954 9.99994 10 10.8954 10 11.9999Z"
+															fill="black"></path>
+														<path
+															d="M10 4.00006C10 5.10463 10.8954 6.00006 12 6.00006C13.1046 6.00006 14 5.10463 14 4.00006C14 2.89549 13.1046 2.00006 12 2.00006C10.8954 2.00006 10 2.89549 10 4.00006Z"
+															fill="black"></path>
+														<path
+															d="M10 20C10 21.1046 10.8954 22 12 22C13.1046 22 14 21.1046 14 20C14 18.8954 13.1046 18 12 18C10.8954 18 10 18.8954 10 20Z"
+															fill="black"></path>
+													</svg>
+												</div>
+												<div class="dropdown-menu dropdown-menu-right">
+													<a class="dropdown-item" href="javascript:void(0)">Düzenle</a>
+													<a class="dropdown-item" href="javascript:void(0)">Sil</a>
+												</div>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<div class="checkbox mr-0 align-self-center">
+												<div class="custom-control custom-checkbox ">
+													<input type="checkbox" class="custom-control-input"
+														id="customCheckBox29" required="">
+													<label class="custom-control-label" for="customCheckBox29"></label>
+												</div>
+											</div>
+										</td>
+										<td><span class="text-black font-w500">42 AHE 87</span></td>
+										<td><span class="text-black text-nowrap">#June 1, 2020, 08:22 AM</span></td>
+										<td>
+											<div class="d-flex align-items-center">
+												<div>
+													<h6 class="fs-16 font-w600 mb-0 text-nowrap"><a
+															href="transactions-details.html" class="text-black">Cindy
+															Seea</a></h6>
+												</div>
+											</div>
+										</td>
+										<td><span class="text-black fs-20 font-w600">₺128.89</span></td>
+										<td colspan="2"><span class="text-black">Yakıt, <br>Gümrük</span></td>
+										<td><a href="javascript:void(0)"
+												class="btn btn-outline-dark btn-rounded">Canceled</a></td>
+										<td>
+											<div class="dropdown mb-auto">
+												<div class="btn-link" role="button" data-toggle="dropdown"
+													aria-expanded="false">
+													<svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+														xmlns="http://www.w3.org/2000/svg">
+														<path
+															d="M10 11.9999C10 13.1045 10.8954 13.9999 12 13.9999C13.1046 13.9999 14 13.1045 14 11.9999C14 10.8954 13.1046 9.99994 12 9.99994C10.8954 9.99994 10 10.8954 10 11.9999Z"
+															fill="black"></path>
+														<path
+															d="M10 4.00006C10 5.10463 10.8954 6.00006 12 6.00006C13.1046 6.00006 14 5.10463 14 4.00006C14 2.89549 13.1046 2.00006 12 2.00006C10.8954 2.00006 10 2.89549 10 4.00006Z"
+															fill="black"></path>
+														<path
+															d="M10 20C10 21.1046 10.8954 22 12 22C13.1046 22 14 21.1046 14 20C14 18.8954 13.1046 18 12 18C10.8954 18 10 18.8954 10 20Z"
+															fill="black"></path>
+													</svg>
+												</div>
+												<div class="dropdown-menu dropdown-menu-right">
+													<a class="dropdown-item" href="javascript:void(0)">Düzenle</a>
+													<a class="dropdown-item" href="javascript:void(0)">Sil</a>
+												</div>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<div class="checkbox mr-0 align-self-center">
+												<div class="custom-control custom-checkbox ">
+													<input type="checkbox" class="custom-control-input"
+														id="customCheckBox211" required="">
+													<label class="custom-control-label" for="customCheckBox211"></label>
+												</div>
+											</div>
+										</td>
+										<td><span class="text-black font-w500">42 AHE 87</span></td>
+										<td><span class="text-black text-nowrap">#June 1, 2020, 08:22 AM</span></td>
+										<td>
+											<div class="d-flex align-items-center">
+												<div>
+													<h6 class="fs-16 font-w600 mb-0 text-nowrap"><a
+															href="transactions-details.html"
+															class="text-black">Nurkomariah</a></h6>
+												</div>
+											</div>
+										</td>
+										<td><span class="text-black fs-20 font-w600">₺783.22</span></td>
+										<td colspan="2"><span class="text-black">Yakıt, <br>Gümrük</span></td>
+										<td><a href="javascript:void(0)"
+												class="btn btn-outline-dark btn-rounded">Canceled</a></td>
+										<td>
+											<div class="dropdown mb-auto">
+												<div class="btn-link" role="button" data-toggle="dropdown"
+													aria-expanded="false">
+													<svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+														xmlns="http://www.w3.org/2000/svg">
+														<path
+															d="M10 11.9999C10 13.1045 10.8954 13.9999 12 13.9999C13.1046 13.9999 14 13.1045 14 11.9999C14 10.8954 13.1046 9.99994 12 9.99994C10.8954 9.99994 10 10.8954 10 11.9999Z"
+															fill="black"></path>
+														<path
+															d="M10 4.00006C10 5.10463 10.8954 6.00006 12 6.00006C13.1046 6.00006 14 5.10463 14 4.00006C14 2.89549 13.1046 2.00006 12 2.00006C10.8954 2.00006 10 2.89549 10 4.00006Z"
+															fill="black"></path>
+														<path
+															d="M10 20C10 21.1046 10.8954 22 12 22C13.1046 22 14 21.1046 14 20C14 18.8954 13.1046 18 12 18C10.8954 18 10 18.8954 10 20Z"
+															fill="black"></path>
+													</svg>
+												</div>
+												<div class="dropdown-menu dropdown-menu-right">
+													<a class="dropdown-item" href="javascript:void(0)">Düzenle</a>
+													<a class="dropdown-item" href="javascript:void(0)">Sil</a>
+												</div>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<div class="checkbox mr-0 align-self-center">
+												<div class="custom-control custom-checkbox ">
+													<input type="checkbox" class="custom-control-input"
+														id="customCheckBox30" required="">
+													<label class="custom-control-label" for="customCheckBox30"></label>
+												</div>
+											</div>
+										</td>
+										<td><span class="text-black font-w500">42 AHE 87</span></td>
+										<td><span class="text-black text-nowrap">#June 1, 2020, 08:22 AM</span></td>
+										<td>
+											<div class="d-flex align-items-center">
+												<div>
+													<h6 class="fs-16 font-w600 mb-0 text-nowrap"><a
+															href="transactions-details.html" class="text-black">XYZ
+															Store ID</a></h6>
+													<span class="fs-14">Online Shop</span>
+												</div>
+											</div>
+										</td>
+										<td><span class="text-black fs-20 font-w600">₺560.67</span></td>
+										<td colspan="2"><span class="text-black">Yakıt, <br>Gümrük</span></td>
+										<td><a href="javascript:void(0)"
+												class="btn btn-outline-success btn-rounded">Completed</a></td>
+										<td>
+											<div class="dropdown mb-auto">
+												<div class="btn-link" role="button" data-toggle="dropdown"
+													aria-expanded="false">
+													<svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+														xmlns="http://www.w3.org/2000/svg">
+														<path
+															d="M10 11.9999C10 13.1045 10.8954 13.9999 12 13.9999C13.1046 13.9999 14 13.1045 14 11.9999C14 10.8954 13.1046 9.99994 12 9.99994C10.8954 9.99994 10 10.8954 10 11.9999Z"
+															fill="black"></path>
+														<path
+															d="M10 4.00006C10 5.10463 10.8954 6.00006 12 6.00006C13.1046 6.00006 14 5.10463 14 4.00006C14 2.89549 13.1046 2.00006 12 2.00006C10.8954 2.00006 10 2.89549 10 4.00006Z"
+															fill="black"></path>
+														<path
+															d="M10 20C10 21.1046 10.8954 22 12 22C13.1046 22 14 21.1046 14 20C14 18.8954 13.1046 18 12 18C10.8954 18 10 18.8954 10 20Z"
+															fill="black"></path>
+													</svg>
+												</div>
+												<div class="dropdown-menu dropdown-menu-right">
+													<a class="dropdown-item" href="javascript:void(0)">Düzenle</a>
+													<a class="dropdown-item" href="javascript:void(0)">Sil</a>
+												</div>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<div class="checkbox mr-0 align-self-center">
+												<div class="custom-control custom-checkbox ">
+													<input type="checkbox" class="custom-control-input"
+														id="customCheckBox241" required="">
+													<label class="custom-control-label" for="customCheckBox241"></label>
+												</div>
+											</div>
+										</td>
+										<td><span class="text-black font-w500">42 AHE 87</span></td>
+										<td><span class="text-black text-nowrap">#June 1, 2020, 08:22 AM</span></td>
+										<td>
+											<div class="d-flex align-items-center">
+												<div>
+													<h6 class="fs-16 font-w600 mb-0 text-nowrap"><a
+															href="transactions-details.html" class="text-black">Romeo
+															Wayudi</a></h6>
+												</div>
+											</div>
+										</td>
+										<td><span class="text-black fs-20 font-w600">₺783.22</span></td>
+										<td colspan="2"><span class="text-black">Yakıt, <br>Gümrük</span></td>
+										<td><a href="javascript:void(0)"
+												class="btn btn-outline-warning btn-rounded">Pending</a></td>
+										<td>
+											<div class="dropdown mb-auto">
+												<div class="btn-link" role="button" data-toggle="dropdown"
+													aria-expanded="false">
+													<svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+														xmlns="http://www.w3.org/2000/svg">
+														<path
+															d="M10 11.9999C10 13.1045 10.8954 13.9999 12 13.9999C13.1046 13.9999 14 13.1045 14 11.9999C14 10.8954 13.1046 9.99994 12 9.99994C10.8954 9.99994 10 10.8954 10 11.9999Z"
+															fill="black"></path>
+														<path
+															d="M10 4.00006C10 5.10463 10.8954 6.00006 12 6.00006C13.1046 6.00006 14 5.10463 14 4.00006C14 2.89549 13.1046 2.00006 12 2.00006C10.8954 2.00006 10 2.89549 10 4.00006Z"
+															fill="black"></path>
+														<path
+															d="M10 20C10 21.1046 10.8954 22 12 22C13.1046 22 14 21.1046 14 20C14 18.8954 13.1046 18 12 18C10.8954 18 10 18.8954 10 20Z"
+															fill="black"></path>
+													</svg>
+												</div>
+												<div class="dropdown-menu dropdown-menu-right">
+													<a class="dropdown-item" href="javascript:void(0)">Düzenle</a>
+													<a class="dropdown-item" href="javascript:void(0)">Sil</a>
+												</div>
+											</div>
+										</td>
+									</tr>
+								</tbody>
+							</table>
 						</div>
 					</div>
 				</div>
-			</div>
-			<div class="modal fade" id="modalGrid2" style="display: none;" aria-hidden="true">
-				<div class="modal-dialog cp-modal-dialog" role="document">
-					<div class="modal-content boradi-4">
-						<div class="modal-header ">
-							<h4 class="modal-title"> <strong>Araç Ekle</strong> </h4>
-							<button type="button" class="close" data-dismiss="modal"><span>×</span>
-							</button>
-						</div>
-						<div class="modal-body cp-anc-modal-body">
-							<div class="container">
-								<form>
 
-									<div class="form-row">
-
-
-										<div class="col-md-6">
-											<div class="form-group">
-												<label>Araç Plaka:</label>
-												<input type="text" class="form-control" placeholder="42 TST 42" disabled
-													required>
-											</div>
-										</div>
-										<div class="col-md-6">
-											<div class="form-group">
-												<label>Sürücü:</label>
-												<select class="form-control default-select" id="sel2">
-													<option>Personel</option>
-													<option>Personel</option>
-													<option>Personel</option>
-													<option>Personel</option>
-													<option>Personel</option>
-													<option>Personel</option>
-													<option>Personel</option>
-													<option>Personel</option>
-												</select>
-											</div>
-										</div>
-										<div class="col-md-6">
-											<div class="form-group">
-												<label>Araç Statü:</label>
-												<select class="form-control default-select" id="sel1">
-													<option>Aktif</option>
-													<option>Pasif</option>
-												</select>
-											</div>
-										</div>
-										<div class="col-md-6">
-											<div class="form-group">
-												<label>Araç Tipi:</label>
-												<select class="form-control default-select" id="sel2">
-													<option>Tenteli</option>
-													<option>Jumbo</option>
-													<option>Treylerli Normal</option>
-													<option>Treylerli Jumbo</option>
-													<option>Normal Açık</option>
-													<option>Damperli</option>
-													<option>Jumbo Açık</option>
-													<option>Lowbed</option>
-												</select>
-											</div>
-										</div>
-
-									</div>
-
-
-								</form>
-							</div>
-						</div>
-						<div class="modal-footer border-tn pr-25">
-							<button type="button" class="btn btn-danger light boradi-4"
-								data-dismiss="modal">Vazgeç</button>
-							<button type="button" class="btn btn-primary boradi-4">Güncelle</button>
-						</div>
-					</div>
-				</div>
 			</div>
 		</div>
 
 		<!-- <div class="footer">
             <div class="copyright">
-                <p>Copyright © Designed &amp; Developed by <a href="#" target="_blank"><span class="color-bal">BAL</span><span class="color-zen">ZEN</span></a> 2021</p>
+                <p>Copyright © Designed &amp; Developed by <a href="#" target="_blank"><span class="color-bal">Bal</span><span class="color-zen">Zen</span></a> 2021</p>
             </div>
         </div> -->
 
@@ -1317,15 +1296,33 @@
 	<script src="../assets/vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
 	<script src="../assets/js/custom.min.js"></script>
 	<script src="../assets/js/deznav-init.js"></script>
-	<!-- <script src="../assets/vendor/lightgallery/js/lightgallery-all.min.js"></script> -->
 
-	<!-- Vectormap -->
-	<script src="../assets/vendor/jqvmap/js/jquery.vmap.min.js"></script>
-	<script src="../assets/vendor/jqvmap/js/jquery.vmap.world.js"></script>
+	<!-- pickdate -->
+	<script src="../assets/vendor/pickadate/picker.js"></script>
+	<script src="../assets/vendor/pickadate/picker.time.js"></script>
+	<script src="../assets/vendor/pickadate/picker.date.js"></script>
 
+	<!-- Pickdate -->
+	<script src="../assets/js/plugins-init/pickadate-init.js"></script>
+	<script src="../assets/vendor/chart.js/Chart.bundle.min.js"></script>
+	<!-- Datatable -->
+	<script src="../assets/vendor/datatables/js/jquery.dataTables.min.js"></script>
+	<script>
+		(function ($) {
+			var table = $('#example5').DataTable({
+				searching: false,
+				paging: true,
+				select: false,
+				//info: false,         
+				lengthChange: false
 
-	<!-- All init script -->
-	<script src="../assets/js/plugins-init/jqvmap-init.js"></script>
+			});
+			$('#example tbody').on('click', 'tr', function () {
+				var data = table.row(this).data();
+
+			});
+		})(jQuery);
+	</script>
 </body>
 
 
