@@ -42306,7 +42306,7 @@ code {
   }
 }
 .table strong {
-  color: #b1b1b1;
+  /* color: #b1b1b1; */
 }
 .table td {
   border-color: #ced4da;

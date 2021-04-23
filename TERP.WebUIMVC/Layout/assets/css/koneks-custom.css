@@ -153,6 +153,10 @@ box-shadow: none !important;
 .cp-sedet:hover {
   background-color: #f4f5f9;
 }
+.docs-sedet:hover {
+  background-color: #f4f5f9;
+}
+
 
 .cp-br {
   border-radius: 4px;
@@ -173,6 +177,14 @@ box-shadow: none !important;
   color: #3b3289;
 }
 .cp-btn-add:hover {
+  background-color: #fff;
+}
+.docs-btn-add {
+  background-color: #fff;
+  border-color: #81879e;
+  color: #3b3289;
+}
+.docs-btn-add:hover {
   background-color: #fff;
 }
 
@@ -223,6 +235,9 @@ box-shadow: none !important;
   padding-right: 5px;
 }
 .cp-anc-ta{
+  resize: none;
+}
+.docs-ta{
   resize: none;
 }
 
@@ -288,6 +303,11 @@ box-shadow: none !important;
   border-radius: 0.5rem !important;
 }
 
+.docs-card{
+  transition: none !important;
+  border-radius: 0.5rem !important;
+}
+
 
 .po-card{
   transition: none !important;
@@ -324,4 +344,155 @@ box-shadow: none !important;
 .ae-tarea{
   resize: none !important;
 }
+
+.docs-th{
+  color: #000 !important;
+  font-family: "poppins", sans-serif !important;
+}
+
+.docs-header{
+  padding: 1rem 1.875rem 1rem !important;
+  border-bottom: none !important;
+}
 /* Custom CSS End */
+
+
+
+/* Upload File CSS Start */
+
+
+.file-container{
+  margin: 20px 0px;
+}
+
+.file-row{
+  display: flex;
+    margin-right: -15px;
+    margin-left: -15px;
+    justify-content: center;
+    align-items: flex-end;
+}
+#one
+{
+  /* margin-top:50px; */
+  border-radius: 6px;
+ box-shadow: 0px 0px 5px 2px rgb(169 169 169 / 20%);
+ padding-top: 30px;
+ padding-bottom: 30px;
+}
+.it .btn-orange
+{
+	background-color: transparent;
+	border-color: #777!important;
+	color: #777;
+	text-align: left;
+  width:100%;
+}
+.it input.form-control
+{
+  padding: 0;
+	height: 34px;
+	border:none;
+  margin-bottom:0px;
+	border-radius: 0px;
+	border-bottom: 1px solid #ddd;
+	box-shadow: none;
+}
+.it .form-control:focus
+{
+	border-color: #645eb4;
+	box-shadow: none;
+	outline: none;
+}
+.fileUpload {
+    position: relative;
+    overflow: hidden;
+    margin: 10px;
+}
+.fileUpload input.upload {
+  width: 100%;
+  min-height: 85px;
+  height: auto !important;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    filter: alpha(opacity=0);
+}
+.it .btn-new, .it .btn-next
+{
+	margin: 10px 0px;
+	background-color: #ef7f1b;
+	color: #f5f5f5;
+	font-size: 16px;
+	/* width: 155px; */
+  border-radius: 4px;
+}
+.it .btn-next
+{
+	background-color: #3b3289;
+	color: #fff;
+}
+.it .btn-check
+{
+  cursor:pointer;
+  line-height:54px;
+  color:#645eb4;
+}
+.it .uploadDoc
+{
+	margin-bottom: 20px;
+}
+.it .uploadDoc
+{
+	margin-bottom: 20px;
+}
+.it .btn-orange img {
+    width: 30px;
+}
+.upl{
+  display: block;
+  width: 88px;
+  overflow: hidden; /* taşanları gizle */
+  white-space: nowrap; /* alt satıra hiç inme */
+  text-overflow: ellipsis; /* eğer uzunsa üç nokta koy */
+  line-clamp: 2;
+}
+.itp
+{
+  font-size:16px;
+  text-align:center;
+  margin-bottom: 20px;
+}
+.it #uploader .docErr
+{
+	position: absolute;
+    right:auto;
+    left: 10px;
+    top: -56px;
+    padding: 10px;
+    font-size: 15px;
+    background-color: #fff;
+    color: red;
+    box-shadow: 0px 0px 7px 2px rgba(0,0,0,0.2);
+    display: none;
+}
+.it #uploader .docErr:after
+{
+	content: '\f0d7';
+	display: inline-block;
+	font-family: FontAwesome;
+	font-size: 50px;
+	color: #fff;
+	position: absolute;
+	left: 30px;
+	bottom: -40px;
+	text-shadow: 0px 3px 6px rgba(0,0,0,0.2);
+}
+/* Upload File CSS End */
+
+
