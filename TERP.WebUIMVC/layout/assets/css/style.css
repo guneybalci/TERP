@@ -39758,6 +39758,20 @@ button:focus {
     margin-bottom: 0.938rem;
     height: calc(100% - 0.938rem);
   }
+  .fileUpload {
+    width: auto !important;
+  }
+
+  .fileUpload > .upload {
+    min-height: 105px !important;
+  }
+
+  .addNote{
+    margin-top: 15px;
+  }
+  .docs-add-title{
+    display: none ;
+  }
 }
 .card-body {
   padding: 1.875rem;

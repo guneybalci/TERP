@@ -56,7 +56,7 @@ $(document).ready(function(){
    });
 
    $(".btn-new").on('click',function(){
-        $("#uploader").append('<div class="row uploadDoc"><div class="col-sm-3"><div class="docErr">Please upload valid file</div><!--error--><div class="fileUpload btn btn-orange"> <img src="../assets/images/fileupload/file-upload-empty.svg" class="icon"><span class="upl" id="upload">Dosya Ekle</span><input type="file" class="upload up" id="up" onchange="readURL(this);" /></div></div><div class="col-sm-9"><input type="text" class="form-control" name="" placeholder="Buradan notunuzu ekleyebilirsiniz.."><a class="btn-check"><i class="fa fa-times"></i> Dosyayı Sil</a></div></div>');
+        $("#uploader").append('<div class="row uploadDoc"><div class="col-sm-3"><div class="fileUpload btn btn-orange"> <img src="../assets/images/fileupload/file-upload-empty.svg" class="icon"><span class="upl" id="upload">Dosya Ekle</span><input type="file" class="upload up" id="up" onchange="readURL(this);" /></div></div><div class="col-sm-9">	<div class="docErr col-sm-12">Lütfen geçerli dosya yükleyin!</div><input type="text" class="form-control addNote" name="" placeholder="Buradan notunuzu ekleyebilirsiniz.."><a class="btn-check"><i class="fa fa-times"></i> Dosyayı Sil</a></div></div>');
    });
     
    $(document).on("click", "a.btn-check" , function() {
