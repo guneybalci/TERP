@@ -63,7 +63,8 @@ $(document).ready(function(){
      if($(".uploadDoc").length>1){
         $(this).closest(".uploadDoc").remove();
       }else{
-        alert("You have to upload at least one document.");
+        // alert("En az bir belge yüklemelisiniz.");
+        $(".fileUploadFind").addClass("dpb")
       } 
    });
 });
