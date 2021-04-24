@@ -3033,11 +3033,24 @@ fieldset:disabled a.btn {
   pointer-events: none;
 }
 
+
+.btn-excel{
+  border-color: #19ac65;
+  background-color: #29c27f;
+  color: #fff;
+}
+
+.btn-excel:hover,.btn-excel:focus,.btn-excel:active{
+  background-color: #fff;
+  color: #27663f;
+}
+
 .btn-primary {
   color: #fff;
   background-color: #3b3289;
   border-color: #3b3289;
 }
+
 .btn-primary:hover {
   color: #fff;
   /* background-color: #1593c9;
