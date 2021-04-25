@@ -483,7 +483,7 @@
           <li>
             <a href="terp-konum-bilgileri.html" class="ai-icon" aria-expanded="false">
               <i class="flaticon-381-map-2"></i>
-              <span class="nav-text">Konum Bilgileri</span>
+              <span class="nav-text">Firma Bilgileri</span>
             </a>
           </li>
 
@@ -513,11 +513,11 @@
       <div class="container-fluid">
         <div class="page-titles">
           <div class="hp-title">
-            <h4 class="hp-h4">Konum Bilgileri</h4>
+            <h4 class="hp-h4">Firma Bilgileri</h4>
           </div>
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="javascript:void(0)">Anasayfa</a></li>
-            <li class="breadcrumb-item active"><a href="javascript:void(0)">Konum Bilgileri</a></li>
+            <li class="breadcrumb-item active"><a href="javascript:void(0)">Firma Bilgileri</a></li>
           </ol>
         </div>
         <!-- row -->
@@ -529,106 +529,78 @@
             Adres Ekle</a>
 
           <!-- Modal -->
-          <div class="modal fade" id="exampledownload" style="display: none" aria-hidden="true">
-            <div class="modal-dialog mc-modal-dialog" role="document">
-              <div class="modal-content boradi-4">
-                <div class="modal-header">
-                  <h4 class="modal-title mc-title"><strong>Yeni Masraf Ekle</strong></h4>
-                  <button type="button" class="close" data-dismiss="modal"><span>×</span></button>
-                </div>
-                <div class="modal-body mc-modal-body">
-                  <div class="container">
-                    <form>
-                      <div class="form-row">
-                        <div class="col-md-6">
-                          <div class="form-group">
-                            <label>Araç Plaka:</label>
-                            <input type="text" class="form-control" placeholder="42 TST 42" required />
-                          </div>
-                        </div>
+          <div class="modal fade" id="exampledownload" style="display: none;" aria-hidden="true">
+            <div class="modal-dialog cp-modal-dialog" role="document">
+                <div class="modal-content boradi-4">
+                    <div class="modal-header">
+                        <h4 class="modal-title comin-title"> <strong>Yeni Firma Ekle</strong> </h4>
+                        <button type="button" class="close" data-dismiss="modal"><span>×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body cp-anc-modal-body">
+                        <div class="container">
+                            <form>
 
-                        <div class="col-md-6">
-                          <div class="form-group">
-                            <label>Ödeme Tipi:</label>
-                            <select class="form-control default-select" id="sel1">
-                              <option>Ödeme Tipi</option>
-                              <option>Borç</option>
-                              <option>Taksit</option>
-                              <option>Yakıt</option>
-                              <option>Gider</option>
-                            </select>
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div class="form-group">
-                            <label>Tarih:</label>
-                            <input name="datepicker" class="datepicker-default form-control" placeholder="1 Ocak 1978"
-                              id="datepicker" />
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div class="form-group">
-                            <label>Para Birimi:</label>
-                            <form action="#">
-                              <div class="input-group">
-                                <input type="text" class="form-control" placeholder="0.00" />
-                                <div class="input-group-append">
-                                  <button class="btn btn-primary dropdown-toggle ae-bortb" type="button"
-                                    data-toggle="dropdown">Birim</button>
-                                  <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">₺ : TRY</a>
-                                    <a class="dropdown-item" href="#">€ : EUR</a>
-                                    <a class="dropdown-item" href="#">$ : USD</a>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label>Firma Ünvanı:</label>
+                                        <input type="text" class="form-control" value="Yıldırım" required>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                      <label>Yetkili:</label>
+                                      <input type="text" class="form-control" value="Yıldırım" required>
                                   </div>
+                                  <div class="form-group col-md-6 mt-20">
+                                    <label>Mersis NO:</label>
+                                    <input type="text" id="number" name="number" class="form-control"
+                                    value="1111111111" required>
                                 </div>
-                              </div>
-                            </form>
-                          </div>
-                        </div>
-                        <div class="col-md-12 ae-cont">
-                          <div class="input-group">
-                            <div class="input-group-prepend">
-                              <button class="btn btn-primary btn-sm ae-boltb ae-input-btn" type="button">
-                                <i class="las la-file-upload ae-fileUpload"></i>
-                              </button>
-                            </div>
-                            <div class="custom-file">
-                              <!-- <input type="file" class="custom-file-input">
-															<label class="custom-file-label">Dosya Ekle</label> -->
-                              <button class="ae-finp" onclick="document.getElementById('getFile').click()">Yüklemek İçin
-                                Buraya Tıklayın</button>
-                              <input type="file" id="getFile" style="display: none" />
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-md-12 mc-tarea">
-                          <div class="form-group">
-                            <label>Açıklama:</label>
-                            <textarea class="form-control ae-tarea" rows="4"
-                              id="comment">Ödemelerinizi detaylandırınız..</textarea>
-                          </div>
-                        </div>
-                      </div>
-                    </form>
-                  </div>
-                </div>
-                <div class="modal-footer border-tn mr-25">
-                  <button type="button" class="btn btn-danger light boradi-4" data-dismiss="modal">Vazgeç</button>
-                  <button type="button" class="btn btn-primary boradi-4">Ekle</button>
-                </div>
-              </div>
-            </div>
-          </div>
 
+                                <div class="form-group col-md-6 mt-20">
+                                  <label>Ticaret Sicil NO:</label>
+                                  <input type="text" id="number" name="number" class="form-control"
+                                  value="1111111111" required>
+                              </div>
+                              
+                                    <div class="form-group col-md-6 mt-20">
+                                        <label>E-Posta</label>
+                                        <input type="E-Posta" class="form-control" value="yildirim@koneks.com">
+                                    </div>
+                                    <div class="form-group col-md-6 mt-20">
+                                        <label>Telefon</label>
+                                        <input type="tel" id="phone" name="phone" class="form-control"
+                                            value="0542 636 35 42" pattern="[0-9]{4}-[0-9]{3}-[0-9]{4}" required>
+                                    </div>
+
+
+                                    <div class="form-group col-md-12 mt-20">
+                                        <label>Adres</label>
+                                        <textarea class="form-control cp-anc-ta" rows="4"
+                                            id="comment">2289 5th Avenue, New York</textarea>
+                                    </div>
+                                </div>
+
+
+                            </form>
+                        </div>
+                    </div>
+                    <div class="modal-footer border-tn pr-25">
+                        <button type="button" class="btn btn-danger light boradi-4"
+                            data-dismiss="modal">Vazgeç</button>
+                        <button type="button" class="btn btn-primary boradi-4">Ekle</button>
+                    </div>
+                </div>
+            </div>
+        </div>
           
 
           
         </div>
         <div class="row">
 			<div class="col-12">
-				<div class="card">
+				<div class="card comin-card">
 					<div class="card-header">
-						<h4 class="card-title">İşbirliği Yapılan Firma Adresleri</h4>
+						<h4 class="card-title">İşbirliği Yapılan Firma Bilgileri</h4>
 					</div>
 					<div class="card-body">
 						<div class="table-responsive">

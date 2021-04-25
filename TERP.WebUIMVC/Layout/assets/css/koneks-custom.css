@@ -40,6 +40,71 @@
 .color-zen {
   color: #5eaaa8 !important;
 }
+/*margin-top*/
+.mt-0{
+  margin-top: 0px !important;
+}
+.mt-5{
+  margin-top: 5px !important;
+}
+.mt-10{
+  margin-top: 10px !important;
+}
+.mt-15{
+  margin-top: 15px !important;
+}
+.mt-20{
+  margin-top: 20px !important;
+}
+/*margin-bottom*/
+.mb-0{
+  margin-bottom: 0px !important;
+}
+.mb-5{
+  margin-bottom: 5px !important;
+}
+.mb-10{
+  margin-bottom: 10px !important;
+}
+.mb-15{
+  margin-bottom: 15px !important;
+}
+.mb-20{
+  margin-bottom: 20px !important;
+}
+/*margin-left*/
+.ml-0{
+  margin-left: 0px !important;
+}
+.ml-5{
+  margin-left: 5px !important;
+}
+.ml-10{
+  margin-left: 10px !important;
+}
+.ml-15{
+  margin-left: 15px !important;
+}
+.ml-20{
+  margin-left: 20px !important;
+}
+
+/*margin-right*/
+.mr-0{
+  margin-right: 0px !important;
+}
+.ml-5{
+  margin-right: 5px !important;
+}
+.ml-10{
+  margin-right: 10px !important;
+}
+.ml-15{
+  margin-right: 15px !important;
+}
+.ml-20{
+  margin-right: 20px !important;
+}
 
 .show::-webkit-scrollbar {
   border-radius: 10px;
@@ -265,11 +330,15 @@
 .mc-title {
   font-size: 1.125rem !important;
   font-weight: normal !important;
-}
-.mc-title {
   margin: 0 !important;
+
 }
 
+.comin-title{
+  font-size: 1.125rem !important;
+  font-weight: normal !important;
+  margin: 0 !important;
+}
 .mc-tarea {
   margin-top: 20px !important;
 }
@@ -314,6 +383,12 @@
   transition: none !important;
   border-radius: 0.5rem !important;
 }
+
+.comin-card {
+  transition: none !important;
+  border-radius: 0.5rem !important;
+}
+
 
 .docs-card {
   transition: none !important;
