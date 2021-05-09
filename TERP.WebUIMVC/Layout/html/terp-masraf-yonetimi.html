@@ -576,13 +576,18 @@
                               <div class="input-group">
                                 <input type="text" class="form-control" placeholder="0.00" />
                                 <div class="input-group-append">
-                                  <button class="btn btn-primary dropdown-toggle ae-bortb" type="button"
+                                  <select class="form-control default-select" id="sel1">
+                                    <option>₺ : TRY</option>
+                                    <option>€ : EUR</option>
+                                    <option>$ : USD</option>
+                                  </select>
+                                  <!-- <button class="btn btn-primary dropdown-toggle ae-bortb" type="button"
                                     data-toggle="dropdown">Birim</button>
                                   <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">₺ : TRY</a>
-                                    <a class="dropdown-item" href="#">€ : EUR</a>
-                                    <a class="dropdown-item" href="#">$ : USD</a>
-                                  </div>
+                                    <a class="dropdown-item" href="#"></a>
+                                    <a class="dropdown-item" href="#"></a>
+                                    <a class="dropdown-item" href="#"></a>
+                                  </div> -->
                                 </div>
                               </div>
                             </form>
@@ -591,7 +596,7 @@
                         <div class="col-md-12 ae-cont">
                           <div class="input-group">
                             <div class="input-group-prepend">
-                              <button class="btn btn-primary btn-sm ae-boltb ae-input-btn" type="button">
+                              <button class="btn btn-primary btn-sm ae-boltb ae-input-btn" disabled type="button">
                                 <i class="las la-file-upload ae-fileUpload"></i>
                               </button>
                             </div>
