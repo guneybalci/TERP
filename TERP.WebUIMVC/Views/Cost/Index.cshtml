@@ -1,0 +1,806 @@
+﻿
+@{
+    ViewBag.Title = "Masraf Yönetimi";
+}
+
+<div class="page-titles">
+    <div class="hp-title">
+        <h4 class="hp-h4">Masraf Yönetimi</h4>
+    </div>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="javascript:void(0)">Anasayfa</a></li>
+        <li class="breadcrumb-item active"><a href="javascript:void(0)">Muhasebe</a></li>
+        <li class="breadcrumb-item active"><a href="javascript:void(0)">Masraf Yönetimi</a></li>
+    </ol>
+</div>
+<!-- row -->
+<div class="page-titles form-head d-flex flex-wrap justify-content-end align-items-center mb-4">
+    <a href="javascript:void(0)" class="btn btn-excel btn-rounded mr-3 mb-2">
+        <i class="las la-file-download scale5 mr-3"></i>
+        Excel'e Aktar
+    </a>
+    <a href="javascript:void(0)" class="btn btn-primary btn-rounded mr-3 mb-2" data-toggle="modal"
+       data-target="#exampledownload">
+        <i class="las la-coins scale5 mr-3"></i>
+        Masraf Ekle
+    </a>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampledownload" style="display: none" aria-hidden="true">
+        <div class="modal-dialog mc-modal-dialog" role="document">
+            <div class="modal-content boradi-4">
+                <div class="modal-header">
+                    <h4 class="modal-title mc-title"><strong>Yeni Masraf Ekle</strong></h4>
+                    <button type="button" class="close" data-dismiss="modal"><span>×</span></button>
+                </div>
+                <div class="modal-body mc-modal-body">
+                    <div class="container">
+                        <form>
+                            <div class="form-row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Araç Plaka:</label>
+                                        <input type="text" class="form-control" placeholder="42 TST 42" required />
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Ödeme Tipi:</label>
+                                        <select class="form-control default-select" id="sel1">
+                                            <option>Ödeme Tipi</option>
+                                            <option>Borç</option>
+                                            <option>Taksit</option>
+                                            <option>Yakıt</option>
+                                            <option>Gider</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Tarih:</label>
+                                        <input name="datepicker" class="datepicker-default form-control" placeholder="1 Ocak 1978"
+                                               id="datepicker" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Para Birimi:</label>
+                                        <form action="#">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" placeholder="0.00" />
+                                                <div class="input-group-append">
+                                                    <select class="form-control default-select" id="sel1">
+                                                        <option>₺ : TRY</option>
+                                                        <option>€ : EUR</option>
+                                                        <option>$ : USD</option>
+                                                    </select>
+                                                    <!-- <button class="btn btn-primary dropdown-toggle ae-bortb" type="button"
+                                                      data-toggle="dropdown">Birim</button>
+                                                    <div class="dropdown-menu">
+                                                      <a class="dropdown-item" href="#"></a>
+                                                      <a class="dropdown-item" href="#"></a>
+                                                      <a class="dropdown-item" href="#"></a>
+                                                    </div> -->
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 ae-cont">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <button class="btn btn-primary btn-sm ae-boltb ae-input-btn" disabled type="button">
+                                                <i class="las la-file-upload ae-fileUpload"></i>
+                                            </button>
+                                        </div>
+                                        <div class="custom-file">
+                                            <!-- <input type="file" class="custom-file-input">
+                                                                          <label class="custom-file-label">Dosya Ekle</label> -->
+                                            <button class="ae-finp" onclick="document.getElementById('getFile').click()">
+                                                Yüklemek İçin
+                                                Buraya Tıklayın
+                                            </button>
+                                            <input type="file" id="getFile" style="display: none" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 mc-tarea">
+                                    <div class="form-group">
+                                        <label>Açıklama:</label>
+                                        <textarea class="form-control ae-tarea" rows="4"
+                                                  id="comment">Ödemelerinizi detaylandırınız..</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer border-tn mr-25">
+                    <button type="button" class="btn btn-danger light boradi-4" data-dismiss="modal">Vazgeç</button>
+                    <button type="button" class="btn btn-primary boradi-4">Ekle</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+</div>
+<div class="row">
+    <div class="col-12">
+        <div class="card accounting-card">
+            <!-- <div class="card-header">
+                <h4 class="card-title">Masraf Yönetim</h4>
+              </div> -->
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="example5" class="display min-w850">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="checkAll" required="" />
+                                        <label class="custom-control-label" for="checkAll"></label>
+                                    </div>
+                                </th>
+                                <th>PLAKA NO</th>
+                                <th>TARİH</th>
+                                <th>AD SOYAD</th>
+                                <th>İŞLEMİ YAPAN</th>
+                                <th>TANIM</th>
+                                <th>STATÜ</th>
+                                <th>TUTAR</th>
+                                <!-- <th>Action</th> -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="customCheckBox2" required="" />
+                                        <label class="custom-control-label" for="customCheckBox2"></label>
+                                    </div>
+                                </td>
+                                <td>42 AHE 871</td>
+                                <td>26/02/2020, 13:00</td>
+                                <td>Tiger Nixon</td>
+                                <td>Dr. Cedric</td>
+                                <td>Cold & Flu</td>
+                                <td>
+                                    <span class="badge light badge-danger">
+                                        <i class="fa fa-circle text-danger mr-1"></i>
+                                        Yeni Eklendi
+                                    </span>
+                                </td>
+                                <td><strong>120₺</strong>1</td>
+                                <!-- <td>
+                                                            <div class="dropdown ml-auto text-right">
+                                                                <div class="btn-link" data-toggle="dropdown">
+                                                                    <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"></rect><circle fill="#000000" cx="5" cy="12" r="2"></circle><circle fill="#000000" cx="12" cy="12" r="2"></circle><circle fill="#000000" cx="19" cy="12" r="2"></circle></g></svg>
+                                                                </div>
+                                                                <div class="dropdown-menu dropdown-menu-right">
+                                                                    <a class="dropdown-item" href="#">Accept Patient</a>
+                                                                    <a class="dropdown-item" href="#">Reject Order</a>
+                                                                    <a class="dropdown-item" href="#">View Details</a>
+                                                                </div>
+                                                            </div>
+                                                        </td> -->
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="customCheckBox3" required="" />
+                                        <label class="custom-control-label" for="customCheckBox3"></label>
+                                    </div>
+                                </td>
+                                <td>42 AHE 872</td>
+                                <td>28/02/2020, 13:00</td>
+                                <td>Garrett Winters</td>
+                                <td>Dr. Cedric</td>
+                                <td>Sleep Problem</td>
+                                <td>
+                                    <span class="badge light badge-warning">
+                                        <i class="fa fa-circle text-warning mr-1"></i>
+                                        Beklenen
+                                    </span>
+                                </td>
+                                <td><strong>120₺</strong>2</td>
+                                <!-- <td>
+                                                            <div class="dropdown ml-auto text-right">
+                                                                <div class="btn-link" data-toggle="dropdown">
+                                                                    <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"></rect><circle fill="#000000" cx="5" cy="12" r="2"></circle><circle fill="#000000" cx="12" cy="12" r="2"></circle><circle fill="#000000" cx="19" cy="12" r="2"></circle></g></svg>
+                                                                </div>
+                                                                <div class="dropdown-menu dropdown-menu-right">
+                                                                    <a class="dropdown-item" href="#">Accept Patient</a>
+                                                                    <a class="dropdown-item" href="#">Reject Order</a>
+                                                                    <a class="dropdown-item" href="#">View Details</a>
+                                                                </div>
+                                                            </div>
+                                                        </td> -->
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="customCheckBox4" required="" />
+                                        <label class="custom-control-label" for="customCheckBox4"></label>
+                                    </div>
+                                </td>
+                                <td>42 AHE 873</td>
+                                <td>26/02/2020, 13:00</td>
+                                <td>Ashton Cox</td>
+                                <td>Dr. Rhona</td>
+                                <td>Cold & Flu</td>
+                                <td>
+                                    <span class="badge light badge-success">
+                                        <i class="fa fa-circle text-success mr-1"></i>
+                                        Onaylandı
+                                    </span>
+                                </td>
+                                <td><strong>120₺</strong>3</td>
+                                <!-- <td>
+                                                            <div class="dropdown ml-auto text-right">
+                                                                <div class="btn-link" data-toggle="dropdown">
+                                                                    <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"></rect><circle fill="#000000" cx="5" cy="12" r="2"></circle><circle fill="#000000" cx="12" cy="12" r="2"></circle><circle fill="#000000" cx="19" cy="12" r="2"></circle></g></svg>
+                                                                </div>
+                                                                <div class="dropdown-menu dropdown-menu-right">
+                                                                    <a class="dropdown-item" href="#">Accept Patient</a>
+                                                                    <a class="dropdown-item" href="#">Reject Order</a>
+                                                                    <a class="dropdown-item" href="#">View Details</a>
+                                                                </div>
+                                                            </div>
+                                                        </td> -->
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="customCheckBox5" required="" />
+                                        <label class="custom-control-label" for="customCheckBox5"></label>
+                                    </div>
+                                </td>
+                                <td>42 AHE 874</td>
+                                <td>29/02/2020, 13:00</td>
+                                <td>Ashton Cox</td>
+                                <td>Dr. Cedric</td>
+                                <td>Cold & Flu</td>
+                                <td>
+                                    <span class="badge light badge-warning">
+                                        <i class="fa fa-circle text-warning mr-1"></i>
+                                        Beklenen
+                                    </span>
+                                </td>
+                                <td><strong>120₺</strong>4</td>
+                                <!-- <td>
+                                                            <div class="dropdown ml-auto text-right">
+                                                                <div class="btn-link" data-toggle="dropdown">
+                                                                    <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"></rect><circle fill="#000000" cx="5" cy="12" r="2"></circle><circle fill="#000000" cx="12" cy="12" r="2"></circle><circle fill="#000000" cx="19" cy="12" r="2"></circle></g></svg>
+                                                                </div>
+                                                                <div class="dropdown-menu dropdown-menu-right">
+                                                                    <a class="dropdown-item" href="#">Accept Patient</a>
+                                                                    <a class="dropdown-item" href="#">Reject Order</a>
+                                                                    <a class="dropdown-item" href="#">View Details</a>
+                                                                </div>
+                                                            </div>
+                                                        </td> -->
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="customCheckBox6" required="" />
+                                        <label class="custom-control-label" for="customCheckBox6"></label>
+                                    </div>
+                                </td>
+                                <td>42 AHE 875</td>
+                                <td>28/02/2020, 13:00</td>
+                                <td>Ashton Cox</td>
+                                <td>Dr. Cedric</td>
+                                <td>Cold & Flu</td>
+                                <td>
+                                    <span class="badge light badge-warning">
+                                        <i class="fa fa-circle text-warning mr-1"></i>
+                                        Beklenen
+                                    </span>
+                                </td>
+                                <td><strong>120₺</strong>5</td>
+                                <!-- <td>
+                                                            <div class="dropdown ml-auto text-right">
+                                                                <div class="btn-link" data-toggle="dropdown">
+                                                                    <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"></rect><circle fill="#000000" cx="5" cy="12" r="2"></circle><circle fill="#000000" cx="12" cy="12" r="2"></circle><circle fill="#000000" cx="19" cy="12" r="2"></circle></g></svg>
+                                                                </div>
+                                                                <div class="dropdown-menu dropdown-menu-right">
+                                                                    <a class="dropdown-item" href="#">Accept Patient</a>
+                                                                    <a class="dropdown-item" href="#">Reject Order</a>
+                                                                    <a class="dropdown-item" href="#">View Details</a>
+                                                                </div>
+                                                            </div>
+                                                        </td> -->
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="customCheckBox7" required="" />
+                                        <label class="custom-control-label" for="customCheckBox7"></label>
+                                    </div>
+                                </td>
+                                <td>42 AHE 876</td>
+                                <td>28/02/2020, 13:00</td>
+                                <td>Ashton Cox</td>
+                                <td>Dr. Rhona</td>
+                                <td>Sleep Problem</td>
+                                <td>
+                                    <span class="badge light badge-warning">
+                                        <i class="fa fa-circle text-warning mr-1"></i>
+                                        Beklenen
+                                    </span>
+                                </td>
+                                <td><strong>120₺</strong>6</td>
+                                <!-- <td>
+                                                            <div class="dropdown ml-auto text-right">
+                                                                <div class="btn-link" data-toggle="dropdown">
+                                                                    <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"></rect><circle fill="#000000" cx="5" cy="12" r="2"></circle><circle fill="#000000" cx="12" cy="12" r="2"></circle><circle fill="#000000" cx="19" cy="12" r="2"></circle></g></svg>
+                                                                </div>
+                                                                <div class="dropdown-menu dropdown-menu-right">
+                                                                    <a class="dropdown-item" href="#">Accept Patient</a>
+                                                                    <a class="dropdown-item" href="#">Reject Order</a>
+                                                                    <a class="dropdown-item" href="#">View Details</a>
+                                                                </div>
+                                                            </div>
+                                                        </td> -->
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="customCheckBox8" required="" />
+                                        <label class="custom-control-label" for="customCheckBox8"></label>
+                                    </div>
+                                </td>
+                                <td>42 AHE 877</td>
+                                <td>26/02/2020, 13:00</td>
+                                <td>Airi Satou</td>
+                                <td>Dr. Rhona</td>
+                                <td>Cold & Flu</td>
+                                <td>
+                                    <span class="badge light badge-danger">
+                                        <i class="fa fa-circle text-danger mr-1"></i>
+                                        Yeni Eklendi
+                                    </span>
+                                </td>
+                                <td><strong>120₺</strong>7</td>
+                                <!-- <td>
+                                                            <div class="dropdown ml-auto text-right">
+                                                                <div class="btn-link" data-toggle="dropdown">
+                                                                    <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"></rect><circle fill="#000000" cx="5" cy="12" r="2"></circle><circle fill="#000000" cx="12" cy="12" r="2"></circle><circle fill="#000000" cx="19" cy="12" r="2"></circle></g></svg>
+                                                                </div>
+                                                                <div class="dropdown-menu dropdown-menu-right">
+                                                                    <a class="dropdown-item" href="#">Accept Patient</a>
+                                                                    <a class="dropdown-item" href="#">Reject Order</a>
+                                                                    <a class="dropdown-item" href="#">View Details</a>
+                                                                </div>
+                                                            </div>
+                                                        </td> -->
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="customCheckBox9" required="" />
+                                        <label class="custom-control-label" for="customCheckBox9"></label>
+                                    </div>
+                                </td>
+                                <td>42 AHE 878</td>
+                                <td>29/02/2020, 13:00</td>
+                                <td>Airi Satou</td>
+                                <td>Dr. Garrett</td>
+                                <td>Sleep Problem</td>
+                                <td>
+                                    <span class="badge light badge-warning">
+                                        <i class="fa fa-circle text-warning mr-1"></i>
+                                        Beklenen
+                                    </span>
+                                </td>
+                                <td><strong>120₺</strong>8</td>
+                                <!-- <td>
+                                                            <div class="dropdown ml-auto text-right">
+                                                                <div class="btn-link" data-toggle="dropdown">
+                                                                    <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"></rect><circle fill="#000000" cx="5" cy="12" r="2"></circle><circle fill="#000000" cx="12" cy="12" r="2"></circle><circle fill="#000000" cx="19" cy="12" r="2"></circle></g></svg>
+                                                                </div>
+                                                                <div class="dropdown-menu dropdown-menu-right">
+                                                                    <a class="dropdown-item" href="#">Accept Patient</a>
+                                                                    <a class="dropdown-item" href="#">Reject Order</a>
+                                                                    <a class="dropdown-item" href="#">View Details</a>
+                                                                </div>
+                                                            </div>
+                                                        </td> -->
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="customCheckBox10" required="" />
+                                        <label class="custom-control-label" for="customCheckBox10"></label>
+                                    </div>
+                                </td>
+                                <td>42 AHE 879</td>
+                                <td>25/02/2020, 13:00</td>
+                                <td>Airi Satou</td>
+                                <td>Dr. Rhona</td>
+                                <td>Cold & Flu</td>
+                                <td>
+                                    <span class="badge light badge-danger">
+                                        <i class="fa fa-circle text-danger mr-1"></i>
+                                        Yeni Eklendi
+                                    </span>
+                                </td>
+                                <td><strong>120₺</strong>9</td>
+                                <!-- <td>
+                                                            <div class="dropdown ml-auto text-right">
+                                                                <div class="btn-link" data-toggle="dropdown">
+                                                                    <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"></rect><circle fill="#000000" cx="5" cy="12" r="2"></circle><circle fill="#000000" cx="12" cy="12" r="2"></circle><circle fill="#000000" cx="19" cy="12" r="2"></circle></g></svg>
+                                                                </div>
+                                                                <div class="dropdown-menu dropdown-menu-right">
+                                                                    <a class="dropdown-item" href="#">Accept Patient</a>
+                                                                    <a class="dropdown-item" href="#">Reject Order</a>
+                                                                    <a class="dropdown-item" href="#">View Details</a>
+                                                                </div>
+                                                            </div>
+                                                        </td> -->
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="customCheckBox11" required="" />
+                                        <label class="custom-control-label" for="customCheckBox11"></label>
+                                    </div>
+                                </td>
+                                <td>42 AHE 870010</td>
+                                <td>26/02/2020, 13:00</td>
+                                <td>Airi Satou</td>
+                                <td>Dr. Rhona</td>
+                                <td>Sleep Problem</td>
+                                <td>
+                                    <span class="badge light badge-danger">
+                                        <i class="fa fa-circle text-danger mr-1"></i>
+                                        Yeni Eklendi
+                                    </span>
+                                </td>
+                                <td><strong>120₺</strong>10</td>
+                                <!-- <td>
+                                                            <div class="dropdown ml-auto text-right">
+                                                                <div class="btn-link" data-toggle="dropdown">
+                                                                    <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"></rect><circle fill="#000000" cx="5" cy="12" r="2"></circle><circle fill="#000000" cx="12" cy="12" r="2"></circle><circle fill="#000000" cx="19" cy="12" r="2"></circle></g></svg>
+                                                                </div>
+                                                                <div class="dropdown-menu dropdown-menu-right">
+                                                                    <a class="dropdown-item" href="#">Accept Patient</a>
+                                                                    <a class="dropdown-item" href="#">Reject Order</a>
+                                                                    <a class="dropdown-item" href="#">View Details</a>
+                                                                </div>
+                                                            </div>
+                                                        </td> -->
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="customCheckBox12" required="" />
+                                        <label class="custom-control-label" for="customCheckBox12"></label>
+                                    </div>
+                                </td>
+                                <td>42 AHE 870011</td>
+                                <td>28/02/2020, 13:00</td>
+                                <td>Airi Satou</td>
+                                <td>Dr. Rhona</td>
+                                <td>Cold & Flu</td>
+                                <td>
+                                    <span class="badge light badge-warning">
+                                        <i class="fa fa-circle text-warning mr-1"></i>
+                                        Beklenen
+                                    </span>
+                                </td>
+                                <td><strong>120₺</strong>11</td>
+                                <!-- <td>
+                                                            <div class="dropdown ml-auto text-right">
+                                                                <div class="btn-link" data-toggle="dropdown">
+                                                                    <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"></rect><circle fill="#000000" cx="5" cy="12" r="2"></circle><circle fill="#000000" cx="12" cy="12" r="2"></circle><circle fill="#000000" cx="19" cy="12" r="2"></circle></g></svg>
+                                                                </div>
+                                                                <div class="dropdown-menu dropdown-menu-right">
+                                                                    <a class="dropdown-item" href="#">Accept Patient</a>
+                                                                    <a class="dropdown-item" href="#">Reject Order</a>
+                                                                    <a class="dropdown-item" href="#">View Details</a>
+                                                                </div>
+                                                            </div>
+                                                        </td> -->
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="customCheckBox13" required="" />
+                                        <label class="custom-control-label" for="customCheckBox13"></label>
+                                    </div>
+                                </td>
+                                <td>42 AHE 870012</td>
+                                <td>29/02/2020, 13:00</td>
+                                <td>Sonya Frost</td>
+                                <td>Dr. Garrett</td>
+                                <td>Sleep Problem</td>
+                                <td>
+                                    <span class="badge light badge-danger">
+                                        <i class="fa fa-circle text-danger mr-1"></i>
+                                        Yeni Eklendi
+                                    </span>
+                                </td>
+                                <td><strong>120₺</strong>12</td>
+                                <!-- <td>
+                                                            <div class="dropdown ml-auto text-right">
+                                                                <div class="btn-link" data-toggle="dropdown">
+                                                                    <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"></rect><circle fill="#000000" cx="5" cy="12" r="2"></circle><circle fill="#000000" cx="12" cy="12" r="2"></circle><circle fill="#000000" cx="19" cy="12" r="2"></circle></g></svg>
+                                                                </div>
+                                                                <div class="dropdown-menu dropdown-menu-right">
+                                                                    <a class="dropdown-item" href="#">Accept Patient</a>
+                                                                    <a class="dropdown-item" href="#">Reject Order</a>
+                                                                    <a class="dropdown-item" href="#">View Details</a>
+                                                                </div>
+                                                            </div>
+                                                        </td> -->
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="customCheckBox14" required="" />
+                                        <label class="custom-control-label" for="customCheckBox14"></label>
+                                    </div>
+                                </td>
+                                <td>42 AHE 870013</td>
+                                <td>25/02/2020, 13:00</td>
+                                <td>Sonya Frost</td>
+                                <td>Dr. Rhona</td>
+                                <td>Cold & Flu</td>
+                                <td>
+                                    <span class="badge light badge-danger">
+                                        <i class="fa fa-circle text-danger mr-1"></i>
+                                        Yeni Eklendi
+                                    </span>
+                                </td>
+                                <td><strong>120₺</strong>13</td>
+                                <!-- <td>
+                                                            <div class="dropdown ml-auto text-right">
+                                                                <div class="btn-link" data-toggle="dropdown">
+                                                                    <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"></rect><circle fill="#000000" cx="5" cy="12" r="2"></circle><circle fill="#000000" cx="12" cy="12" r="2"></circle><circle fill="#000000" cx="19" cy="12" r="2"></circle></g></svg>
+                                                                </div>
+                                                                <div class="dropdown-menu dropdown-menu-right">
+                                                                    <a class="dropdown-item" href="#">Accept Patient</a>
+                                                                    <a class="dropdown-item" href="#">Reject Order</a>
+                                                                    <a class="dropdown-item" href="#">View Details</a>
+                                                                </div>
+                                                            </div>
+                                                        </td> -->
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="customCheckBox15" required="" />
+                                        <label class="custom-control-label" for="customCheckBox15"></label>
+                                    </div>
+                                </td>
+                                <td>42 AHE 870014</td>
+                                <td>26/02/2020, 13:00</td>
+                                <td>Sonya Frost</td>
+                                <td>Dr. Garrett</td>
+                                <td>Sleep Problem</td>
+                                <td>
+                                    <span class="badge light badge-warning">
+                                        <i class="fa fa-circle text-warning mr-1"></i>
+                                        Beklenen
+                                    </span>
+                                </td>
+                                <td><strong>120₺</strong>14</td>
+                                <!-- <td>
+                                                            <div class="dropdown ml-auto text-right">
+                                                                <div class="btn-link" data-toggle="dropdown">
+                                                                    <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"></rect><circle fill="#000000" cx="5" cy="12" r="2"></circle><circle fill="#000000" cx="12" cy="12" r="2"></circle><circle fill="#000000" cx="19" cy="12" r="2"></circle></g></svg>
+                                                                </div>
+                                                                <div class="dropdown-menu dropdown-menu-right">
+                                                                    <a class="dropdown-item" href="#">Accept Patient</a>
+                                                                    <a class="dropdown-item" href="#">Reject Order</a>
+                                                                    <a class="dropdown-item" href="#">View Details</a>
+                                                                </div>
+                                                            </div>
+                                                        </td> -->
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="customCheckBox16" required="" />
+                                        <label class="custom-control-label" for="customCheckBox16"></label>
+                                    </div>
+                                </td>
+                                <td>42 AHE 870015</td>
+                                <td>28/02/2020, 13:00</td>
+                                <td>Sonya Frost</td>
+                                <td>Dr. Rhona</td>
+                                <td>Cold & Flu</td>
+                                <td>
+                                    <span class="badge light badge-danger">
+                                        <i class="fa fa-circle text-danger mr-1"></i>
+                                        Yeni Eklendi
+                                    </span>
+                                </td>
+                                <td><strong>120₺</strong>15</td>
+                                <!-- <td>
+                                                            <div class="dropdown ml-auto text-right">
+                                                                <div class="btn-link" data-toggle="dropdown">
+                                                                    <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"></rect><circle fill="#000000" cx="5" cy="12" r="2"></circle><circle fill="#000000" cx="12" cy="12" r="2"></circle><circle fill="#000000" cx="19" cy="12" r="2"></circle></g></svg>
+                                                                </div>
+                                                                <div class="dropdown-menu dropdown-menu-right">
+                                                                    <a class="dropdown-item" href="#">Accept Patient</a>
+                                                                    <a class="dropdown-item" href="#">Reject Order</a>
+                                                                    <a class="dropdown-item" href="#">View Details</a>
+                                                                </div>
+                                                            </div>
+                                                        </td> -->
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="customCheckBox17" required="" />
+                                        <label class="custom-control-label" for="customCheckBox17"></label>
+                                    </div>
+                                </td>
+                                <td>42 AHE 870016</td>
+                                <td>29/02/2020, 13:00</td>
+                                <td>Sonya Frost</td>
+                                <td>Dr. Garrett</td>
+                                <td>Sleep Problem</td>
+                                <td>
+                                    <span class="badge light badge-danger">
+                                        <i class="fa fa-circle text-danger mr-1"></i>
+                                        Yeni Eklendi
+                                    </span>
+                                </td>
+                                <td><strong>120₺</strong>16</td>
+                                <!-- <td>
+                                                            <div class="dropdown ml-auto text-right">
+                                                                <div class="btn-link" data-toggle="dropdown">
+                                                                    <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"></rect><circle fill="#000000" cx="5" cy="12" r="2"></circle><circle fill="#000000" cx="12" cy="12" r="2"></circle><circle fill="#000000" cx="19" cy="12" r="2"></circle></g></svg>
+                                                                </div>
+                                                                <div class="dropdown-menu dropdown-menu-right">
+                                                                    <a class="dropdown-item" href="#">Accept Patient</a>
+                                                                    <a class="dropdown-item" href="#">Reject Order</a>
+                                                                    <a class="dropdown-item" href="#">View Details</a>
+                                                                </div>
+                                                            </div>
+                                                        </td> -->
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="customCheckBox18" required="" />
+                                        <label class="custom-control-label" for="customCheckBox18"></label>
+                                    </div>
+                                </td>
+                                <td>42 AHE 870017</td>
+                                <td>25/02/2020, 13:00</td>
+                                <td>Sonya Frost</td>
+                                <td>Dr. Rhona</td>
+                                <td>Cold & Flu</td>
+                                <td>
+                                    <span class="badge light badge-warning">
+                                        <i class="fa fa-circle text-warning mr-1"></i>
+                                        Beklenen
+                                    </span>
+                                </td>
+                                <td><strong>120₺</strong>17</td>
+                                <!-- <td>
+                                                            <div class="dropdown ml-auto text-right">
+                                                                <div class="btn-link" data-toggle="dropdown">
+                                                                    <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"></rect><circle fill="#000000" cx="5" cy="12" r="2"></circle><circle fill="#000000" cx="12" cy="12" r="2"></circle><circle fill="#000000" cx="19" cy="12" r="2"></circle></g></svg>
+                                                                </div>
+                                                                <div class="dropdown-menu dropdown-menu-right">
+                                                                    <a class="dropdown-item" href="#">Accept Patient</a>
+                                                                    <a class="dropdown-item" href="#">Reject Order</a>
+                                                                    <a class="dropdown-item" href="#">View Details</a>
+                                                                </div>
+                                                            </div>
+                                                        </td> -->
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="customCheckBox19" required="" />
+                                        <label class="custom-control-label" for="customCheckBox19"></label>
+                                    </div>
+                                </td>
+                                <td>42 AHE 870018</td>
+                                <td>26/02/2020, 13:00</td>
+                                <td>Sonya Frost</td>
+                                <td>Dr. Rhona</td>
+                                <td>Sleep Problem</td>
+                                <td>
+                                    <span class="badge light badge-danger">
+                                        <i class="fa fa-circle text-danger mr-1"></i>
+                                        Yeni Eklendi
+                                    </span>
+                                </td>
+                                <td><strong>120₺</strong>18</td>
+                                <!-- <td>
+                                                            <div class="dropdown ml-auto text-right">
+                                                                <div class="btn-link" data-toggle="dropdown">
+                                                                    <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"></rect><circle fill="#000000" cx="5" cy="12" r="2"></circle><circle fill="#000000" cx="12" cy="12" r="2"></circle><circle fill="#000000" cx="19" cy="12" r="2"></circle></g></svg>
+                                                                </div>
+                                                                <div class="dropdown-menu dropdown-menu-right">
+                                                                    <a class="dropdown-item" href="#">Accept Patient</a>
+                                                                    <a class="dropdown-item" href="#">Reject Order</a>
+                                                                    <a class="dropdown-item" href="#">View Details</a>
+                                                                </div>
+                                                            </div>
+                                                        </td> -->
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="customCheckBox20" required="" />
+                                        <label class="custom-control-label" for="customCheckBox20"></label>
+                                    </div>
+                                </td>
+                                <td>42 AHE 870019</td>
+                                <td>28/02/2020, 13:00</td>
+                                <td>Sonya Frost</td>
+                                <td>Dr. Rhona</td>
+                                <td>Cold & Flu</td>
+                                <td>
+                                    <span class="badge light badge-danger">
+                                        <i class="fa fa-circle text-danger mr-1"></i>
+                                        Yeni Eklendi
+                                    </span>
+                                </td>
+                                <td><strong>120₺</strong>19</td>
+                                <!-- <td>
+                                                            <div class="dropdown ml-auto text-right">
+                                                                <div class="btn-link" data-toggle="dropdown">
+                                                                    <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"></rect><circle fill="#000000" cx="5" cy="12" r="2"></circle><circle fill="#000000" cx="12" cy="12" r="2"></circle><circle fill="#000000" cx="19" cy="12" r="2"></circle></g></svg>
+                                                                </div>
+                                                                <div class="dropdown-menu dropdown-menu-right">
+                                                                    <a class="dropdown-item" href="#">Accept Patient</a>
+                                                                    <a class="dropdown-item" href="#">Reject Order</a>
+                                                                    <a class="dropdown-item" href="#">View Details</a>
+                                                                </div>
+                                                            </div>
+                                                        </td> -->
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="customCheckBox21" required="" />
+                                        <label class="custom-control-label" for="customCheckBox21"></label>
+                                    </div>
+                                </td>
+                                <td>42 AHE 870020</td>
+                                <td>25/02/2020, 13:00</td>
+                                <td>Sonya Frost</td>
+                                <td>Dr. Garrett</td>
+                                <td>Sleep Problem</td>
+                                <td>
+                                    <span class="badge light badge-warning">
+                                        <i class="fa fa-circle text-warning mr-1"></i>
+                                        Beklenen
+                                    </span>
+                                </td>
+                                <td><strong>120₺</strong>20</td>
+                                <!-- <td>
+                                                            <div class="dropdown ml-auto text-right">
+                                                                <div class="btn-link" data-toggle="dropdown">
+                                                                    <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"></rect><circle fill="#000000" cx="5" cy="12" r="2"></circle><circle fill="#000000" cx="12" cy="12" r="2"></circle><circle fill="#000000" cx="19" cy="12" r="2"></circle></g></svg>
+                                                                </div>
+                                                                <div class="dropdown-menu dropdown-menu-right">
+                                                                    <a class="dropdown-item" href="#">Accept Patient</a>
+                                                                    <a class="dropdown-item" href="#">Reject Order</a>
+                                                                    <a class="dropdown-item" href="#">View Details</a>
+                                                                </div>
+                                                            </div>
+                                                        </td> -->
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
