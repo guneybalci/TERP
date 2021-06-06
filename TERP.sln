@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TERP.Entities", "TERP.Entit
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TERP.DataAccess", "TERP.DataAccess\TERP.DataAccess.csproj", "{65B718A5-8070-4B17-855E-7B4B77B193D2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TERP.Business", "TERP.Business\TERP.Business.csproj", "{395854D0-9A6C-4217-B975-AA845B89C9D6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{65B718A5-8070-4B17-855E-7B4B77B193D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{65B718A5-8070-4B17-855E-7B4B77B193D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{65B718A5-8070-4B17-855E-7B4B77B193D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{395854D0-9A6C-4217-B975-AA845B89C9D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{395854D0-9A6C-4217-B975-AA845B89C9D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{395854D0-9A6C-4217-B975-AA845B89C9D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{395854D0-9A6C-4217-B975-AA845B89C9D6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
