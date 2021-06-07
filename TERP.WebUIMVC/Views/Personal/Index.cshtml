@@ -16,11 +16,11 @@
                 <div>
                     <h4 class="fs-20 text-black">Personel Listesi</h4>
                     <span class="fs-12">
-                        Bu departmanda yeni personel tanımlamanızı
+                        Bu departmanda personel listenizi ve atamalarınızı
                         yapabilirsiniz.
                     </span>
                 </div>
-                <div class="dropdown custom-dropdown mb-0 mt-3 mt-sm-0">
+                @*<div class="dropdown custom-dropdown mb-0 mt-3 mt-sm-0">
                     <div class="btn cp-btn-add  cp-sedet cp-br-6" role="button" data-toggle="dropdown"
                          aria-expanded="false">
                         Personel Ekle
@@ -32,7 +32,7 @@
                             Yeni Personel Ekle
                         </button>
                     </div>
-                </div>
+                </div>*@
             </div>
             <div class="card-body">
                 @if (TempData["PersonalSuccessResult"] != null)
@@ -117,6 +117,11 @@
                                         <div class="dropdown-menu dropdown-menu-right border py-0">
                                             <button type="button " class="cp-new-add"
                                                     data-toggle="modal"
+                                                    data-target="#modalcreation">
+                                                Araç Atama
+                                            </button>
+                                            <button type="button " class="cp-new-add"
+                                                    data-toggle="modal"
                                                     data-target="#modalGrid">
                                                 Düzenle
                                             </button>
@@ -179,11 +184,17 @@
                                         <div class="dropdown-menu dropdown-menu-right border py-0">
                                             <button type="button " class="cp-new-add"
                                                     data-toggle="modal"
+                                                    data-target="#modalcreation">
+                                                Araç Atama
+                                            </button>
+                                            <button type="button " class="cp-new-add"
+                                                    data-toggle="modal"
                                                     data-target="#modalGrid">
                                                 Düzenle
                                             </button>
                                             <button type="button " class="cp-new-add">Sil</button>
                                         </div>
+
                                     </div>
                                 </td>
                             </tr>
@@ -240,6 +251,11 @@
                                             </span>
                                         </button>
                                         <div class="dropdown-menu dropdown-menu-right border py-0">
+                                            <button type="button " class="cp-new-add"
+                                                    data-toggle="modal"
+                                                    data-target="#modalcreation">
+                                                Araç Atama
+                                            </button>
                                             <button type="button " class="cp-new-add"
                                                     data-toggle="modal"
                                                     data-target="#modalGrid">
@@ -302,6 +318,11 @@
                                         <div class="dropdown-menu dropdown-menu-right border py-0">
                                             <button type="button " class="cp-new-add"
                                                     data-toggle="modal"
+                                                    data-target="#modalcreation">
+                                                Araç Atama
+                                            </button>
+                                            <button type="button " class="cp-new-add"
+                                                    data-toggle="modal"
                                                     data-target="#modalGrid">
                                                 Düzenle
                                             </button>
@@ -362,6 +383,11 @@
                                             </span>
                                         </button>
                                         <div class="dropdown-menu dropdown-menu-right border py-0">
+                                            <button type="button " class="cp-new-add"
+                                                    data-toggle="modal"
+                                                    data-target="#modalcreation">
+                                                Araç Atama
+                                            </button>
                                             <button type="button " class="cp-new-add"
                                                     data-toggle="modal"
                                                     data-target="#modalGrid">
@@ -427,11 +453,15 @@
                                         <div class="dropdown-menu dropdown-menu-right border py-0">
                                             <button type="button " class="cp-new-add"
                                                     data-toggle="modal"
+                                                    data-target="#modalcreation">
+                                                Araç Atama
+                                            </button>
+                                            <button type="button " class="cp-new-add"
+                                                    data-toggle="modal"
                                                     data-target="#modalGrid">
                                                 Düzenle
                                             </button>
                                             <button type="button " class="cp-new-add">Sil</button>
-
                                         </div>
                                     </div>
                                 </td>
@@ -488,6 +518,11 @@
                                             </span>
                                         </button>
                                         <div class="dropdown-menu dropdown-menu-right border py-0">
+                                            <button type="button " class="cp-new-add"
+                                                    data-toggle="modal"
+                                                    data-target="#modalcreation">
+                                                Araç Atama
+                                            </button>
                                             <button type="button " class="cp-new-add"
                                                     data-toggle="modal"
                                                     data-target="#modalGrid">
@@ -550,6 +585,11 @@
                                         <div class="dropdown-menu dropdown-menu-right border py-0">
                                             <button type="button " class="cp-new-add"
                                                     data-toggle="modal"
+                                                    data-target="#modalcreation">
+                                                Araç Atama
+                                            </button>
+                                            <button type="button " class="cp-new-add"
+                                                    data-toggle="modal"
                                                     data-target="#modalGrid">
                                                 Düzenle
                                             </button>
@@ -609,6 +649,11 @@
                                             </span>
                                         </button>
                                         <div class="dropdown-menu dropdown-menu-right border py-0">
+                                            <button type="button " class="cp-new-add"
+                                                    data-toggle="modal"
+                                                    data-target="#modalcreation">
+                                                Araç Atama
+                                            </button>
                                             <button type="button " class="cp-new-add"
                                                     data-toggle="modal"
                                                     data-target="#modalGrid">
@@ -673,6 +718,11 @@
                                         <div class="dropdown-menu dropdown-menu-right border py-0">
                                             <button type="button " class="cp-new-add"
                                                     data-toggle="modal"
+                                                    data-target="#modalcreation">
+                                                Araç Atama
+                                            </button>
+                                            <button type="button " class="cp-new-add"
+                                                    data-toggle="modal"
                                                     data-target="#modalGrid">
                                                 Düzenle
                                             </button>
@@ -690,14 +740,52 @@
     </div>
 </div>
 
-
-
-
-<div class="modal fade" id="modalGrid2" style="display: none;" aria-hidden="true">
+<!-- Araç Atama Modal -->
+<div class="modal fade" id="modalcreation" style="display: none;" aria-hidden="true">
     <div class="modal-dialog cp-modal-dialog" role="document">
         <div class="modal-content boradi-4">
             <div class="modal-header">
-                <h4 class="modal-title"> <strong>Yeni Personel Ekle</strong> </h4>
+                <h4 class="modal-title"> <strong>Personel Düzenle</strong> </h4>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span>×</span>
+                </button>
+            </div>
+            <div class="modal-body cp-anc-modal-body">
+                <div class="container">
+                    <form method="post" action="">
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label>Atanmış Plaka:</label>
+                                <input type="text" class="form-control" placeholder="42 AHE 87" required name="eskiplaka">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label>Atanacak Plaka:</label>
+                                <input type="text" class="form-control" required name="yeniplaka">
+                            </div>
+                          
+                        </div>
+
+                        <div class="modal-footer border-tn pr-0">
+                            <button type="button" class="btn btn-danger light boradi-4"
+                                    data-dismiss="modal">
+                                Vazgeç
+                            </button>
+                            <button type="submit" class="btn btn-primary boradi-4">Güncelle</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="modalGrid" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog cp-modal-dialog" role="document">
+        <div class="modal-content boradi-4">
+            <div class="modal-header">
+                <h4 class="modal-title"> <strong>Personel Düzenle</strong> </h4>
                 <button type="button" class="close" data-dismiss="modal">
                     <span>×</span>
                 </button>
@@ -733,7 +821,7 @@
                             </div>
                         </div>
 
-                        <div class="modal-footer border-tn pr-25">
+                        <div class="modal-footer border-tn pr-0">
                             <button type="button" class="btn btn-danger light boradi-4"
                                     data-dismiss="modal">
                                 Vazgeç
