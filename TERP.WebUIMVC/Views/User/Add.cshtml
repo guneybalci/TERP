@@ -1,0 +1,176 @@
+﻿@using TERP.Entities.Concrete
+@model TERP.WebUIMVC.Models.UserViewModel
+@{
+    ViewBag.Title = "Yeni Kullanıcı Oluştur";
+}
+<div class="page-titles">
+    <div class="hp-title">
+        <h4 class="hp-h4">Kullanıcı Oluşturma</h4>
+    </div>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="javascript:void(0)">Anasayfa</a></li>
+        <li class="breadcrumb-item active"><a href="javascript:void(0)">Kullanıcı Oluşturma</a></li>
+    </ol>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card uc-card">
+            <div class="card-header">
+                <h4 class="card-title">Yeni Kullanıcı Oluşturma</h4>
+            </div>
+            <div class="card-body">
+                @if (TempData["UserSuccessResult"] != null)
+                {
+                    <div class="alert alert-success">@TempData["UserSuccessResult"]</div>
+                }
+                @if (TempData["UserErrorResult"] != null)
+                {
+                    <div class="alert alert-danger">@TempData["UserErrorResult"]</div>
+                }
+                <div class="form-validation">
+                    <form class="form-valide" method="post">
+                        @Html.AntiForgeryToken()
+                        <div class="row">
+                            <div class="col-xl-6">
+
+                                <div class="form-group row">
+                                    <label class="col-lg-4 col-form-label" for="val-skill">
+                                        Yetkilendirme
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-6">
+                                        <select class="form-control default-select" id="val-skill"
+                                                name="roleID">
+                                            <option value="">Rol Seçiniz</option>
+                                            @foreach (Role role in Model.Roles)
+                                            {
+                                                <option value="@role.Id" @(Model.AddUserViewModel.RoleID == role.Id ? "selected=''" : "")>@role.Name</option>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-lg-4 col-form-label" for="val-username">
+                                        Kullanıcı
+                                        Adı
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-6">
+                                        <input type="text" class="form-control" id="val-username"
+                                               name="username" autocomplete="off"
+                                               placeholder="Kullanıcı adı" value="@Model.AddUserViewModel.Username">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-lg-4 col-form-label" for="val-password">
+                                        Şife
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-6">
+                                        <input type="password" class="form-control" id="val-password"
+                                               autocomplete="off" name="password"
+                                               placeholder="Şifre giriniz">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-lg-4 col-form-label"
+                                           for="val-confirm-password">
+                                        Şifre (Tekrar) <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-6">
+                                        <input type="password" class="form-control"
+                                               id="val-confirm-password" autocomplete="off"
+                                               name="passwordConfirm"
+                                               placeholder="Şifre tekrar giriniz">
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-xl-6">
+                                <div class="form-group row">
+                                    <label class="col-lg-4 col-form-label" for="val-name">
+                                        Ad
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-6">
+                                        <input type="text" class="form-control" id="val-name"
+                                               name="name" autocomplete="off" value="@Model.AddUserViewModel.Name" />
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-lg-4 col-form-label" for="val-lastname">
+                                        Soyad
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-6">
+                                        <input type="text" class="form-control" id="val-lastname"
+                                               autocomplete="off"
+                                               name="lastname"
+                                               value="@Model.AddUserViewModel.Lastname" />
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-lg-4 col-form-label" for="val-phones">
+                                        Telefon
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-6">
+                                        <input type="text" class="form-control" id="val-phones"
+                                               name="phone" autocomplete="off"
+                                               placeholder="0500 000 00 00" value="@Model.AddUserViewModel.Phone" />
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-lg-4 col-form-label" for="val-email">
+                                        Email
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-6">
+                                        <input type="email" class="form-control" id="val-email"
+                                               name="email" autocomplete="off"
+                                               placeholder="koneks@koneks.com" value="@Model.AddUserViewModel.Email" />
+
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group row">
+                                    <label class="col-lg-4 col-form-label" for="val-suggestions">
+                                        Adres
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-6">
+                                        <textarea class="form-control us-tarea" id="val-suggestions"
+                                                  name="adress" rows="6"
+                                                  placeholder="Adres giriniz..">@Model.AddUserViewModel.Adress</textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-lg-8 ml-auto">
+                                        <button type="submit"
+                                                class="btn btn-primary boradi-4">
+                                            Oluştur
+                                        </button>
+
+                                        <button type="reset"
+                                                class="btn btn-light boradi-4 ml-2">
+                                            Vazgeç
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

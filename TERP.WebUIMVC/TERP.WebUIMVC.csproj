@@ -248,6 +248,7 @@
     <Content Include="Content\assets\images\tab\2.jpg" />
     <Content Include="Content\assets\images\tab\3.jpg" />
     <Content Include="Content\assets\images\tab\4.jpg" />
+    <Content Include="Content\assets\js\terp.js" />
     <Content Include="Content\assets\js\custom.min.js" />
     <Content Include="Content\assets\js\dashboard\cards-center.js" />
     <Content Include="Content\assets\js\dashboard\dashboard-1.js" />
@@ -595,6 +596,7 @@
     <Content Include="Layout\html\Errors\404.html" />
     <Content Include="Layout\html\Errors\500.html" />
     <Content Include="Layout\html\Errors\503.html" />
+    <Content Include="Layout\html\kullanici-listesi.html" />
     <Content Include="Layout\html\terp-anasayfa.html" />
     <Content Include="Layout\html\terp-arac-listesi.html" />
     <Content Include="Layout\html\terp-ayarlar-kullanici-olusturma.html" />
@@ -744,6 +746,7 @@
     <Content Include="Views\Cost\Index.cshtml" />
     <Content Include="Views\Document\Index.cshtml" />
     <Content Include="Views\Company\Index.cshtml" />
+    <Content Include="Views\User\Add.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

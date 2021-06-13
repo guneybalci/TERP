@@ -1,22 +1,22 @@
-﻿@using TERP.Entities.Concrete
-@model TERP.WebUIMVC.Models.UserViewModel
+﻿@model List<TERP.Entities.Concrete.Personal>
 @{
-    ViewBag.Title = "Yeni Kullanıcı Oluştur";
+    ViewBag.Title = "Kullanıcı Listesi";
 }
 <div class="page-titles">
-    <div class="hp-title">
-        <h4 class="hp-h4">Kullanıcı Oluşturma</h4>
-    </div>
+    <h4>Personel Yönetimi</h4>
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="javascript:void(0)">Anasayfa</a></li>
-        <li class="breadcrumb-item active"><a href="javascript:void(0)">Kullanıcı Oluşturma</a></li>
+        <li class="breadcrumb-item active"><a href="javascript:void(0)">Personel Yönetimi</a></li>
     </ol>
 </div>
 <div class="row">
     <div class="col-lg-12">
-        <div class="card uc-card">
-            <div class="card-header">
-                <h4 class="card-title">Yeni Kullanıcı Oluşturma</h4>
+        <div class="card car-list-card">
+            <div class="card-header d-sm-flex d-block border-0 pb-0">
+                <div>
+                    <h4 class="fs-20 text-black">Kullanıcı Listesi</h4>
+                    <span class="fs-12">Bu departmanda şirket içerisinde çalışan ve yetki sahibi kullanıcıları listelemektesiniz.</span>
+                </div>
             </div>
             <div class="card-body">
                 @if (TempData["UserSuccessResult"] != null)
@@ -27,148 +27,129 @@
                 {
                     <div class="alert alert-danger">@TempData["UserErrorResult"]</div>
                 }
-                <div class="form-validation">
-                    <form class="form-valide" action="/user/add" method="post">
-                        @Html.AntiForgeryToken()
-                        <div class="row">
-                            <div class="col-xl-6">
-                                
-                                <div class="form-group row">
-                                    <label class="col-lg-4 col-form-label" for="val-skill">
-                                        Yetkilendirme
-                                        <span class="text-danger">*</span>
-                                    </label>
-                                    <div class="col-lg-6">
-                                        <select class="form-control default-select" id="val-skill"
-                                                name="roleID">
-                                            <option value="">Rol Seçiniz</option>
-                                            @foreach (Role role in Model.Roles)
-                                            {
-                                                <option value="@role.Id" @(Model.AddUserViewModel.RoleID == role.Id ? "selected=''" : "")>@role.Name</option>
-                                            }
-                                        </select>
-                                    </div>
-                                </div>
+                <div class="table-responsive">
+                    <table class="table mb-0 table-striped">
+                        <thead>
+                            <tr>
+                                <th>Rol</th>
+                                <th>Kullanıcı Adı</th>
+                                <th>Ad Soyad</th>
+                                <th>E-Posta</th>
+                                <th>Telefon</th>
+                                <th>Adres</th>
+                            </tr>
+                        </thead>
+                        <tbody id="customers">
+                            @foreach (var item in Model)
+                            {
+                                <tr class="btn-reveal-trigger">
+                                    <td class="py-2">@item.User.Role.Name</td>
+                                    <td class="py-2">@item.User.Username</td>
+                                    <td class="py-3">
+                                        <a href="#">
+                                            <div class="media d-flex align-items-center">
+                                                <div class="media-body">
+                                                    <h5 class="mb-0 fs--1">@($"{item.FirstName} {item.LastName}")</h5>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </td>
 
-                                <div class="form-group row">
-                                    <label class="col-lg-4 col-form-label" for="val-username">
-                                        Kullanıcı
-                                        Adı
-                                        <span class="text-danger">*</span>
-                                    </label>
-                                    <div class="col-lg-6">
-                                        <input type="text" class="form-control" id="val-username"
-                                               name="username" autocomplete="off"
-                                               placeholder="Kullanıcı adı" value="@Model.AddUserViewModel.Username">
-                                    </div>
-                                </div>
-                                @*<div class="form-group row">
-                                        <label class="col-lg-4 col-form-label" for="val-email">
-                                            E-Posta <span class="text-danger">*</span>
-                                        </label>
-                                        <div class="col-lg-6">
-                                            <input type="text" class="form-control" id="val-email"
-                                                   autocomplete="off" name="val-email"
-                                                   placeholder="E-posta adresini giriniz">
+                                    <td class="py-2"><a href="mailto:@item.Email">@item.Email</a></td>
+                                    <td class="py-2"><a href="tel:@item.Phone">@item.Phone</a></td>
+                                    <td class="py-2 wspace-no">@item.Adress</td>
+                                    <td class="py-2 text-right">
+                                        <div class="dropdown">
+                                            <button class="btn boradi-btn btn-primary tp-btn-light sharp" type="button" data-toggle="dropdown">
+                                                <span class="fs--1">
+                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                         xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                         width="18px"
+                                                         height="18px"
+                                                         viewBox="0 0 24 24"
+                                                         version="1.1">
+                                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                            <rect x="0" y="0" width="24" height="24"></rect>
+                                                            <circle fill="#000000" cx="5" cy="12" r="2"></circle>
+                                                            <circle fill="#000000" cx="12" cy="12" r="2"></circle>
+                                                            <circle fill="#000000" cx="19" cy="12" r="2"></circle>
+                                                        </g>
+                                                    </svg>
+                                                </span>
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-right border py-0">
+                                                <button type="button" class="cp-new-add updateUser" value="@item.Id">Düzenle</button>
+                                                <a href="/user/delete/@item.Id" class="btn cp-new-add" onclick="return confirm('Bu personeli silmek istediğinize emin misiniz?')">Sil</a>
+                                            </div>
                                         </div>
-                                    </div>*@
-                                <div class="form-group row">
-                                    <label class="col-lg-4 col-form-label" for="val-password">
-                                        Şife
-                                        <span class="text-danger">*</span>
-                                    </label>
-                                    <div class="col-lg-6">
-                                        <input type="password" class="form-control" id="val-password"
-                                               autocomplete="off" name="password"
-                                               placeholder="Şifre giriniz">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-lg-4 col-form-label"
-                                           for="val-confirm-password">
-                                        Şifre (Tekrar) <span class="text-danger">*</span>
-                                    </label>
-                                    <div class="col-lg-6">
-                                        <input type="password" class="form-control"
-                                               id="val-confirm-password" autocomplete="off"
-                                               name="passwordConfirm"
-                                               placeholder="Şifre tekrar giriniz">
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class="col-xl-6">
-                               
-                                <div class="form-group row">
-                                    <label class="col-lg-4 col-form-label" for="val-phones">
-                                        Telefon
-                                        <span class="text-danger">*</span>
-                                    </label>
-                                    <div class="col-lg-6">
-                                        <input type="text" class="form-control" id="val-phones"
-                                               name="phone" autocomplete="off"
-                                               placeholder="0542 636 35 42" value="@Model.AddUserViewModel.Phone" />
-
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label class="col-lg-4 col-form-label" for="val-email">
-                                        Email
-                                        <span class="text-danger">*</span>
-                                    </label>
-                                    <div class="col-lg-6">
-                                        <input type="email" class="form-control" id="val-email"
-                                               name="email" autocomplete="off"
-                                               placeholder="koneks@koneks.com" value="@Model.AddUserViewModel.Phone" />
-
-                                    </div>
-                                </div>
-
-                             
-                                <div class="form-group row">
-                                    <label class="col-lg-4 col-form-label" for="val-suggestions">
-                                        Adres
-                                        <span class="text-danger">*</span>
-                                    </label>
-                                    <div class="col-lg-6">
-                                        <textarea class="form-control us-tarea" id="val-suggestions"
-                                                  name="adress" rows="6"
-                                                  placeholder="Adres giriniz..">@Model.AddUserViewModel.Adress</textarea>
-                                    </div>
-                                </div>
-
-                                @*<div class="form-group row">
-                                    <div class="col-lg-8 ml-auto">
-                                        <label class="css-control css-control-primary css-checkbox"
-                                               for="val-terms">
-                                            <input type="checkbox"
-                                                   class="css-control-input mr-2 us-tterms" id="val-terms"
-                                                   name="val-terms" value="1">
-                                            <span class="css-control-indicator"></span>
-                                            Onaylıyorum
-                                        </label>
-                                    </div>
-                                </div>*@
-                                <div class="form-group row">
-                                    <div class="col-lg-8 ml-auto">
-                                        <button type="submit"
-                                                class="btn btn-primary boradi-4">
-                                            Oluştur
-                                        </button>
-
-                                        <button type="reset"
-                                                class="btn btn-light boradi-4 ml-2">
-                                            Vazgeç
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
+</div>
+<div class="modal fade" id="updatePersonalModal" style="display: none" aria-hidden="true">
+    <div class="modal-dialog cp-modal-dialog" role="document">
+        <div class="modal-content boradi-4">
+            <div class="modal-header">
+                <h4 class="modal-title"><strong>Kullanıcı Düzenle</strong></h4>
+                <button type="button" class="close" data-dismiss="modal"><span>×</span></button>
+            </div>
+            <div class="modal-body cp-anc-modal-body">
+                <div class="container">
+                    <form method="post" action="/User/Update">
+                        <input type="hidden" value="0" id="updatedPersonalId" name="id" />
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label class="" for="">Yetkilendirme </label>
+                                <select class="form-control" id="updatedRoleId" name="roleID">
+                                    <option value="">Rol Seçiniz</option>
+                                    @foreach (var role in ViewBag.Roles)
+                                    {
+                                        <option value="@role.Id">@role.Name</option>
+                                    }
+                                </select>
+                            </div>
 
+                            <div class="form-group col-md-6">
+                                <label class="" for="">Kullanıcı Adı </label>
+                                <input type="text" class="form-control" id="updatedUsername" name="username" autocomplete="off" placeholder="Kullanıcı adı" />
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="" for="">Ad </label>
+                                <input type="text" class="form-control" id="updatedFirstName" name="name" autocomplete="off" placeholder="Ad" />
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="" for="">Soyad</label>
+                                <input type="text" class="form-control" id="updatedLastName" name="lastname" autocomplete="off" placeholder="Soyad" />
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label>E-Posta</label>
+                                <input type="E-Posta" class="form-control" id="updatedEmail" name="email" value="yildirim@koneks.com" />
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label>Telefon</label>
+                                <input type="tel" id="updatedPhone" name="phone" class="form-control" value="0500 500 0000" required />
+                            </div>
+
+                            <div class="form-group col-md-12">
+                                <label>Adres</label>
+                                <textarea class="form-control cp-anc-ta" name="adress" rows="4" id="updatedAdress"></textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer pr-25 border-tn">
+                            <button type="button" class="btn btn-danger light boradi-4" data-dismiss="modal">Vazgeç</button>
+                            <button type="submit" class="btn btn-primary boradi-4">Güncelle</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
 </div>

@@ -10,5 +10,8 @@ namespace TERP.Business.Abstract
     public interface IUserService
     {
         void Add(User user);
+
+        User GetByPersonalId(int id);
+        void Update(User user);
     }
 }

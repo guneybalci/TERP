@@ -51,8 +51,15 @@ namespace TERP.WebUIMVC
 
             routes.MapRoute(
                 name: "UserManager",
-                url: "kullanici-yonetimi",
+                url: "kullanici-listesi",
                 defaults: new { controller = "User", action = "Index" }
+            );
+
+
+            routes.MapRoute(
+                name: "CreateUser",
+                url: "kullanici-ekle",
+                defaults: new { controller = "User", action = "Add" }
             );
 
             routes.MapRoute(

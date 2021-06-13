@@ -18,9 +18,25 @@ namespace TERP.Business.Concrete
         {
             _personalDal = new EfPersonalDal();
         }
+
+        public List<Personal> GetAllWithUserAndRole()
+        {
+            return _personalDal.GetAllWithUserAndRole();
+        }
+
         public void Add(Personal personal)
         {
             _personalDal.Add(personal);
+        }
+
+        public Personal GetById(int id)
+        {
+            return _personalDal.Get(x => x.Id == id);
+        }
+
+        public void Update(Personal personal)
+        {
+            _personalDal.Update(personal);
         }
     }
 }

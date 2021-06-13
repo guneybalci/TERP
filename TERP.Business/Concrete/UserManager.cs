@@ -21,5 +21,15 @@ namespace TERP.Business.Concrete
         {
             _userDal.Add(user);
         }
+
+        public User GetByPersonalId(int id)
+        {
+            return _userDal.Get(x => x.Personals.FirstOrDefault(y => y.Id == id).UserID == x.Id);
+        }
+
+        public void Update(User user)
+        {
+            _userDal.Update(user);
+        }
     }
 }
