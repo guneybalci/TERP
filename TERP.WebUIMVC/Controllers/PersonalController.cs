@@ -8,7 +8,7 @@ using TERP.Entities.Concrete;
 
 namespace TERP.WebUIMVC.Controllers
 {
-    public class PersonalController : Controller
+    public class PersonalController : BaseController
     {
 
         public ActionResult Index()

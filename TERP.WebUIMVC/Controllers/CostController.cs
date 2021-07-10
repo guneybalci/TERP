@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace TERP.WebUIMVC.Controllers
 {
-    public class CostController : Controller
+    public class CostController : BaseController
     {
 
         public ActionResult Index()

@@ -22,6 +22,11 @@ namespace TERP.Business.Concrete
             _userDal.Add(user);
         }
 
+        public User GetUserByUsername(string username)
+        {
+            return _userDal.Get(x => x.Username == username);
+        }
+
         public User GetByPersonalId(int id)
         {
             return _userDal.Get(x => x.Personals.FirstOrDefault(y => y.Id == id).UserID == x.Id);
@@ -30,6 +35,16 @@ namespace TERP.Business.Concrete
         public void Update(User user)
         {
             _userDal.Update(user);
+        }
+
+        public User GetUserWithRolesByUsername(string username)
+        {
+            return _userDal.GetUserWithRolesByUsername(username);
+        }
+
+        public User GetUserByUsernameAndPassword(string username, string password)
+        {
+            return _userDal.Get(x => x.Username == username && x.Password == password);
         }
     }
 }

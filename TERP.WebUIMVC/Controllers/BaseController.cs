@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace TERP.WebUIMVC.Controllers
 {
+    [Authorize]
     public class BaseController : Controller
     {
     }

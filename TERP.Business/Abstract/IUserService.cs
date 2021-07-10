@@ -11,7 +11,13 @@ namespace TERP.Business.Abstract
     {
         void Add(User user);
 
+        User GetUserByUsername(string username);
+
         User GetByPersonalId(int id);
         void Update(User user);
+
+        User GetUserWithRolesByUsername(string username);
+
+        User GetUserByUsernameAndPassword(string username, string password);
     }
 }

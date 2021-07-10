@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace TERP.WebUIMVC.Controllers
 {
-    public class MapController : Controller
+    public class MapController : BaseController
     {
         // GET: Map
         public ActionResult Index()

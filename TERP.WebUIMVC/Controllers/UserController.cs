@@ -11,7 +11,7 @@ using TERP.WebUIMVC.Models;
 
 namespace TERP.WebUIMVC.Controllers
 {
-    public class UserController : Controller
+    public class UserController : BaseController
     {
         private IUserService _userService;
         private IRoleService _roleService;
