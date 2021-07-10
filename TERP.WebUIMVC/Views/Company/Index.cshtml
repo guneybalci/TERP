@@ -1,4 +1,4 @@
-﻿
+﻿@model List<TERP.Entities.Concrete.Company>
 @{
     ViewBag.Title = "Firma Bilgileri";
 }
@@ -15,81 +15,77 @@
 <!-- row -->
 <div class="page-titles form-head d-flex flex-wrap justify-content-end align-items-center mb-4">
 
-    <a href="javascript:void(0)" class="btn btn-primary btn-rounded mr-3 mb-2" data-toggle="modal"
-       data-target="#exampledownload">
-        <i class="las la-location-arrow scale5 mr-3"></i>
-        Adres Ekle
-    </a>
+    @if (User.IsInRole("Koneks Admin"))
+    {
+        <a href="javascript:void(0)" class="btn btn-primary btn-rounded mr-3 mb-2 btn-new-company" data-toggle="modal"
+           data-target="#addCompany">
+            <i class="las la-location-arrow scale5 mr-3"></i>
+            Adres Ekle
+        </a>
 
-    <!-- Modal -->
-    <div class="modal fade" id="exampledownload" style="display: none;" aria-hidden="true">
-        <div class="modal-dialog cp-modal-dialog" role="document">
-            <div class="modal-content boradi-4">
-                <div class="modal-header">
-                    <h4 class="modal-title comin-title"> <strong>Yeni Firma Ekle</strong> </h4>
-                    <button type="button" class="close" data-dismiss="modal">
-                        <span>×</span>
-                    </button>
-                </div>
-                <div class="modal-body cp-anc-modal-body">
-                    <div class="container">
-                        <form>
+        <div class="modal fade" id="addCompany" style="display: none;" aria-hidden="true">
+            <div class="modal-dialog cp-modal-dialog" role="document">
+                <div class="modal-content boradi-4">
+                    <form method="post">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" value="0" id="updatedCompanyId" name="id" />
+                        <div class="modal-header">
+                            <h4 class="modal-title comin-title"> <strong>Yeni Firma Ekle</strong> </h4>
+                            <button type="button" class="close" data-dismiss="modal">
+                                <span>×</span>
+                            </button>
+                        </div>
+                        <div class="modal-body cp-anc-modal-body">
+                            <div class="container">
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label>Firma Ünvanı:</label>
+                                        <input type="text" class="form-control" value="" id="updatedCompanyName" name="name" required>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label>Yetkili:</label>
+                                        <input type="text" class="form-control" name="officerFullName" id="updatedCompanyOfficerFullName" required>
+                                    </div>
+                                    <div class="form-group col-md-6 mt-20">
+                                        <label>Mersis NO:</label>
+                                        <input type="text" id="updatedCompanyMersisNo" name="mersisNo" class="form-control" required>
+                                    </div>
 
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label>Firma Ünvanı:</label>
-                                    <input type="text" class="form-control" value="Yıldırım" required>
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label>Yetkili:</label>
-                                    <input type="text" class="form-control" value="Yıldırım" required>
-                                </div>
-                                <div class="form-group col-md-6 mt-20">
-                                    <label>Mersis NO:</label>
-                                    <input type="text" id="number" name="number" class="form-control"
-                                           value="1111111111" required>
-                                </div>
+                                    <div class="form-group col-md-6 mt-20">
+                                        <label>Ticaret Sicil NO:</label>
+                                        <input type="text" id="updatedCompanyEnrolmentNo" name="enrolmentNo" class="form-control" required>
+                                    </div>
 
-                                <div class="form-group col-md-6 mt-20">
-                                    <label>Ticaret Sicil NO:</label>
-                                    <input type="text" id="number" name="number" class="form-control"
-                                           value="1111111111" required>
-                                </div>
-
-                                <div class="form-group col-md-6 mt-20">
-                                    <label>E-Posta</label>
-                                    <input type="E-Posta" class="form-control" value="yildirim@koneks.com">
-                                </div>
-                                <div class="form-group col-md-6 mt-20">
-                                    <label>Telefon</label>
-                                    <input type="tel" id="phone" name="phone" class="form-control"
-                                           value="0542 636 35 42" pattern="[0-9]{4}-[0-9]{3}-[0-9]{4}" required>
-                                </div>
+                                    <div class="form-group col-md-6 mt-20">
+                                        <label>E-Posta</label>
+                                        <input type="email" class="form-control" name="email" id="updatedCompanyEmail">
+                                    </div>
+                                    <div class="form-group col-md-6 mt-20">
+                                        <label>Telefon</label>
+                                        <input type="tel" id="updatedCompanyPhone" name="phone" class="form-control" required>
+                                    </div>
 
 
-                                <div class="form-group col-md-12 mt-20">
-                                    <label>Adres</label>
-                                    <textarea class="form-control cp-anc-ta" rows="4"
-                                              id="comment">2289 5th Avenue, New York</textarea>
+                                    <div class="form-group col-md-12 mt-20">
+                                        <label>Adres</label>
+                                        <textarea class="form-control cp-anc-ta" rows="4"
+                                                  id="updatedCompanyAdress" name="adress"></textarea>
+                                    </div>
                                 </div>
                             </div>
-
-
-                        </form>
-                    </div>
-                </div>
-                <div class="modal-footer border-tn pr-25">
-                    <button type="button" class="btn btn-danger light boradi-4"
-                            data-dismiss="modal">
-                        Vazgeç
-                    </button>
-                    <button type="button" class="btn btn-primary boradi-4">Ekle</button>
+                        </div>
+                        <div class="modal-footer border-tn pr-25">
+                            <button type="button" class="btn btn-danger light boradi-4"
+                                    data-dismiss="modal">
+                                Vazgeç
+                            </button>
+                            <button type="submit" class="btn btn-primary boradi-4 btn-company-ekle">Ekle</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
-    </div>
-
-
+    }
 
 </div>
 <div class="row">
@@ -99,6 +95,14 @@
                 <h4 class="card-title">İşbirliği Yapılan Firma Bilgileri</h4>
             </div>
             <div class="card-body">
+                @if (TempData["CompanySuccessResult"] != null)
+                {
+                    <div class="alert alert-success">@TempData["CompanySuccessResult"]</div>
+                }
+                @if (TempData["CompanyErrorResult"] != null)
+                {
+                    <div class="alert alert-danger">@TempData["CompanyErrorResult"]</div>
+                }
                 <div class="table-responsive">
                     <table id="example3" class="display min-w850">
                         <thead>
@@ -111,490 +115,38 @@
                                 <th>E-POSTA</th>
                                 <th>ADRES</th>
                                 <th>YETKİLİ</th>
-                                <th></th>
+                                @if (User.IsInRole("Koneks Admin"))
+                                {
+                                    <th>İşlem</th>
+                                }
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td><img class="rounded-circle" width="35" src="../assets/images/profile/small/logistics.png" alt=""></td>
-                                <td>Tiger Nixon</td>
-                                <td>Architect</td>
-                                <td>Male</td>
-                                <td>M.COM., P.H.D.</td>
-                                <td><a href="javascript:void(0);"><strong>123 456 7890</strong></a></td>
-                                <td><a href="javascript:void(0);"><strong>info@example.com</strong></a></td>
-                                <td>2011/04/25</td>
-                                <td>
-                                    <div class="d-flex">
-                                        <a href="#" class="btn btn-primary shadow btn-xs sharp mr-1 boradi-4"><i class="fa fa-pencil"></i></a>
-                                        <a href="#" class="btn btn-danger shadow btn-xs sharp boradi-4"><i class="fa fa-trash"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><img class="rounded-circle" width="35" src="../assets/images/profile/small/logistics.png" alt=""></td>
-                                <td>Garrett Winters</td>
-                                <td>Accountant</td>
-                                <td>Female</td>
-                                <td>M.COM., P.H.D.</td>
-                                <td><a href="javascript:void(0);"><strong>987 654 3210</strong></a></td>
-                                <td><a href="javascript:void(0);"><strong>info@example.com</strong></a></td>
-                                <td>2011/07/25</td>
-                                <td>
-                                    <div class="d-flex">
-                                        <a href="#" class="btn btn-primary shadow btn-xs sharp mr-1 boradi-4"><i class="fa fa-pencil"></i></a>
-                                        <a href="#" class="btn btn-danger shadow btn-xs sharp boradi-4"><i class="fa fa-trash"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><img class="rounded-circle" width="35" src="../assets/images/profile/small/logistics.png" alt=""></td>
-                                <td>Ashton Cox</td>
-                                <td>Junior Technical</td>
-                                <td>Male</td>
-                                <td>B.COM., M.COM.</td>
-                                <td><a href="javascript:void(0);"><strong>(123) 4567 890</strong></a></td>
-                                <td><a href="javascript:void(0);"><strong>info@example.com</strong></a></td>
-                                <td>2009/01/12</td>
-                                <td>
-                                    <div class="d-flex">
-                                        <a href="#" class="btn btn-primary shadow btn-xs sharp mr-1 boradi-4"><i class="fa fa-pencil"></i></a>
-                                        <a href="#" class="btn btn-danger shadow btn-xs sharp boradi-4"><i class="fa fa-trash"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><img class="rounded-circle" width="35" src="../assets/images/profile/small/logistics.png" alt=""></td>
-                                <td>Cedric Kelly</td>
-                                <td>Developer</td>
-                                <td>Male</td>
-                                <td>B.COM., M.COM.</td>
-                                <td><a href="javascript:void(0);"><strong>123 456 7890</strong></a></td>
-                                <td><a href="javascript:void(0);"><strong>info@example.com</strong></a></td>
-                                <td>2012/03/29</td>
-                                <td>
-                                    <div class="d-flex">
-                                        <a href="#" class="btn btn-primary shadow btn-xs sharp mr-1 boradi-4"><i class="fa fa-pencil"></i></a>
-                                        <a href="#" class="btn btn-danger shadow btn-xs sharp boradi-4"><i class="fa fa-trash"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><img class="rounded-circle" width="35" src="../assets/images/profile/small/logistics.png" alt=""></td>
-                                <td>Airi Satou</td>
-                                <td>Accountant</td>
-                                <td>Female</td>
-                                <td>B.A, B.C.A</td>
-                                <td><a href="javascript:void(0);"><strong>987 654 3210</strong></a></td>
-                                <td><a href="javascript:void(0);"><strong>info@example.com</strong></a></td>
-                                <td>2008/11/28</td>
-                                <td>
-                                    <div class="d-flex">
-                                        <a href="#" class="btn btn-primary shadow btn-xs sharp mr-1 boradi-4"><i class="fa fa-pencil"></i></a>
-                                        <a href="#" class="btn btn-danger shadow btn-xs sharp boradi-4"><i class="fa fa-trash"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><img class="rounded-circle" width="35" src="../assets/images/profile/small/logistics.png" alt=""></td>
-                                <td>Brielle Williamson</td>
-                                <td>Specialist</td>
-                                <td>Male</td>
-                                <td>B.COM., M.COM.</td>
-                                <td><a href="javascript:void(0);"><strong>123 456 7890</strong></a></td>
-                                <td><a href="javascript:void(0);"><strong>info@example.com</strong></a></td>
-                                <td>2012/12/02</td>
-                                <td>
-                                    <div class="d-flex">
-                                        <a href="#" class="btn btn-primary shadow btn-xs sharp mr-1 boradi-4"><i class="fa fa-pencil"></i></a>
-                                        <a href="#" class="btn btn-danger shadow btn-xs sharp boradi-4"><i class="fa fa-trash"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><img class="rounded-circle" width="35" src="../assets/images/profile/small/logistics.png" alt=""></td>
-                                <td>Herrod Chandler</td>
-                                <td>Sales Assistant</td>
-                                <td>Female</td>
-                                <td>B.A, B.C.A</td>
-                                <td><a href="javascript:void(0);"><strong>987 654 3210</strong></a></td>
-                                <td><a href="javascript:void(0);"><strong>info@example.com</strong></a></td>
-                                <td>2012/08/06</td>
-                                <td>
-                                    <div class="d-flex">
-                                        <a href="#" class="btn btn-primary shadow btn-xs sharp mr-1 boradi-4"><i class="fa fa-pencil"></i></a>
-                                        <a href="#" class="btn btn-danger shadow btn-xs sharp boradi-4"><i class="fa fa-trash"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><img class="rounded-circle" width="35" src="../assets/images/profile/small/logistics.png" alt=""></td>
-                                <td>Rhona Davidson</td>
-                                <td>Integration</td>
-                                <td>Male</td>
-                                <td>B.TACH, M.TACH</td>
-                                <td><a href="javascript:void(0);"><strong>(123) 4567 890</strong></a></td>
-                                <td><a href="javascript:void(0);"><strong>info@example.com</strong></a></td>
-                                <td>2010/10/14</td>
-                                <td>
-                                    <div class="d-flex">
-                                        <a href="#" class="btn btn-primary shadow btn-xs sharp mr-1 boradi-4"><i class="fa fa-pencil"></i></a>
-                                        <a href="#" class="btn btn-danger shadow btn-xs sharp boradi-4"><i class="fa fa-trash"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><img class="rounded-circle" width="35" src="../assets/images/profile/small/logistics.png" alt=""></td>
-                                <td>Colleen Hurst</td>
-                                <td>Javascript Developer</td>
-                                <td>Female</td>
-                                <td>B.A, B.C.A</td>
-                                <td><a href="javascript:void(0);"><strong>(123) 4567 890</strong></a></td>
-                                <td><a href="javascript:void(0);"><strong>info@example.com</strong></a></td>
-                                <td>2009/09/15</td>
-                                <td>
-                                    <div class="d-flex">
-                                        <a href="#" class="btn btn-primary shadow btn-xs sharp mr-1 boradi-4"><i class="fa fa-pencil"></i></a>
-                                        <a href="#" class="btn btn-danger shadow btn-xs sharp boradi-4"><i class="fa fa-trash"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><img class="rounded-circle" width="35" src="../assets/images/profile/small/logistics.png" alt=""></td>
-                                <td>Sonya Frost</td>
-                                <td>Software Engineer</td>
-                                <td>Male</td>
-                                <td>B.COM., M.COM.</td>
-                                <td><a href="javascript:void(0);"><strong>123 456 7890</strong></a></td>
-                                <td><a href="javascript:void(0);"><strong>info@example.com</strong></a></td>
-                                <td>2008/12/13</td>
-                                <td>
-                                    <div class="d-flex">
-                                        <a href="#" class="btn btn-primary shadow btn-xs sharp mr-1 boradi-4"><i class="fa fa-pencil"></i></a>
-                                        <a href="#" class="btn btn-danger shadow btn-xs sharp boradi-4"><i class="fa fa-trash"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><img class="rounded-circle" width="35" src="../assets/images/profile/small/logistics.png" alt=""></td>
-                                <td>Jena Gaines</td>
-                                <td>Office Manager</td>
-                                <td>Female</td>
-                                <td>B.TACH, M.TACH</td>
-                                <td><a href="javascript:void(0);"><strong>987 654 3210</strong></a></td>
-                                <td><a href="javascript:void(0);"><strong>info@example.com</strong></a></td>
-                                <td>2008/12/19</td>
-                                <td>
-                                    <div class="d-flex">
-                                        <a href="#" class="btn btn-primary shadow btn-xs sharp mr-1 boradi-4"><i class="fa fa-pencil"></i></a>
-                                        <a href="#" class="btn btn-danger shadow btn-xs sharp boradi-4"><i class="fa fa-trash"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><img class="rounded-circle" width="35" src="../assets/images/profile/small/logistics.png" alt=""></td>
-                                <td>Quinn Flynn</td>
-                                <td>Support Lead</td>
-                                <td>Male</td>
-                                <td>B.TACH, M.TACH</td>
-                                <td><a href="javascript:void(0);"><strong>(123) 4567 890</strong></a></td>
-                                <td><a href="javascript:void(0);"><strong>info@example.com</strong></a></td>
-                                <td>2013/03/03</td>
-                                <td>
-                                    <div class="d-flex">
-                                        <a href="#" class="btn btn-primary shadow btn-xs sharp mr-1 boradi-4"><i class="fa fa-pencil"></i></a>
-                                        <a href="#" class="btn btn-danger shadow btn-xs sharp boradi-4"><i class="fa fa-trash"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><img class="rounded-circle" width="35" src="../assets/images/profile/small/logistics.png" alt=""></td>
-                                <td>Charde Marshall</td>
-                                <td>Regional Director</td>
-                                <td>Female</td>
-                                <td>B.A, B.C.A</td>
-                                <td><a href="javascript:void(0);"><strong>123 456 7890</strong></a></td>
-                                <td><a href="javascript:void(0);"><strong>info@example.com</strong></a></td>
-                                <td>2008/10/16</td>
-                                <td>
-                                    <div class="d-flex">
-                                        <a href="#" class="btn btn-primary shadow btn-xs sharp mr-1 boradi-4"><i class="fa fa-pencil"></i></a>
-                                        <a href="#" class="btn btn-danger shadow btn-xs sharp boradi-4"><i class="fa fa-trash"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><img class="rounded-circle" width="35" src="../assets/images/profile/small/logistics.png" alt=""></td>
-                                <td>Haley Kennedy</td>
-                                <td>Senior Marketing</td>
-                                <td>Male</td>
-                                <td>B.COM., M.COM.</td>
-                                <td><a href="javascript:void(0);"><strong>987 654 3210</strong></a></td>
-                                <td><a href="javascript:void(0);"><strong>info@example.com</strong></a></td>
-                                <td>2012/12/18</td>
-                                <td>
-                                    <div class="d-flex">
-                                        <a href="#" class="btn btn-primary shadow btn-xs sharp mr-1 boradi-4"><i class="fa fa-pencil"></i></a>
-                                        <a href="#" class="btn btn-danger shadow btn-xs sharp boradi-4"><i class="fa fa-trash"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><img class="rounded-circle" width="35" src="../assets/images/profile/small/logistics.png" alt=""></td>
-                                <td>Tatyana Fitzpatrick</td>
-                                <td>Regional Director</td>
-                                <td>Male</td>
-                                <td>B.TACH, M.TACH</td>
-                                <td><a href="javascript:void(0);"><strong>(123) 4567 890</strong></a></td>
-                                <td><a href="javascript:void(0);"><strong>info@example.com</strong></a></td>
-                                <td>2010/03/17</td>
-                                <td>
-                                    <div class="d-flex">
-                                        <a href="#" class="btn btn-primary shadow btn-xs sharp mr-1 boradi-4"><i class="fa fa-pencil"></i></a>
-                                        <a href="#" class="btn btn-danger shadow btn-xs sharp boradi-4"><i class="fa fa-trash"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><img class="rounded-circle" width="35" src="../assets/images/profile/small/logistics.png" alt=""></td>
-                                <td>Michael Silva</td>
-                                <td>Marketing Designer</td>
-                                <td>Female</td>
-                                <td>B.A, B.C.A</td>
-                                <td><a href="javascript:void(0);"><strong>123 456 7890</strong></a></td>
-                                <td><a href="javascript:void(0);"><strong>info@example.com</strong></a></td>
-                                <td>2012/11/27</td>
-                                <td>
-                                    <div class="d-flex">
-                                        <a href="#" class="btn btn-primary shadow btn-xs sharp mr-1 boradi-4"><i class="fa fa-pencil"></i></a>
-                                        <a href="#" class="btn btn-danger shadow btn-xs sharp boradi-4"><i class="fa fa-trash"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><img class="rounded-circle" width="35" src="../assets/images/profile/small/logistics.png" alt=""></td>
-                                <td>Paul Byrd</td>
-                                <td>Financial Officer</td>
-                                <td>Male</td>
-                                <td>B.TACH, M.TACH</td>
-                                <td><a href="javascript:void(0);"><strong>987 654 3210</strong></a></td>
-                                <td><a href="javascript:void(0);"><strong>info@example.com</strong></a></td>
-                                <td>2010/06/09</td>
-                                <td>
-                                    <div class="d-flex">
-                                        <a href="#" class="btn btn-primary shadow btn-xs sharp mr-1 boradi-4"><i class="fa fa-pencil"></i></a>
-                                        <a href="#" class="btn btn-danger shadow btn-xs sharp boradi-4"><i class="fa fa-trash"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><img class="rounded-circle" width="35" src="../assets/images/profile/small/logistics.png" alt=""></td>
-                                <td>Gloria Little</td>
-                                <td>Systems Administrator</td>
-                                <td>Female</td>
-                                <td>B.A, B.C.A</td>
-                                <td><a href="javascript:void(0);"><strong>(123) 4567 890</strong></a></td>
-                                <td><a href="javascript:void(0);"><strong>info@example.com</strong></a></td>
-                                <td>2009/04/10</td>
-                                <td>
-                                    <div class="d-flex">
-                                        <a href="#" class="btn btn-primary shadow btn-xs sharp mr-1 boradi-4"><i class="fa fa-pencil"></i></a>
-                                        <a href="#" class="btn btn-danger shadow btn-xs sharp boradi-4"><i class="fa fa-trash"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><img class="rounded-circle" width="35" src="../assets/images/profile/small/logistics.png" alt=""></td>
-                                <td>Bradley Greer</td>
-                                <td>Software Engineer</td>
-                                <td>Male</td>
-                                <td>B.COM., M.COM.</td>
-                                <td><a href="javascript:void(0);"><strong>(123) 4567 890</strong></a></td>
-                                <td><a href="javascript:void(0);"><strong>info@example.com</strong></a></td>
-                                <td>2012/10/13</td>
-                                <td>
-                                    <div class="d-flex">
-                                        <a href="#" class="btn btn-primary shadow btn-xs sharp mr-1 boradi-4"><i class="fa fa-pencil"></i></a>
-                                        <a href="#" class="btn btn-danger shadow btn-xs sharp boradi-4"><i class="fa fa-trash"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><img class="rounded-circle" width="35" src="../assets/images/profile/small/logistics.png" alt=""></td>
-                                <td>Dai Rios</td>
-                                <td>Personnel Lead</td>
-                                <td>Male</td>
-                                <td>B.TACH, M.TACH</td>
-                                <td><a href="javascript:void(0);"><strong>123 456 7890</strong></a></td>
-                                <td><a href="javascript:void(0);"><strong>info@example.com</strong></a></td>
-                                <td>2012/09/26</td>
-                                <td>
-                                    <div class="d-flex">
-                                        <a href="#" class="btn btn-primary shadow btn-xs sharp mr-1 boradi-4"><i class="fa fa-pencil"></i></a>
-                                        <a href="#" class="btn btn-danger shadow btn-xs sharp boradi-4"><i class="fa fa-trash"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><img class="rounded-circle" width="35" src="../assets/images/profile/small/logistics.png" alt=""></td>
-                                <td>Jenette Caldwell</td>
-                                <td>Development Lead</td>
-                                <td>Female</td>
-                                <td>B.A, B.C.A</td>
-                                <td><a href="javascript:void(0);"><strong>987 654 3210</strong></a></td>
-                                <td><a href="javascript:void(0);"><strong>info@example.com</strong></a></td>
-                                <td>2011/09/03</td>
-                                <td>
-                                    <div class="d-flex">
-                                        <a href="#" class="btn btn-primary shadow btn-xs sharp mr-1 boradi-4"><i class="fa fa-pencil"></i></a>
-                                        <a href="#" class="btn btn-danger shadow btn-xs sharp boradi-4"><i class="fa fa-trash"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><img class="rounded-circle" width="35" src="../assets/images/profile/small/logistics.png" alt=""></td>
-                                <td>Yuri Berry</td>
-                                <td>Marketing Officer</td>
-                                <td>Male</td>
-                                <td>B.TACH, M.TACH</td>
-                                <td><a href="javascript:void(0);"><strong>(123) 4567 890</strong></a></td>
-                                <td><a href="javascript:void(0);"><strong>info@example.com</strong></a></td>
-                                <td>2009/06/25</td>
-                                <td>
-                                    <div class="d-flex">
-                                        <a href="#" class="btn btn-primary shadow btn-xs sharp mr-1 boradi-4"><i class="fa fa-pencil"></i></a>
-                                        <a href="#" class="btn btn-danger shadow btn-xs sharp boradi-4"><i class="fa fa-trash"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><img class="rounded-circle" width="35" src="../assets/images/profile/small/logistics.png" alt=""></td>
-                                <td>Caesar Vance</td>
-                                <td>Pre-Sales Support</td>
-                                <td>Male</td>
-                                <td>B.TACH, M.TACH</td>
-                                <td><a href="javascript:void(0);"><strong>(123) 4567 890</strong></a></td>
-                                <td><a href="javascript:void(0);"><strong>info@example.com</strong></a></td>
-                                <td>2011/12/12</td>
-                                <td>
-                                    <div class="d-flex">
-                                        <a href="#" class="btn btn-primary shadow btn-xs sharp mr-1 boradi-4"><i class="fa fa-pencil"></i></a>
-                                        <a href="#" class="btn btn-danger shadow btn-xs sharp boradi-4"><i class="fa fa-trash"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><img class="rounded-circle" width="35" src="../assets/images/profile/small/logistics.png" alt=""></td>
-                                <td>Doris Wilder</td>
-                                <td>Sales Assistant</td>
-                                <td>Female</td>
-                                <td>B.A, B.C.A</td>
-                                <td><a href="javascript:void(0);"><strong>123 456 7890</strong></a></td>
-                                <td><a href="javascript:void(0);"><strong>info@example.com</strong></a></td>
-                                <td>2010/09/20</td>
-                                <td>
-                                    <div class="d-flex">
-                                        <a href="#" class="btn btn-primary shadow btn-xs sharp mr-1 boradi-4"><i class="fa fa-pencil"></i></a>
-                                        <a href="#" class="btn btn-danger shadow btn-xs sharp boradi-4"><i class="fa fa-trash"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><img class="rounded-circle" width="35" src="../assets/images/profile/small/logistics.png" alt=""></td>
-                                <td>Angelica Ramos</td>
-                                <td>Executive Officer</td>
-                                <td>Male</td>
-                                <td>B.COM., M.COM.</td>
-                                <td><a href="javascript:void(0);"><strong>123 456 7890</strong></a></td>
-                                <td><a href="javascript:void(0);"><strong>info@example.com</strong></a></td>
-                                <td>2009/10/09</td>
-                                <td>
-                                    <div class="d-flex">
-                                        <a href="#" class="btn btn-primary shadow btn-xs sharp mr-1 boradi-4"><i class="fa fa-pencil"></i></a>
-                                        <a href="#" class="btn btn-danger shadow btn-xs sharp boradi-4"><i class="fa fa-trash"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><img class="rounded-circle" width="35" src="../assets/images/profile/small/logistics.png" alt=""></td>
-                                <td>Gavin Joyce</td>
-                                <td>Developer</td>
-                                <td>Female</td>
-                                <td>B.TACH, M.TACH</td>
-                                <td><a href="javascript:void(0);"><strong>123 456 7890</strong></a></td>
-                                <td><a href="javascript:void(0);"><strong>info@example.com</strong></a></td>
-                                <td>2010/12/22</td>
-                                <td>
-                                    <div class="d-flex">
-                                        <a href="#" class="btn btn-primary shadow btn-xs sharp mr-1 boradi-4"><i class="fa fa-pencil"></i></a>
-                                        <a href="#" class="btn btn-danger shadow btn-xs sharp boradi-4"><i class="fa fa-trash"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><img class="rounded-circle" width="35" src="../assets/images/profile/small/logistics.png" alt=""></td>
-                                <td>Jennifer Chang</td>
-                                <td>Regional Director</td>
-                                <td>Male</td>
-                                <td>B.A, B.C.A</td>
-                                <td><a href="javascript:void(0);"><strong>123 456 7890</strong></a></td>
-                                <td><a href="javascript:void(0);"><strong>info@example.com</strong></a></td>
-                                <td>2010/11/14</td>
-                                <td>
-                                    <div class="d-flex">
-                                        <a href="#" class="btn btn-primary shadow btn-xs sharp mr-1 boradi-4"><i class="fa fa-pencil"></i></a>
-                                        <a href="#" class="btn btn-danger shadow btn-xs sharp boradi-4"><i class="fa fa-trash"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><img class="rounded-circle" width="35" src="../assets/images/profile/small/logistics.png" alt=""></td>
-                                <td>Brenden Wagner</td>
-                                <td>Software Engineer</td>
-                                <td>Female</td>
-                                <td>B.TACH, M.TACH</td>
-                                <td><a href="javascript:void(0);"><strong>123 456 7890</strong></a></td>
-                                <td><a href="javascript:void(0);"><strong>info@example.com</strong></a></td>
-                                <td>2011/06/07</td>
-                                <td>
-                                    <div class="d-flex">
-                                        <a href="#" class="btn btn-primary shadow btn-xs sharp mr-1 boradi-4"><i class="fa fa-pencil"></i></a>
-                                        <a href="#" class="btn btn-danger shadow btn-xs sharp boradi-4"><i class="fa fa-trash"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><img class="rounded-circle" width="35" src="../assets/images/profile/small/logistics.png" alt=""></td>
-                                <td>Fiona Green</td>
-                                <td>Operating Officer</td>
-                                <td>Male</td>
-                                <td>B.A, B.C.A</td>
-                                <td><a href="javascript:void(0);"><strong>987 654 3210</strong></a></td>
-                                <td><a href="javascript:void(0);"><strong>info@example.com</strong></a></td>
-                                <td>2010/03/11</td>
-                                <td>
-                                    <div class="d-flex">
-                                        <a href="#" class="btn btn-primary shadow btn-xs sharp mr-1 boradi-4"><i class="fa fa-pencil"></i></a>
-                                        <a href="#" class="btn btn-danger shadow btn-xs sharp boradi-4"><i class="fa fa-trash"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><img class="rounded-circle" width="35" src="../assets/images/profile/small/logistics.png" alt=""></td>
-                                <td>Shou Itou</td>
-                                <td>Regional Marketing</td>
-                                <td>Female</td>
-                                <td>B.COM., M.COM.</td>
-                                <td><a href="javascript:void(0);"><strong>(123) 4567 890</strong></a></td>
-                                <td><a href="javascript:void(0);"><strong>info@example.com</strong></a></td>
-                                <td>2011/08/14</td>
-                                <td>
-                                    <div class="d-flex">
-                                        <a href="#" class="btn btn-primary shadow btn-xs sharp mr-1 boradi-4"><i class="fa fa-pencil"></i></a>
-                                        <a href="#" class="btn btn-danger shadow btn-xs sharp boradi-4"><i class="fa fa-trash"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
+                            @foreach (var company in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        <img class="rounded-circle" width="35" src="/content/assets/images/profile/small/logistics.png" alt="">
+                                    </td>
+                                    <td>@company.Name</td>
+                                    <td>@company.MersisNo</td>
+                                    <td>@company.EnrolmentNo</td>
+                                    <td><a href="javascript:void(0);"><strong>@company.Phone</strong></a></td>
+                                    <td><a href="javascript:void(0);"><strong>@company.Email</strong></a></td>
+                                    <td>@company.Adress</td>
+                                    <td>@company.OfficerFullName</td>
+                                    @if (User.IsInRole("Koneks Admin"))
+                                    {
+                                        <td>
+                                            <div class="d-flex">
+                                                <button type="button" class="btn btn-primary shadow btn-xs sharp mr-1 boradi-4 updateCompany" value="@company.Id"><i class="fa fa-pencil"></i></button>
+                                                <a href="/company/remove/@company.Id" onclick="return confirm('Bu firma bilgisini silmek istediğinize emin misiniz?')" class="btn btn-danger shadow btn-xs sharp boradi-4"><i class="fa fa-trash"></i></a>
+                                            </div>
+                                        </td>
+                                    }
+
+                                </tr>
+                            }
                         </tbody>
                     </table>
                 </div>

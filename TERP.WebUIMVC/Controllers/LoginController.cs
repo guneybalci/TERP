@@ -7,6 +7,7 @@ using System.Web.Security;
 using TERP.Business.Abstract;
 using TERP.Business.Concrete;
 using TERP.Entities.Concrete;
+using TERP.WebUIMVC.Auth;
 using TERP.WebUIMVC.Models;
 
 namespace TERP.WebUIMVC.Controllers
@@ -22,6 +23,8 @@ namespace TERP.WebUIMVC.Controllers
         [AllowAnonymous]
         public ActionResult Index()
         {
+            if (HttpContext.User.Identity.IsAuthenticated)
+                return RedirectPermanent("/");
             return View(new LoginViewModel());
         }
 
@@ -47,20 +50,20 @@ namespace TERP.WebUIMVC.Controllers
             return View(model);
         }
 
-        [Authorize]
+        [CustomAuthorize]
         public ActionResult LogOut()
         {
             FormsAuthentication.SignOut();
             return RedirectPermanent("/");
         }
 
-        [Authorize]
+        [CustomAuthorize]
         public ActionResult ChangePassword()
         {
             return View();
         }
 
-        [Authorize]
+        [CustomAuthorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult ChangePassword(ChangePasswordViewModel model)

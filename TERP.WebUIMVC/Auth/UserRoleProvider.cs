@@ -6,7 +6,7 @@ using System.Web.Security;
 using TERP.Business.Abstract;
 using TERP.Business.Concrete;
 
-namespace TERP.WebUIMVC.Infrastructure
+namespace TERP.WebUIMVC.Auth
 {
     public class UserRoleProvider : RoleProvider
     {
