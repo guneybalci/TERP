@@ -36,7 +36,7 @@ namespace TERP.WebUIMVC.Controllers
                     try
                     {
                         _companyService.Add(model);
-                        TempData["CompanySuccessResult"] = "Yeni firma bilgisi eklendi!";
+                        TempData["CompanySuccessResult"] = "Yeni firma bilgisi eklendi.";
                     }
                     catch
                     {
