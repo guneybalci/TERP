@@ -8,7 +8,7 @@ namespace TERP.WebUIMVC.Controllers
 {
     public class HomeController : BaseController
     {
-        [Authorize(Roles = "Koneks Admin")]
+
         public ActionResult Index()
         {
             return View();

@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using TERP.Business.Abstract;
 using TERP.Entities.Concrete;
+using TERP.WebUIMVC.Auth;
 
 namespace TERP.WebUIMVC.Controllers
 {
@@ -15,6 +16,7 @@ namespace TERP.WebUIMVC.Controllers
         {
             return View();
         }
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]

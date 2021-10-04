@@ -535,7 +535,10 @@
                         </a>
                         <ul aria-expanded="false">
                             <li><a href="/kullanici-listesi">Kullanıcı Listesi</a></li>
-                            <li><a href="/kullanici-ekle">Kullanıcı Oluşturma</a></li>
+                            @if (User.IsInRole("Koneks Admin"))
+                            {
+                                <li><a href="/kullanici-ekle">Kullanıcı Oluşturma</a></li>
+                            }
                             <li><a href="/sifre-degistir">Şifre Değiştirme</a></li>
                             <li><a href="terp-ayarlar-sosyal-medya.html">Sosyal Medya</a></li>
                         </ul>

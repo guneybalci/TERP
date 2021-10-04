@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using TERP.Business.Abstract;
 using TERP.Business.Concrete;
 using TERP.Entities.Concrete;
+using TERP.WebUIMVC.Auth;
 using TERP.WebUIMVC.Models;
 
 
@@ -32,11 +33,13 @@ namespace TERP.WebUIMVC.Controllers
             return View(personals);
         }
 
+        [CustomAuthorize(Roles = "Koneks Admin")]
         public ActionResult Add()
         {
             return View(new UserViewModel { Roles = GetAllRoles(), AddUserViewModel = new AddUserViewModel() });
         }
 
+        [CustomAuthorize(Roles = "Koneks Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Add(AddUserViewModel model)
