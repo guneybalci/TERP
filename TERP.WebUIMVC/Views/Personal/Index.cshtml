@@ -1,4 +1,4 @@
-﻿
+﻿@model List<TERP.Entities.Concrete.Personal>
 @{
     ViewBag.Title = "Personel Yönetimi";
 }
@@ -9,30 +9,90 @@
         <li class="breadcrumb-item active"><a href="javascript:void(0)">Personel Yönetimi</a></li>
     </ol>
 </div>
+
 <div class="row">
     <div class="col-lg-12">
         <div class="card car-list-card">
             <div class="card-header d-sm-flex d-block border-0 pb-0">
-                <div>
+                <div class="personal-list-header">
                     <h4 class="fs-20 text-black">Personel Listesi</h4>
-                    <span class="fs-12">
-                        Bu departmanda personel listenizi ve atamalarınızı
-                        yapabilirsiniz.
-                    </span>
+                    <span class="fs-12"> Bu departmanda personel listenizi ve atamalarınızı yapabilirsiniz. </span>
                 </div>
-                @*<div class="dropdown custom-dropdown mb-0 mt-3 mt-sm-0">
-                    <div class="btn cp-btn-add  cp-sedet cp-br-6" role="button" data-toggle="dropdown"
-                         aria-expanded="false">
-                        Personel Ekle
-                        <i class="fa fa-caret-down text-primary ml-3" aria-hidden="true"></i>
+
+                @if (User.IsInRole("Koneks Admin"))
+                {
+                    <div class="dropdown custom-dropdown mb-0 mt-3 mt-sm-0">
+                        <div class="btn cp-btn-add  cp-sedet cp-br-6" role="button" data-toggle="dropdown" aria-expanded="false"> Personel Ekle
+                            <i class="fa fa-caret-down text-primary ml-3" aria-hidden="true"></i>
+                        </div>
+
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <button type="button" class="cp-new-add addingPersonal" data-toggle="modal" data-target="#addPersonal"> Yeni Personel Ekle </button>
+                        </div>
                     </div>
-                    <div class="dropdown-menu dropdown-menu-right ">
-                        <button type="button " class="cp-new-add" data-toggle="modal"
-                                data-target="#modalGrid2">
-                            Yeni Personel Ekle
-                        </button>
+
+                    <div id="addPersonal" class="modal fade" style="display: none;" aria-hidden="true">
+
+                        <div class="modal-dialog cp-modal-dialog" role="document">
+                            <div class="modal-content boradi-4">
+                                <form method="post">
+                                    @Html.AntiForgeryToken()
+                                    <div class="modal-header">
+
+                                        <input type="hidden" value="0" id="updatedPersonalId" name="id" />
+
+                                        <h4 class="modal-title"> <strong>Yeni Personel Ekle</strong> </h4>
+
+                                        <button type="button" class="close" data-dismiss="modal">
+                                            <span>×</span>
+                                        </button>
+                                    </div>
+
+                                    <div class="modal-body cp-anc-modal-body">
+                                        <div class="container">
+                                            <div class="form-row">
+
+                                                <div class="form-group col-md-6">
+                                                    <label>Ad</label>
+                                                    <input type="text" id="#updatedPersonalFirstName" class="form-control" value="" name="firstName" required>
+                                                </div>
+
+                                                <div class="form-group col-md-6">
+                                                    <label>Soyad</label>
+                                                    <input type="text" id="updatedPersonalLastName" class="form-control" value="" name="lastName" required>
+                                                </div>
+
+                                                <div class="form-group col-md-6">
+                                                    <label>E-Posta</label>
+                                                    <input type="email" id="updatedPersonalEmail" class="form-control" value="" name="email">
+                                                </div>
+
+                                                <div class="form-group col-md-6">
+                                                    <label>Telefon</label>
+                                                    <input type="tel" id="updatedPersonalPhone" class="form-control" name="phone" value="" required>
+                                                </div>
+
+                                                <div class="form-group col-md-12">
+                                                    <label>Adres</label>
+                                                    <textarea id="updatedPersonalAdress" class="form-control cp-anc-ta" name="adress" rows="4"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="modal-footer border-tn pr-25">
+
+                                        <button type="button" class="btn btn-danger light boradi-4" data-dismiss="modal"> Vazgeç </button>
+
+                                        <button class="btn btn-primary boradi-4" type="submit" class="btn btn-primary boradi-4">Ekle</button>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
                     </div>
-                </div>*@
+                }
+
             </div>
             <div class="card-body">
                 @if (TempData["PersonalSuccessResult"] != null)
@@ -60,677 +120,82 @@
                                     Adres
                                 </th>
                                 <th>Araç Plaka</th>
-                                <th></th>
+                                @*<th></th>*@
                             </tr>
                         </thead>
                         <tbody id="customers">
-                            <tr class="btn-reveal-trigger">
-                                <td>
-                                    <div class="custom-control custom-checkbox">
-                                        <!-- <input type="checkbox" class="custom-control-input" id="checkbox1">
-                                        <label class="custom-control-label" for="checkbox1"></label> -->
-                                        <span>1</span>
-                                    </div>
-                                </td>
-                                <td class="py-3">
-                                    <a href="#">
-                                        <div class="media d-flex align-items-center">
-                                            <!-- <div class="avatar avatar-xl mr-2">
-                                                <div class=""><img class="rounded-circle img-fluid"
-                                                                   src="../assets/../assets/images/avatar/cp-personal.svg" width="30" alt="" />
+                            @foreach (var personal in Model)
+                            {
+                                <tr class="btn-reveal-trigger">
+                                    <td>
+                                        <div class="custom-control custom-checkbox">
+                                            <!-- <input type="checkbox" class="custom-control-input" id="checkbox1">
+                    <label class="custom-control-label" for="checkbox1"></label> -->
+                                            <span>@personal.Id</span>
+                                        </div>
+                                    </td>
+                                    <td class="py-3">
+                                        <a href="#">
+                                            <div class="media d-flex align-items-center">
+                                                <!-- <div class="avatar avatar-xl mr-2">
+                            <div class=""><img class="rounded-circle img-fluid"
+                                               src="../assets/../assets/images/avatar/cp-personal.svg" width="30" alt="" />
+                            </div>
+                        </div> -->
+                                                <div class="media-body">
+                                                    <h5 class="mb-0 fs--1">@personal.FirstName + @personal.LastName</h5>
                                                 </div>
-                                            </div> -->
-                                            <div class="media-body">
-                                                <h5 class="mb-0 fs--1">Ricky Antony</h5>
                                             </div>
-                                        </div>
-                                    </a>
-                                </td>
-                                <td class="py-2">
-                                    <a href="mailto:ricky@example.com">info@example.com</a>
-                                </td>
-                                <td class="py-2"> <a href="tel:2012001851">(201) 200-1851</a></td>
-                                <td class="py-2 pl-5 wspace-no">2392 Main Avenue, Penasauka</td>
-                                <td class="py-2">42 AHE 87</td>
-                                <td class="py-2 text-right">
-                                    <div class="dropdown">
-                                        <button class="btn boradi-btn btn-primary tp-btn-light sharp"
-                                                type="button" data-toggle="dropdown">
-                                            <span class="fs--1">
-                                                <svg xmlns="http://www.w3.org/2000/svg"
-                                                     xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                     width="18px" height="18px" viewBox="0 0 24 24"
-                                                     version="1.1">
-                                                    <g stroke="none" stroke-width="1" fill="none"
-                                                       fill-rule="evenodd">
-                                                        <rect x="0" y="0" width="24" height="24"></rect>
-                                                        <circle fill="#000000" cx="5" cy="12" r="2">
-                                                        </circle>
-                                                        <circle fill="#000000" cx="12" cy="12" r="2">
-                                                        </circle>
-                                                        <circle fill="#000000" cx="19" cy="12" r="2">
-                                                        </circle>
-                                                    </g>
-                                                </svg>
-                                            </span>
-                                        </button>
-                                        <div class="dropdown-menu dropdown-menu-right border py-0">
-                                            <button type="button " class="cp-new-add"
-                                                    data-toggle="modal"
-                                                    data-target="#modalcreation">
-                                                Araç Atama
-                                            </button>
-                                            <button type="button " class="cp-new-add"
-                                                    data-toggle="modal"
-                                                    data-target="#modalGrid">
-                                                Düzenle
-                                            </button>
-                                            <button type="button " class="cp-new-add">Sil</button>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr class="btn-reveal-trigger">
-                                <td class="py-2">
-                                    <div class="custom-control custom-checkbox">
-                                        <!-- <input type="checkbox" class="custom-control-input" id="checkbox2">
-                                        <label class="custom-control-label" for="checkbox2"></label> -->
-                                        <span>2</span>
-                                    </div>
-                                </td>
-                                <td class="py-3">
-                                    <a href="#">
-                                        <div class="media d-flex align-items-center">
-                                            <!-- <div class="avatar avatar-xl mr-2">
-                                                <img class="rounded-circle img-fluid"
-                                                     src="../assets/images/avatar/cp-personal.svg" alt="" width="30" />
-                                            </div> -->
-                                            <div class="media-body">
-                                                <h5 class="mb-0 fs--1">Emma Watson</h5>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </td>
-                                <td class="py-2">
-                                    <a href="mailto:emma@example.com">info@example.com</a>
-                                </td>
-                                <td class="py-2"> <a href="tel:2122288403">(212) 228-8403</a></td>
-                                <td class="py-2 pl-5 wspace-no">
-                                    2289 5th Avenue, New York
-                                </td>
-                                <td class="py-2">42 AHE 87</td>
-                                <td class="py-2 text-right">
-                                    <div class="dropdown">
-                                        <button class="btn boradi-btn btn-primary tp-btn-light sharp"
-                                                type="button" data-toggle="dropdown">
-                                            <span class="fs--1">
-                                                <svg xmlns="http://www.w3.org/2000/svg"
-                                                     xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                     width="18px" height="18px" viewBox="0 0 24 24"
-                                                     version="1.1">
-                                                    <g stroke="none" stroke-width="1" fill="none"
-                                                       fill-rule="evenodd">
-                                                        <rect x="0" y="0" width="24" height="24"></rect>
-                                                        <circle fill="#000000" cx="5" cy="12" r="2">
-                                                        </circle>
-                                                        <circle fill="#000000" cx="12" cy="12" r="2">
-                                                        </circle>
-                                                        <circle fill="#000000" cx="19" cy="12" r="2">
-                                                        </circle>
-                                                    </g>
-                                                </svg>
-                                            </span>
-                                        </button>
-                                        <div class="dropdown-menu dropdown-menu-right border py-0">
-                                            <button type="button " class="cp-new-add"
-                                                    data-toggle="modal"
-                                                    data-target="#modalcreation">
-                                                Araç Atama
-                                            </button>
-                                            <button type="button " class="cp-new-add"
-                                                    data-toggle="modal"
-                                                    data-target="#modalGrid">
-                                                Düzenle
-                                            </button>
-                                            <button type="button " class="cp-new-add">Sil</button>
-                                        </div>
+                                        </a>
+                                    </td>
+                                    <td class="py-2">
+                                        <a href="mailto:ricky@example.com">@personal.Email</a>
+                                    </td>
+                                    <td class="py-2"> <a href="javascript:void(0)">@personal.Phone</a></td>
+                                    <td class="py-2 pl-5 wspace-no">@personal.Adress</td>
+                                    <td class="py-2">42 AHE 87</td>
 
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr class="btn-reveal-trigger">
-                                <td class="py-2">
-                                    <div class="custom-control custom-checkbox">
-                                        <!-- <input type="checkbox" class="custom-control-input" id="checkbox3">
-                                        <label class="custom-control-label" for="checkbox3"></label> -->
-                                        <span>3</span>
-                                    </div>
-                                </td>
-                                <td class="py-3">
-                                    <a href="#">
-                                        <div class="media d-flex align-items-center">
-                                            <!-- <div class="avatar avatar-xl mr-2">
-                                                <div class=""><img class="rounded-circle img-fluid"
-                                                                   src="../assets/images/avatar/cp-personal.svg" width="30" alt="" />
+                                    @if (User.IsInRole("Koneks Admin"))
+                                    {
+                                        <td class="py-2 text-right">
+                                            <div class="dropdown">
+                                                <button class="btn boradi-btn btn-primary tp-btn-light sharp"
+                                                        type="button" data-toggle="dropdown">
+                                                    <span class="fs--1">
+                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                             xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                             width="18px" height="18px" viewBox="0 0 24 24"
+                                                             version="1.1">
+                                                            <g stroke="none" stroke-width="1" fill="none"
+                                                               fill-rule="evenodd">
+                                                                <rect x="0" y="0" width="24" height="24"></rect>
+                                                                <circle fill="#000000" cx="5" cy="12" r="2">
+                                                                </circle>
+                                                                <circle fill="#000000" cx="12" cy="12" r="2">
+                                                                </circle>
+                                                                <circle fill="#000000" cx="19" cy="12" r="2">
+                                                                </circle>
+                                                            </g>
+                                                        </svg>
+                                                    </span>
+                                                </button>
+                                                <div class="dropdown-menu dropdown-menu-right border py-0">
+                                                    <button type="button " class="cp-new-add"
+                                                            data-toggle="modal"
+                                                            data-target="#modalcreation">
+                                                        Araç Atama
+                                                    </button>
+                                                    <button type="button" class="cp-new-add updatedPersonal" value="@personal.Id"> Düzenle </button>
+                                                    <button type="button" class="cp-new-add">Sil</button>
                                                 </div>
-                                            </div> -->
-                                            <div class="media-body">
-                                                <h5 class="mb-0 fs--1">Rowen Atkinson</h5>
                                             </div>
-                                        </div>
-                                    </a>
-                                </td>
-                                <td class="py-2">
-                                    <a href="mailto:rown@example.com">info@example.com</a>
-                                </td>
-                                <td class="py-2"> <a href="tel:2012001851">(201) 200-1851</a></td>
-                                <td class="py-2 pl-5 wspace-no">
-                                    112 Bostwick Avenue, Jersey City
-                                </td>
-                                <td class="py-2">42 AHE 87</td>
-                                <td class="py-2 text-right">
-                                    <div class="dropdown">
-                                        <button class="btn boradi-btn btn-primary tp-btn-light sharp"
-                                                type="button" data-toggle="dropdown">
-                                            <span class="fs--1">
-                                                <svg xmlns="http://www.w3.org/2000/svg"
-                                                     xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                     width="18px" height="18px" viewBox="0 0 24 24"
-                                                     version="1.1">
-                                                    <g stroke="none" stroke-width="1" fill="none"
-                                                       fill-rule="evenodd">
-                                                        <rect x="0" y="0" width="24" height="24"></rect>
-                                                        <circle fill="#000000" cx="5" cy="12" r="2">
-                                                        </circle>
-                                                        <circle fill="#000000" cx="12" cy="12" r="2">
-                                                        </circle>
-                                                        <circle fill="#000000" cx="19" cy="12" r="2">
-                                                        </circle>
-                                                    </g>
-                                                </svg>
-                                            </span>
-                                        </button>
-                                        <div class="dropdown-menu dropdown-menu-right border py-0">
-                                            <button type="button " class="cp-new-add"
-                                                    data-toggle="modal"
-                                                    data-target="#modalcreation">
-                                                Araç Atama
-                                            </button>
-                                            <button type="button " class="cp-new-add"
-                                                    data-toggle="modal"
-                                                    data-target="#modalGrid">
-                                                Düzenle
-                                            </button>
-                                            <button type="button " class="cp-new-add">Sil</button>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr class="btn-reveal-trigger">
-                                <td class="py-2">
-                                    <div class="custom-control custom-checkbox">
-                                        <!-- <input type="checkbox" class="custom-control-input" id="checkbox4">
-                                        <label class="custom-control-label" for="checkbox4"></label> -->
-                                        <span>4</span>
-                                    </div>
-                                </td>
-                                <td class="py-3">
-                                    <a href="#">
-                                        <div class="media d-flex align-items-center">
-                                            <!-- <div class="avatar avatar-xl mr-2">
-                                                <img class="rounded-circle img-fluid"
-                                                     src="../assets/images/avatar/cp-personal.svg" alt="" width="30" />
-                                            </div> -->
-                                            <div class="media-body">
-                                                <h5 class="mb-0 fs--1">Antony Hopkins</h5>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </td>
-                                <td class="py-2">
-                                    <a href="mailto:antony@example.com">info@example.com</a>
-                                </td>
-                                <td class="py-2"> <a href="tel:9013243127">(901) 324-3127</a></td>
-                                <td class="py-2 pl-5 wspace-no">3448 Ile De France St #242, </td>
-                                <td class="py-2">42 AHE 87</td>
-                                <td class="py-2 text-right">
-                                    <div class="dropdown">
-                                        <button class="btn boradi-btn btn-primary tp-btn-light sharp"
-                                                type="button" data-toggle="dropdown">
-                                            <span class="fs--1">
-                                                <svg xmlns="http://www.w3.org/2000/svg"
-                                                     xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                     width="18px" height="18px" viewBox="0 0 24 24"
-                                                     version="1.1">
-                                                    <g stroke="none" stroke-width="1" fill="none"
-                                                       fill-rule="evenodd">
-                                                        <rect x="0" y="0" width="24" height="24"></rect>
-                                                        <circle fill="#000000" cx="5" cy="12" r="2">
-                                                        </circle>
-                                                        <circle fill="#000000" cx="12" cy="12" r="2">
-                                                        </circle>
-                                                        <circle fill="#000000" cx="19" cy="12" r="2">
-                                                        </circle>
-                                                    </g>
-                                                </svg>
-                                            </span>
-                                        </button>
-                                        <div class="dropdown-menu dropdown-menu-right border py-0">
-                                            <button type="button " class="cp-new-add"
-                                                    data-toggle="modal"
-                                                    data-target="#modalcreation">
-                                                Araç Atama
-                                            </button>
-                                            <button type="button " class="cp-new-add"
-                                                    data-toggle="modal"
-                                                    data-target="#modalGrid">
-                                                Düzenle
-                                            </button>
-                                            <button type="button " class="cp-new-add">Sil</button>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr class="btn-reveal-trigger">
-                                <td class="py-2">
-                                    <div class="custom-control custom-checkbox">
-                                        <!-- <input type="checkbox" class="custom-control-input" id="checkbox5">
-                                        <label class="custom-control-label" for="checkbox5"></label> -->
-                                        <span>5</span>
-                                    </div>
-                                </td>
-                                <td class="py-3">
-                                    <a href="#">
-                                        <div class="media d-flex align-items-center">
-                                            <!-- <div class="avatar avatar-xl mr-2">
-                                                <img class="rounded-circle img-fluid"
-                                                     src="../assets/images/avatar/cp-personal.svg" alt="" width="30" />
-                                            </div> -->
-                                            <div class="media-body">
-                                                <h5 class="mb-0 fs--1">Jennifer Schramm</h5>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </td>
-                                <td class="py-2">
-                                    <a href="mailto:jennifer@example.com">info@example.com</a>
-                                </td>
-                                <td class="py-2"> <a href="tel:8283829631">(828) 382-9631</a></td>
-                                <td class="py-2 pl-5 wspace-no">
-                                    659 Hannah Street, Charlotte
-                                </td>
-                                <td class="py-2">42 AHE 87</td>
-                                <td class="py-2 text-right">
-                                    <div class="dropdown">
-                                        <button class="btn boradi-btn btn-primary tp-btn-light sharp"
-                                                type="button" data-toggle="dropdown">
-                                            <span class="fs--1">
-                                                <svg xmlns="http://www.w3.org/2000/svg"
-                                                     xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                     width="18px" height="18px" viewBox="0 0 24 24"
-                                                     version="1.1">
-                                                    <g stroke="none" stroke-width="1" fill="none"
-                                                       fill-rule="evenodd">
-                                                        <rect x="0" y="0" width="24" height="24"></rect>
-                                                        <circle fill="#000000" cx="5" cy="12" r="2">
-                                                        </circle>
-                                                        <circle fill="#000000" cx="12" cy="12" r="2">
-                                                        </circle>
-                                                        <circle fill="#000000" cx="19" cy="12" r="2">
-                                                        </circle>
-                                                    </g>
-                                                </svg>
-                                            </span>
-                                        </button>
-                                        <div class="dropdown-menu dropdown-menu-right border py-0">
-                                            <button type="button " class="cp-new-add"
-                                                    data-toggle="modal"
-                                                    data-target="#modalcreation">
-                                                Araç Atama
-                                            </button>
-                                            <button type="button " class="cp-new-add"
-                                                    data-toggle="modal"
-                                                    data-target="#modalGrid">
-                                                Düzenle
-                                            </button>
-                                            <button type="button " class="cp-new-add">Sil</button>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr class="btn-reveal-trigger">
-                                <td class="py-2">
-                                    <div class="custom-control custom-checkbox">
-                                        <!-- <input type="checkbox" class="custom-control-input" id="checkbox6">
-                                        <label class="custom-control-label" for="checkbox6"></label> -->
-                                        <span>6</span>
-                                    </div>
-                                </td>
-                                <td class="py-3">
-                                    <a href="#">
-                                        <div class="media d-flex align-items-center">
-                                            <!-- <div class="avatar avatar-xl mr-2">
-                                                <div class=""><img class="rounded-circle img-fluid"
-                                                                   src="../assets/images/avatar/cp-personal.svg" width="30" alt="" />
-                                                </div>
-                                            </div> -->
-                                            <div class="media-body">
-                                                <h5 class="mb-0 fs--1">Raymond Mims</h5>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </td>
-                                <td class="py-2">
-                                    <a href="mailto:raymond@example.com">info@example.com</a>
-                                </td>
-                                <td class="py-2"> <a href="tel:5624685646">(562) 468-5646</a></td>
-                                <td class="py-2 pl-5 wspace-no">
-                                    2298 Locust Court, Artesia
-                                </td>
-                                <td class="py-2">42 AHE 87</td>
-                                <td class="py-2 text-right">
-                                    <div class="dropdown">
-                                        <button class="btn boradi-btn btn-primary tp-btn-light sharp"
-                                                type="button" data-toggle="dropdown">
-                                            <span class="fs--1">
-                                                <svg xmlns="http://www.w3.org/2000/svg"
-                                                     xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                     width="18px" height="18px" viewBox="0 0 24 24"
-                                                     version="1.1">
-                                                    <g stroke="none" stroke-width="1" fill="none"
-                                                       fill-rule="evenodd">
-                                                        <rect x="0" y="0" width="24" height="24"></rect>
-                                                        <circle fill="#000000" cx="5" cy="12" r="2">
-                                                        </circle>
-                                                        <circle fill="#000000" cx="12" cy="12" r="2">
-                                                        </circle>
-                                                        <circle fill="#000000" cx="19" cy="12" r="2">
-                                                        </circle>
-                                                    </g>
-                                                </svg>
-                                            </span>
-                                        </button>
-                                        <div class="dropdown-menu dropdown-menu-right border py-0">
-                                            <button type="button " class="cp-new-add"
-                                                    data-toggle="modal"
-                                                    data-target="#modalcreation">
-                                                Araç Atama
-                                            </button>
-                                            <button type="button " class="cp-new-add"
-                                                    data-toggle="modal"
-                                                    data-target="#modalGrid">
-                                                Düzenle
-                                            </button>
-                                            <button type="button " class="cp-new-add">Sil</button>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr class="btn-reveal-trigger">
-                                <td class="py-2">
-                                    <div class="custom-control custom-checkbox">
-                                        <!-- <input type="checkbox" class="custom-control-input" id="checkbox7">
-                                        <label class="custom-control-label" for="checkbox7"></label> -->
-                                        <span>7</span>
-                                    </div>
-                                </td>
-                                <td class="py-3">
-                                    <a href="#">
-                                        <div class="media d-flex align-items-center">
-                                            <!-- <div class="avatar avatar-xl mr-2">
-                                                <img class="rounded-circle img-fluid"
-                                                     src="../assets/images/avatar/cp-personal.svg" alt="" width="30" />
-                                            </div> -->
-                                            <div class="media-body">
-                                                <h5 class="mb-0 fs--1">Michael Jenkins</h5>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </td>
-                                <td class="py-2">
-                                    <a href="mailto:jenkins@example.com">info@example.com</a>
-                                </td>
-                                <td class="py-2"> <a href="tel:3026138829">(302) 613-8829</a></td>
-                                <td class="py-2 pl-5 wspace-no">
-                                    4678 Maud Street, Philadelphia
-                                </td>
-                                <td class="py-2">42 AHE 87</td>
-                                <td class="py-2 text-right">
-                                    <div class="dropdown">
-                                        <button class="btn boradi-btn btn-primary tp-btn-light sharp"
-                                                type="button" data-toggle="dropdown">
-                                            <span class="fs--1">
-                                                <svg xmlns="http://www.w3.org/2000/svg"
-                                                     xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                     width="18px" height="18px" viewBox="0 0 24 24"
-                                                     version="1.1">
-                                                    <g stroke="none" stroke-width="1" fill="none"
-                                                       fill-rule="evenodd">
-                                                        <rect x="0" y="0" width="24" height="24"></rect>
-                                                        <circle fill="#000000" cx="5" cy="12" r="2">
-                                                        </circle>
-                                                        <circle fill="#000000" cx="12" cy="12" r="2">
-                                                        </circle>
-                                                        <circle fill="#000000" cx="19" cy="12" r="2">
-                                                        </circle>
-                                                    </g>
-                                                </svg>
-                                            </span>
-                                        </button>
-                                        <div class="dropdown-menu dropdown-menu-right border py-0">
-                                            <button type="button " class="cp-new-add"
-                                                    data-toggle="modal"
-                                                    data-target="#modalcreation">
-                                                Araç Atama
-                                            </button>
-                                            <button type="button " class="cp-new-add"
-                                                    data-toggle="modal"
-                                                    data-target="#modalGrid">
-                                                Düzenle
-                                            </button>
-                                            <button type="button " class="cp-new-add">Sil</button>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr class="btn-reveal-trigger">
-                                <td class="py-2">
-                                    <div class="custom-control custom-checkbox">
-                                        <!-- <input type="checkbox" class="custom-control-input" id="checkbox8">
-                                        <label class="custom-control-label" for="checkbox8"></label> -->
-                                        <span>8</span>
-                                    </div>
-                                </td>
-                                <td class="py-3">
-                                    <a href="#">
-                                        <div class="media d-flex align-items-center">
-                                            <!-- <div class="avatar avatar-xl mr-2">
-                                                <img class="rounded-circle img-fluid"
-                                                     src="../assets/images/avatar/cp-personal.svg" alt="" width="30" />
-                                            </div> -->
-                                            <div class="media-body">
-                                                <h5 class="mb-0 fs--1">Kristine Cadena</h5>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </td>
-                                <td class="py-2">
-                                    <a href="mailto:cadena@example.com">info@example.com</a>
-                                </td>
-                                <td class="py-2"> <a href="tel:3172737814">(317) 273-7814</a></td>
-                                <td class="py-2 pl-5 wspace-no">3412 Crestview Manor, Indianapolis</td>
-                                <td class="py-2">42 AHE 87</td>
-                                <td class="py-2 text-right">
-                                    <div class="dropdown">
-                                        <button class="btn boradi-btn btn-primary tp-btn-light sharp"
-                                                type="button" data-toggle="dropdown">
-                                            <span class="fs--1">
-                                                <svg xmlns="http://www.w3.org/2000/svg"
-                                                     xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                     width="18px" height="18px" viewBox="0 0 24 24"
-                                                     version="1.1">
-                                                    <g stroke="none" stroke-width="1" fill="none"
-                                                       fill-rule="evenodd">
-                                                        <rect x="0" y="0" width="24" height="24"></rect>
-                                                        <circle fill="#000000" cx="5" cy="12" r="2">
-                                                        </circle>
-                                                        <circle fill="#000000" cx="12" cy="12" r="2">
-                                                        </circle>
-                                                        <circle fill="#000000" cx="19" cy="12" r="2">
-                                                        </circle>
-                                                    </g>
-                                                </svg>
-                                            </span>
-                                        </button>
-                                        <div class="dropdown-menu dropdown-menu-right border py-0">
-                                            <button type="button " class="cp-new-add"
-                                                    data-toggle="modal"
-                                                    data-target="#modalcreation">
-                                                Araç Atama
-                                            </button>
-                                            <button type="button " class="cp-new-add"
-                                                    data-toggle="modal"
-                                                    data-target="#modalGrid">
-                                                Düzenle
-                                            </button>
-                                            <button type="button " class="cp-new-add">Sil</button>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr class="btn-reveal-trigger">
-                                <td class="py-2">
-                                    <div class="custom-control custom-checkbox">
-                                        <!-- <input type="checkbox" class="custom-control-input" id="checkbox9">
-                                        <label class="custom-control-label" for="checkbox9"></label> -->
-                                        <span>9</span>
-                                    </div>
-                                </td>
-                                <td class="py-3">
-                                    <a href="#">
-                                        <div class="media d-flex align-items-center">
-                                            <!-- <div class="avatar avatar-xl mr-2">
-                                                <div class=""><img class="rounded-circle img-fluid"
-                                                                   src="../assets/images/avatar/cp-personal.svg" width="30" alt="" />
-                                                </div>
-                                            </div> -->
-                                            <div class="media-body">
-                                                <h5 class="mb-0 fs--1">Ricky Antony</h5>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </td>
-                                <td class="py-2">
-                                    <a href="mailto:ricky@example.com">info@example.com</a>
-                                </td>
-                                <td class="py-2"> <a href="tel:2012001851">(201) 200-1851</a></td>
-                                <td class="py-2 pl-5 wspace-no">2392 Main Avenue, Penasauka</td>
-                                <td class="py-2">42 AHE 87</td>
-                                <td class="py-2 text-right">
-                                    <div class="dropdown">
-                                        <button class="btn boradi-btn btn-primary tp-btn-light sharp"
-                                                type="button" data-toggle="dropdown">
-                                            <span class="fs--1">
-                                                <svg xmlns="http://www.w3.org/2000/svg"
-                                                     xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                     width="18px" height="18px" viewBox="0 0 24 24"
-                                                     version="1.1">
-                                                    <g stroke="none" stroke-width="1" fill="none"
-                                                       fill-rule="evenodd">
-                                                        <rect x="0" y="0" width="24" height="24"></rect>
-                                                        <circle fill="#000000" cx="5" cy="12" r="2">
-                                                        </circle>
-                                                        <circle fill="#000000" cx="12" cy="12" r="2">
-                                                        </circle>
-                                                        <circle fill="#000000" cx="19" cy="12" r="2">
-                                                        </circle>
-                                                    </g>
-                                                </svg>
-                                            </span>
-                                        </button>
-                                        <div class="dropdown-menu dropdown-menu-right border py-0">
-                                            <button type="button " class="cp-new-add"
-                                                    data-toggle="modal"
-                                                    data-target="#modalcreation">
-                                                Araç Atama
-                                            </button>
-                                            <button type="button " class="cp-new-add"
-                                                    data-toggle="modal"
-                                                    data-target="#modalGrid">
-                                                Düzenle
-                                            </button>
-                                            <button type="button " class="cp-new-add">Sil</button>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr class="btn-reveal-trigger">
-                                <td class="py-2">
-                                    <div class="custom-control custom-checkbox">
-                                        <!-- <input type="checkbox" class="custom-control-input" id="checkbox10">
-                                        <label class="custom-control-label" for="checkbox10"></label> -->
-                                        <span>10</span>
-                                    </div>
-                                </td>
-                                <td class="py-3">
-                                    <a href="#">
-                                        <div class="media d-flex align-items-center">
-                                            <!-- <div class="avatar avatar-xl mr-2">
-                                                <img class="rounded-circle img-fluid"
-                                                     src="../assets/images/avatar/cp-personal.svg" alt="" width="30" />
-                                            </div> -->
-                                            <div class="media-body">
-                                                <h5 class="mb-0 fs--1">Emma Watson</h5>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </td>
-                                <td class="py-2">
-                                    <a href="mailto:emma@example.com">info@example.com</a>
-                                </td>
-                                <td class="py-2"> <a href="tel:2122288403">(212) 228-8403</a></td>
-                                <td class="py-2 pl-5 wspace-no">
-                                    2289 5th Avenue, New York
-                                </td>
-                                <td class="py-2">42 AHE 87</td>
-                                <td class="py-2 text-right">
-                                    <div class="dropdown">
-                                        <button class="btn boradi-btn btn-primary tp-btn-light sharp"
-                                                type="button" data-toggle="dropdown">
-                                            <span class="fs--1">
-                                                <svg xmlns="http://www.w3.org/2000/svg"
-                                                     xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                     width="18px" height="18px" viewBox="0 0 24 24"
-                                                     version="1.1">
-                                                    <g stroke="none" stroke-width="1" fill="none"
-                                                       fill-rule="evenodd">
-                                                        <rect x="0" y="0" width="24" height="24"></rect>
-                                                        <circle fill="#000000" cx="5" cy="12" r="2">
-                                                        </circle>
-                                                        <circle fill="#000000" cx="12" cy="12" r="2">
-                                                        </circle>
-                                                        <circle fill="#000000" cx="19" cy="12" r="2">
-                                                        </circle>
-                                                    </g>
-                                                </svg>
-                                            </span>
-                                        </button>
-                                        <div class="dropdown-menu dropdown-menu-right border py-0">
-                                            <button type="button " class="cp-new-add"
-                                                    data-toggle="modal"
-                                                    data-target="#modalcreation">
-                                                Araç Atama
-                                            </button>
-                                            <button type="button " class="cp-new-add"
-                                                    data-toggle="modal"
-                                                    data-target="#modalGrid">
-                                                Düzenle
-                                            </button>
-                                            <button type="button " class="cp-new-add">Sil</button>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
+                                        </td>
+
+                                    }
+                                </tr>
+                            }
+
+
 
                         </tbody>
                     </table>
@@ -741,7 +206,7 @@
 </div>
 
 <!-- Araç Atama Modal -->
-<div class="modal fade" id="modalcreation" style="display: none;" aria-hidden="true">
+@*<div class="modal fade" id="modalcreation" style="display: none;" aria-hidden="true">
     <div class="modal-dialog cp-modal-dialog" role="document">
         <div class="modal-content boradi-4">
             <div class="modal-header">
@@ -762,7 +227,7 @@
                                 <label>Atanacak Plaka:</label>
                                 <input type="text" class="form-control" required name="yeniplaka">
                             </div>
-                          
+
                         </div>
 
                         <div class="modal-footer border-tn pr-0">
@@ -778,10 +243,10 @@
 
         </div>
     </div>
-</div>
+</div>*@
 
 
-<div class="modal fade" id="modalGrid" style="display: none;" aria-hidden="true">
+@*<div class="modal fade" id="modalGrid" style="display: none;" aria-hidden="true">
     <div class="modal-dialog cp-modal-dialog" role="document">
         <div class="modal-content boradi-4">
             <div class="modal-header">
@@ -834,4 +299,4 @@
 
         </div>
     </div>
-</div>
+</div>*@

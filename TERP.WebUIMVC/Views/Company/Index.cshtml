@@ -7,6 +7,7 @@
     <div class="hp-title">
         <h4 class="hp-h4">Firma Bilgileri</h4>
     </div>
+
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="javascript:void(0)">Anasayfa</a></li>
         <li class="breadcrumb-item active"><a href="javascript:void(0)">Firma Bilgileri</a></li>
@@ -17,8 +18,7 @@
 
     @if (User.IsInRole("Koneks Admin"))
     {
-        <a href="javascript:void(0)" class="btn btn-primary btn-rounded mr-3 mb-2 btn-new-company" data-toggle="modal"
-           data-target="#addCompany">
+        <a href="javascript:void(0)" class="btn btn-primary btn-rounded mr-3 mb-2 btn-new-company" data-toggle="modal" data-target="#addCompany">
             <i class="las la-location-arrow scale5 mr-3"></i>
             Adres Ekle
         </a>
@@ -27,14 +27,16 @@
             <div class="modal-dialog cp-modal-dialog" role="document">
                 <div class="modal-content boradi-4">
                     <form method="post">
+
                         @Html.AntiForgeryToken()
-                        <input type="hidden" value="0" id="updatedCompanyId" name="id" />
+                        <input type="hidden" value="0" id="updatedCompanyId" name="id"/>
                         <div class="modal-header">
                             <h4 class="modal-title comin-title"> <strong>Yeni Firma Ekle</strong> </h4>
                             <button type="button" class="close" data-dismiss="modal">
                                 <span>×</span>
                             </button>
                         </div>
+
                         <div class="modal-body cp-anc-modal-body">
                             <div class="container">
                                 <div class="form-row">
@@ -42,10 +44,12 @@
                                         <label>Firma Ünvanı:</label>
                                         <input type="text" class="form-control" value="" id="updatedCompanyName" name="name" required>
                                     </div>
+
                                     <div class="form-group col-md-6">
                                         <label>Yetkili:</label>
                                         <input type="text" class="form-control" name="officerFullName" id="updatedCompanyOfficerFullName" required>
                                     </div>
+
                                     <div class="form-group col-md-6 mt-20">
                                         <label>Mersis NO:</label>
                                         <input type="text" id="updatedCompanyMersisNo" name="mersisNo" class="form-control" required>
@@ -75,10 +79,8 @@
                             </div>
                         </div>
                         <div class="modal-footer border-tn pr-25">
-                            <button type="button" class="btn btn-danger light boradi-4"
-                                    data-dismiss="modal">
-                                Vazgeç
-                            </button>
+                            <button type="button" class="btn btn-danger light boradi-4" data-dismiss="modal"> Vazgeç </button>
+
                             <button type="submit" class="btn btn-primary boradi-4 btn-company-ekle">Ekle</button>
                         </div>
                     </form>

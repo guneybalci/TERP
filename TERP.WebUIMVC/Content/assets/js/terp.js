@@ -23,6 +23,7 @@
             });
         });
 
+    /* Company Management */
     $(".updateCompany").on("click",
         function () {
             var updatedCompanyId = $(this).attr("value");
@@ -59,5 +60,40 @@
             $("#updatedCompanyOfficerFullName").val("");
             $("#updatedCompanyPhone").val("");
             $(".btn-company-ekle").text("Ekle");
+        });
+
+    /* Peronal Management */
+    $(".updatedPersonal").on("click",
+        function () {
+            var updatedPersonalId = $(this).attr("value");
+            $.ajax({
+                url: '/Personal/GetPersonalById' + updatedPersonalId,
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    $("#updatedPersonalId").val(data.Id);
+                    $("#updatedPersonalFirstName").val(data.FirstName);
+                    $("#updatedPersonalLastName").val(data.LastName);
+                    $("#updatedPersonalEmail").val(data.Email);
+                    $("#updatedPersonalPhone").val(data.Phone);
+                    $("#updatedPersonalAdress").val(data.Adress);
+                    $(".addingPersonal").text("Güncelle");
+                    $("#addPersonal").modal();
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            })
+        });
+
+    $(".addingPersonal").on("click",
+        function () {
+            $("#updatedPersonalId").val(0);
+            $("#updatedPersonalFirstName").val("");
+            $("#updatedPersonalLastName").val("");
+            $("#updatedPersonalEmail").val("");
+            $("#updatedPersonalPhone").val("");
+            $("#updatedPersonalAdress").val("");
+            $(".addingPersonal").text("Ekle");
         });
 })(jQuery);
