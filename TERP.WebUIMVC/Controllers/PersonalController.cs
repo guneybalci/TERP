@@ -7,21 +7,28 @@ using TERP.Business.Abstract;
 using TERP.Business.Concrete;
 using TERP.Entities.Concrete;
 using TERP.WebUIMVC.Auth;
+using TERP.WebUIMVC.Models;
 
 namespace TERP.WebUIMVC.Controllers
 {
     public class PersonalController : BaseController
     {
         private IPersonalService _personalService;
+        private IUserService _userService;
 
         public PersonalController()
         {
             _personalService = new PersonalManager();
+            _userService = new UserManager();
         }
 
         public ActionResult Index()
         {
-            return View(_personalService.GetAll());
+            return View(new PersonalViewModel()
+            {
+                PersonalLists = _personalService.GetAll(),
+                UserList = _userService.GetAll()
+            });
         }
 
 
@@ -33,7 +40,7 @@ namespace TERP.WebUIMVC.Controllers
             if (ModelState.IsValid)
             {
                 //doğrulama olduğu zaman yapılacak işlemler,yönlendirilecek sayfa vb.
-                if (model.Id==0)
+                if (model.Id == 0)
                 {
                     try
                     {
@@ -57,7 +64,7 @@ namespace TERP.WebUIMVC.Controllers
                         TempData["PersonalErrorResult"] = "Personal bilgisi güncellenemedi";
                     }
                 }
-               
+
             }
             //doğrulama yapılmadığı takdirde ekrana aynı view getirilecek
             return RedirectToAction("Index");

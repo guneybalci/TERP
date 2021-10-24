@@ -67,7 +67,7 @@
         function () {
             var updatedPersonalId = $(this).attr("value");
             $.ajax({
-                url: '/Personal/GetPersonalById' + updatedPersonalId,
+                url: '/Personal/GetPersonalById/' + updatedPersonalId,
                 type: 'GET',
                 dataType: 'json',
                 success: function (data) {

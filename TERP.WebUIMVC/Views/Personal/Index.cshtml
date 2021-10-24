@@ -1,4 +1,4 @@
-﻿@model List<TERP.Entities.Concrete.Personal>
+﻿@model TERP.WebUIMVC.Models.PersonalViewModel
 @{
     ViewBag.Title = "Personel Yönetimi";
 }
@@ -22,7 +22,8 @@
                 @if (User.IsInRole("Koneks Admin"))
                 {
                     <div class="dropdown custom-dropdown mb-0 mt-3 mt-sm-0">
-                        <div class="btn cp-btn-add  cp-sedet cp-br-6" role="button" data-toggle="dropdown" aria-expanded="false"> Personel Ekle
+                        <div class="btn cp-btn-add  cp-sedet cp-br-6" role="button" data-toggle="dropdown" aria-expanded="false">
+                            Personel Ekle
                             <i class="fa fa-caret-down text-primary ml-3" aria-hidden="true"></i>
                         </div>
 
@@ -71,11 +72,22 @@
                                                     <label>Telefon</label>
                                                     <input type="tel" id="updatedPersonalPhone" class="form-control" name="phone" value="" required>
                                                 </div>
+                                                <div class="form-group col-md-12">
+                                                    <label>Kullanıcı</label>
+                                                    <select class="form-control">
+                                                        @foreach (var user in Model.UserList)
+                                                        {
+                                                            <option value="@user.Id">@user.Username</option>
+                                                        }
+                                                    </select>
+                                                </div>
 
                                                 <div class="form-group col-md-12">
                                                     <label>Adres</label>
                                                     <textarea id="updatedPersonalAdress" class="form-control cp-anc-ta" name="adress" rows="4"></textarea>
                                                 </div>
+
+
                                             </div>
                                         </div>
                                     </div>
@@ -124,13 +136,13 @@
                             </tr>
                         </thead>
                         <tbody id="customers">
-                            @foreach (var personal in Model)
+                            @foreach (var personal in Model.PersonalLists)
                             {
                                 <tr class="btn-reveal-trigger">
                                     <td>
                                         <div class="custom-control custom-checkbox">
                                             <!-- <input type="checkbox" class="custom-control-input" id="checkbox1">
-                    <label class="custom-control-label" for="checkbox1"></label> -->
+                                            <label class="custom-control-label" for="checkbox1"></label> -->
                                             <span>@personal.Id</span>
                                         </div>
                                     </td>
@@ -138,12 +150,12 @@
                                         <a href="#">
                                             <div class="media d-flex align-items-center">
                                                 <!-- <div class="avatar avatar-xl mr-2">
-                            <div class=""><img class="rounded-circle img-fluid"
-                                               src="../assets/../assets/images/avatar/cp-personal.svg" width="30" alt="" />
-                            </div>
-                        </div> -->
+                                                    <div class=""><img class="rounded-circle img-fluid"
+                                                                       src="../assets/../assets/images/avatar/cp-personal.svg" width="30" alt="" />
+                                                    </div>
+                                                </div> -->
                                                 <div class="media-body">
-                                                    <h5 class="mb-0 fs--1">@personal.FirstName + @personal.LastName</h5>
+                                                    <h5 class="mb-0 fs--1">@($"{personal.FirstName} {personal.LastName}")</h5>
                                                 </div>
                                             </div>
                                         </a>
@@ -207,96 +219,96 @@
 
 <!-- Araç Atama Modal -->
 @*<div class="modal fade" id="modalcreation" style="display: none;" aria-hidden="true">
-    <div class="modal-dialog cp-modal-dialog" role="document">
-        <div class="modal-content boradi-4">
-            <div class="modal-header">
-                <h4 class="modal-title"> <strong>Personel Düzenle</strong> </h4>
-                <button type="button" class="close" data-dismiss="modal">
-                    <span>×</span>
-                </button>
-            </div>
-            <div class="modal-body cp-anc-modal-body">
-                <div class="container">
-                    <form method="post" action="">
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label>Atanmış Plaka:</label>
-                                <input type="text" class="form-control" placeholder="42 AHE 87" required name="eskiplaka">
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label>Atanacak Plaka:</label>
-                                <input type="text" class="form-control" required name="yeniplaka">
-                            </div>
-
-                        </div>
-
-                        <div class="modal-footer border-tn pr-0">
-                            <button type="button" class="btn btn-danger light boradi-4"
-                                    data-dismiss="modal">
-                                Vazgeç
-                            </button>
-                            <button type="submit" class="btn btn-primary boradi-4">Güncelle</button>
-                        </div>
-                    </form>
+        <div class="modal-dialog cp-modal-dialog" role="document">
+            <div class="modal-content boradi-4">
+                <div class="modal-header">
+                    <h4 class="modal-title"> <strong>Personel Düzenle</strong> </h4>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span>×</span>
+                    </button>
                 </div>
-            </div>
+                <div class="modal-body cp-anc-modal-body">
+                    <div class="container">
+                        <form method="post" action="">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label>Atanmış Plaka:</label>
+                                    <input type="text" class="form-control" placeholder="42 AHE 87" required name="eskiplaka">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>Atanacak Plaka:</label>
+                                    <input type="text" class="form-control" required name="yeniplaka">
+                                </div>
 
+                            </div>
+
+                            <div class="modal-footer border-tn pr-0">
+                                <button type="button" class="btn btn-danger light boradi-4"
+                                        data-dismiss="modal">
+                                    Vazgeç
+                                </button>
+                                <button type="submit" class="btn btn-primary boradi-4">Güncelle</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
         </div>
-    </div>
-</div>*@
+    </div>*@
 
 
 @*<div class="modal fade" id="modalGrid" style="display: none;" aria-hidden="true">
-    <div class="modal-dialog cp-modal-dialog" role="document">
-        <div class="modal-content boradi-4">
-            <div class="modal-header">
-                <h4 class="modal-title"> <strong>Personel Düzenle</strong> </h4>
-                <button type="button" class="close" data-dismiss="modal">
-                    <span>×</span>
-                </button>
-            </div>
-            <div class="modal-body cp-anc-modal-body">
-                <div class="container">
-                    <form method="post" action="/personal/add">
-                        @Html.AntiForgeryToken()
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label>Ad</label>
-                                <input type="text" class="form-control" required name="firstName">
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label>Soyad</label>
-                                <input type="text" class="form-control" required name="lastName">
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label>E-Posta</label>
-                                <input type="E-Posta" class="form-control" name="email">
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label>Telefon</label>
-                                <input type="tel" id="phone" name="phone" class="form-control"
-                                       required name="phone">
-                            </div>
-
-
-                            <div class="form-group col-md-12">
-                                <label>Adres</label>
-                                <textarea class="form-control cp-anc-ta" rows="4"
-                                          id="comment" name="adress"></textarea>
-                            </div>
-                        </div>
-
-                        <div class="modal-footer border-tn pr-0">
-                            <button type="button" class="btn btn-danger light boradi-4"
-                                    data-dismiss="modal">
-                                Vazgeç
-                            </button>
-                            <button type="submit" class="btn btn-primary boradi-4">Ekle</button>
-                        </div>
-                    </form>
+        <div class="modal-dialog cp-modal-dialog" role="document">
+            <div class="modal-content boradi-4">
+                <div class="modal-header">
+                    <h4 class="modal-title"> <strong>Personel Düzenle</strong> </h4>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span>×</span>
+                    </button>
                 </div>
-            </div>
+                <div class="modal-body cp-anc-modal-body">
+                    <div class="container">
+                        <form method="post" action="/personal/add">
+                            @Html.AntiForgeryToken()
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label>Ad</label>
+                                    <input type="text" class="form-control" required name="firstName">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>Soyad</label>
+                                    <input type="text" class="form-control" required name="lastName">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>E-Posta</label>
+                                    <input type="E-Posta" class="form-control" name="email">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>Telefon</label>
+                                    <input type="tel" id="phone" name="phone" class="form-control"
+                                           required name="phone">
+                                </div>
 
+
+                                <div class="form-group col-md-12">
+                                    <label>Adres</label>
+                                    <textarea class="form-control cp-anc-ta" rows="4"
+                                              id="comment" name="adress"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="modal-footer border-tn pr-0">
+                                <button type="button" class="btn btn-danger light boradi-4"
+                                        data-dismiss="modal">
+                                    Vazgeç
+                                </button>
+                                <button type="submit" class="btn btn-primary boradi-4">Ekle</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
         </div>
-    </div>
-</div>*@
+    </div>*@

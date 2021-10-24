@@ -10,8 +10,11 @@ namespace TERP.Business.Abstract
     public interface ICompanyService
     {
         List<Company> GetAll();
+
         void Add(Company company);
+
         void DeleteById(int id);
+
         void Update(Company company);
 
         Company GetById(int id);

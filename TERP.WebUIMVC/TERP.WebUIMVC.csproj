@@ -634,6 +634,7 @@
     <Compile Include="Auth\UserRoleProvider.cs" />
     <Compile Include="Models\ChangePasswordViewModel.cs" />
     <Compile Include="Models\LoginViewModels.cs" />
+    <Compile Include="Models\PersonalViewModels.cs" />
     <Compile Include="Models\UserViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

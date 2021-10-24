@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using TERP.DataAccess.Abstract;
@@ -16,5 +17,14 @@ namespace TERP.DataAccess.Concrete.EntityFramework
                 return context.Personals.Include(x => x.User).Include(x => x.User.Role).ToList();
             }
         }
+
+        //public Personal GetPersonalWithUsersById(int id)
+        //{
+        //    using (TERPContext context = new TERPContext())
+        //    {
+        //        return context.Personals.Include(x => x.User).FirstOrDefault(x=> x.Id == id);
+        //    }
+        //}
+
     }
 }

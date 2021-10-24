@@ -6,5 +6,7 @@ namespace TERP.DataAccess.Abstract
     public interface IPersonalDal : IEntityRepositoryBase<Personal>
     {
         List<Personal> GetAllWithUserAndRole();
+
+        //Personal GetPersonalWithUsersById(int id);
     }
 }
