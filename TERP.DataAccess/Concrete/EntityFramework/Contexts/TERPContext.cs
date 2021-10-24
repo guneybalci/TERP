@@ -34,8 +34,8 @@ namespace TERP.DataAccess.Concrete.EntityFramework.Contexts
 
             modelBuilder.Entity<CarType>()
                 .HasMany(e => e.Cars)
-                .WithOptional(e => e.CarType)
-                .HasForeignKey(e => e.PersonalID);
+                .WithRequired(e => e.CarType)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Personal>()
                 .HasMany(e => e.Documents)
