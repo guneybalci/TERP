@@ -10,7 +10,6 @@ namespace TERP.Business.Abstract
     public interface IPersonalService
     {
         List<Personal> GetAllWithUserAndRole();
-        //Personal GetPersonalWithUsersById(int id);
         List<Personal> GetAll();
         void Add(Personal personal);
         void DeleteById(int id);

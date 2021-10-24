@@ -24,11 +24,6 @@ namespace TERP.Business.Concrete
             return _personalDal.GetAllWithUserAndRole();
         }
 
-        //public Personal GetPersonalWithUsersById(int id)
-        //{
-        //    return _personalDal.GetPersonalWithUsersById(id);
-        //}
-
         public List<Personal> GetAll()
         {
             return _personalDal.GetAll();

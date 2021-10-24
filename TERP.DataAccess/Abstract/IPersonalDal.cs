@@ -7,6 +7,5 @@ namespace TERP.DataAccess.Abstract
     {
         List<Personal> GetAllWithUserAndRole();
 
-        //Personal GetPersonalWithUsersById(int id);
     }
 }

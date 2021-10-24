@@ -18,13 +18,5 @@ namespace TERP.DataAccess.Concrete.EntityFramework
             }
         }
 
-        //public Personal GetPersonalWithUsersById(int id)
-        //{
-        //    using (TERPContext context = new TERPContext())
-        //    {
-        //        return context.Personals.Include(x => x.User).FirstOrDefault(x=> x.Id == id);
-        //    }
-        //}
-
     }
 }
