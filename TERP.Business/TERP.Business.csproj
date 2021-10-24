@@ -42,11 +42,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstract\ICarService.cs" />
+    <Compile Include="Abstract\ICarTypeService.cs" />
     <Compile Include="Abstract\ICompanyService.cs" />
     <Compile Include="Abstract\IPersonalService.cs" />
     <Compile Include="Abstract\IRoleService.cs" />
     <Compile Include="Abstract\IUserService.cs" />
     <Compile Include="Concrete\CarManager.cs" />
+    <Compile Include="Concrete\CarTypeManager.cs" />
     <Compile Include="Concrete\CompanyManager.cs" />
     <Compile Include="Concrete\PersonalManager.cs" />
     <Compile Include="Concrete\RoleManager.cs" />

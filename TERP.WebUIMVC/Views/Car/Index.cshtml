@@ -1,4 +1,4 @@
-﻿
+﻿@model TERP.WebUIMVC.Models.CarViewModel
 @{
     ViewBag.Title = "Araç Yönetim";
 }
@@ -25,477 +25,88 @@
                                 giriş kontrolünü sağlayabilirsiniz.
                             </span>
                         </div>
-                        <div class="dropdown custom-dropdown mb-0 mt-3 mt-sm-0 cp-respdd">
-                            <div class="btn cp-btn-add  cp-sedet cp-br-6" role="button"
-                                 data-toggle="dropdown" aria-expanded="false">
-                                Araç Ekle
-                                <i class="fa fa-caret-down text-primary ml-3" aria-hidden="true"></i>
+                        @if (User.IsInRole("Koneks Admin"))
+                        {
+                            <div class="dropdown custom-dropdown mb-0 mt-3 mt-sm-0 cp-respdd">
+                                <div class="btn cp-btn-add  cp-sedet cp-br-6" role="button"
+                                     data-toggle="dropdown" aria-expanded="false">
+                                    Araç Ekle
+                                    <i class="fa fa-caret-down text-primary ml-3" aria-hidden="true"></i>
+                                </div>
+                                <div class="dropdown-menu dropdown-menu-right cp-cdd-menu">
+                                    <button type="button " class="cp-new-add" data-toggle="modal" id="btnAddNewCar"
+                                            data-target="#modalGrid">
+                                        Yeni Ekle
+                                    </button>
+                                </div>
                             </div>
-                            <div class="dropdown-menu dropdown-menu-right cp-cdd-menu">
-                                <button type="button " class="cp-new-add" data-toggle="modal"
-                                        data-target="#modalGrid">
-                                    Yeni Ekle
-                                </button>
-                            </div>
-                        </div>
+                        }
                     </div>
 
                     <div class="card-body pb-0">
-
-                        <div class="d-flex mb-3 border-bottom justify-content-between flex-wrap align-items-center">
-                            <div class="d-flex pb-3 align-items-center">
-                                <img src="/content/assets/images/card/mercedes-axor.png" alt=""
-                                     class="mr-3 cp-br" width="130">
-                                <div class="mr-3">
-                                    <p class="fs-14 mb-1">Araç Plaka</p>
-                                    <span class="text-black font-w500">42 AHE 87</span>
+                        @if (TempData["CarControlSuccessResult"] != null)
+                        {
+                            <div class="alert alert-success">@TempData["CarControlSuccessResult"]</div>
+                        }
+                        @if (TempData["CarControlErrorResult"] != null)
+                        {
+                            <div class="alert alert-danger">@TempData["CarControlErrorResult"]</div>
+                        }
+                        @foreach (var car in Model.CarList)
+                        {
+                            <div class="d-flex mb-3 border-bottom justify-content-between flex-wrap align-items-center">
+                                <div class="d-flex pb-3 align-items-center">
+                                    <img src="/content/assets/images/card/mercedes-axor.png" alt=""
+                                         class="mr-3 cp-br" width="130">
+                                    <div class="mr-3">
+                                        <p class="fs-14 mb-1">Araç Plaka</p>
+                                        <span class="text-black font-w500">@car.Plaque</span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="mr-3 pb-3">
-                                <p class="fs-14 mb-1">Araç Statü</p>
-                                <span class="text-black font-w500">Aktif</span>
-                            </div>
-                            <div class="mr-3 pb-3">
-                                <p class="fs-14 mb-1">Araç Tipi</p>
-                                <span class="text-black font-w500">Tenteli</span>
-                            </div>
-                            <div class="mr-3 pb-3">
-                                <p class="fs-14 mb-1">Araç Sürücü</p>
-                                <span class="text-black font-w500">Yıldırım Kılıç</span>
-                            </div>
-
-
-                            <div class="dropdown pb-3">
-                                <div class="btn-link" role="button" data-toggle="dropdown"
-                                     aria-expanded="false">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                         xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M10 11.9999C10 13.1045 10.8954 13.9999 12 13.9999C13.1046 13.9999 14 13.1045 14 11.9999C14 10.8954 13.1046 9.99994 12 9.99994C10.8954 9.99994 10 10.8954 10 11.9999Z"
-                                              fill="black"></path>
-                                        <path d="M10 4.00006C10 5.10463 10.8954 6.00006 12 6.00006C13.1046 6.00006 14 5.10463 14 4.00006C14 2.89549 13.1046 2.00006 12 2.00006C10.8954 2.00006 10 2.89549 10 4.00006Z"
-                                              fill="black"></path>
-                                        <path d="M10 20C10 21.1046 10.8954 22 12 22C13.1046 22 14 21.1046 14 20C14 18.8954 13.1046 18 12 18C10.8954 18 10 18.8954 10 20Z"
-                                              fill="black"></path>
-                                    </svg>
+                                <div class="mr-3 pb-3">
+                                    <p class="fs-14 mb-1">Araç Statü</p>
+                                    @if (car.Status)
+                                    {
+                                        <span class="text-black font-w500">Aktif</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="text-black font-w500">Pasif</span>
+                                    }
                                 </div>
-                                <div class="dropdown-menu dropdown-menu-right p-0">
-                                    <button type="button " class="cp-new-add" data-toggle="modal"
-                                            data-target="#modalGrid2">
-                                        Düzenle
-                                    </button>
-                                    <button type="button " class="cp-new-add">Sil</button>
+                                <div class="mr-3 pb-3">
+                                    <p class="fs-14 mb-1">Araç Tipi</p>
+                                    <span class="text-black font-w500">@car.CarType.Name.ToString()</span>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="d-flex mb-3 border-bottom justify-content-between flex-wrap align-items-center">
-                            <div class="d-flex pb-3 align-items-center">
-                                <img src="/content/assets/images/card/mercedes-axor.png" alt=""
-                                     class="mr-3 cp-br" width="130">
-                                <div class="mr-3">
-                                    <p class="fs-14 mb-1">Araç Plaka</p>
-                                    <span class="text-black font-w500">42 AHE 87</span>
+                                <div class="mr-3 pb-3">
+                                    <p class="fs-14 mb-1">Araç Sürücü</p>
+                                    <span class="text-black font-w500">@($"{car.Personal.FirstName} {car.Personal.LastName}")</span>
                                 </div>
-                            </div>
-                            <div class="mr-3 pb-3">
-                                <p class="fs-14 mb-1">Araç Statü</p>
-                                <span class="text-black font-w500">Aktif</span>
-                            </div>
-                            <div class="mr-3 pb-3">
-                                <p class="fs-14 mb-1">Araç Tipi</p>
-                                <span class="text-black font-w500">Tenteli</span>
-                            </div>
-                            <div class="mr-3 pb-3">
-                                <p class="fs-14 mb-1">Araç Sürücü</p>
-                                <span class="text-black font-w500">Yıldırım Kılıç</span>
-                            </div>
 
 
-                            <div class="dropdown pb-3">
-                                <div class="btn-link" role="button" data-toggle="dropdown"
-                                     aria-expanded="false">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                         xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M10 11.9999C10 13.1045 10.8954 13.9999 12 13.9999C13.1046 13.9999 14 13.1045 14 11.9999C14 10.8954 13.1046 9.99994 12 9.99994C10.8954 9.99994 10 10.8954 10 11.9999Z"
-                                              fill="black"></path>
-                                        <path d="M10 4.00006C10 5.10463 10.8954 6.00006 12 6.00006C13.1046 6.00006 14 5.10463 14 4.00006C14 2.89549 13.1046 2.00006 12 2.00006C10.8954 2.00006 10 2.89549 10 4.00006Z"
-                                              fill="black"></path>
-                                        <path d="M10 20C10 21.1046 10.8954 22 12 22C13.1046 22 14 21.1046 14 20C14 18.8954 13.1046 18 12 18C10.8954 18 10 18.8954 10 20Z"
-                                              fill="black"></path>
-                                    </svg>
-                                </div>
-                                <div class="dropdown-menu dropdown-menu-right p-0">
-                                    <button type="button " class="cp-new-add" data-toggle="modal"
-                                            data-target="#modalGrid2">
-                                        Düzenle
-                                    </button>
-                                    <button type="button " class="cp-new-add">Sil</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="d-flex mb-3 border-bottom justify-content-between flex-wrap align-items-center">
-                            <div class="d-flex pb-3 align-items-center">
-                                <img src="/content/assets/images/card/mercedes-axor.png" alt=""
-                                     class="mr-3 cp-br" width="130">
-                                <div class="mr-3">
-                                    <p class="fs-14 mb-1">Araç Plaka</p>
-                                    <span class="text-black font-w500">42 AHE 87</span>
+                                <div class="dropdown pb-3">
+                                    <div class="btn-link" role="button" data-toggle="dropdown"
+                                         aria-expanded="false">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                             xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M10 11.9999C10 13.1045 10.8954 13.9999 12 13.9999C13.1046 13.9999 14 13.1045 14 11.9999C14 10.8954 13.1046 9.99994 12 9.99994C10.8954 9.99994 10 10.8954 10 11.9999Z"
+                                                  fill="black"></path>
+                                            <path d="M10 4.00006C10 5.10463 10.8954 6.00006 12 6.00006C13.1046 6.00006 14 5.10463 14 4.00006C14 2.89549 13.1046 2.00006 12 2.00006C10.8954 2.00006 10 2.89549 10 4.00006Z"
+                                                  fill="black"></path>
+                                            <path d="M10 20C10 21.1046 10.8954 22 12 22C13.1046 22 14 21.1046 14 20C14 18.8954 13.1046 18 12 18C10.8954 18 10 18.8954 10 20Z"
+                                                  fill="black"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="dropdown-menu dropdown-menu-right p-0">
+                                        <button type="button " class="cp-new-add btnCarControlEdit" data-toggle="modal" value="@car.Id"
+                                                data-target="#modalGrid">
+                                            Düzenle
+                                        </button>
+                                        <button type="button " class="cp-new-add">Sil</button>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="mr-3 pb-3">
-                                <p class="fs-14 mb-1">Araç Statü</p>
-                                <span class="text-black font-w500">Aktif</span>
-                            </div>
-                            <div class="mr-3 pb-3">
-                                <p class="fs-14 mb-1">Araç Tipi</p>
-                                <span class="text-black font-w500">Tenteli</span>
-                            </div>
-                            <div class="mr-3 pb-3">
-                                <p class="fs-14 mb-1">Araç Sürücü</p>
-                                <span class="text-black font-w500">Yıldırım Kılıç</span>
-                            </div>
-
-
-                            <div class="dropdown pb-3">
-                                <div class="btn-link" role="button" data-toggle="dropdown"
-                                     aria-expanded="false">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                         xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M10 11.9999C10 13.1045 10.8954 13.9999 12 13.9999C13.1046 13.9999 14 13.1045 14 11.9999C14 10.8954 13.1046 9.99994 12 9.99994C10.8954 9.99994 10 10.8954 10 11.9999Z"
-                                              fill="black"></path>
-                                        <path d="M10 4.00006C10 5.10463 10.8954 6.00006 12 6.00006C13.1046 6.00006 14 5.10463 14 4.00006C14 2.89549 13.1046 2.00006 12 2.00006C10.8954 2.00006 10 2.89549 10 4.00006Z"
-                                              fill="black"></path>
-                                        <path d="M10 20C10 21.1046 10.8954 22 12 22C13.1046 22 14 21.1046 14 20C14 18.8954 13.1046 18 12 18C10.8954 18 10 18.8954 10 20Z"
-                                              fill="black"></path>
-                                    </svg>
-                                </div>
-                                <div class="dropdown-menu dropdown-menu-right p-0">
-                                    <button type="button " class="cp-new-add" data-toggle="modal"
-                                            data-target="#modalGrid2">
-                                        Düzenle
-                                    </button>
-                                    <button type="button " class="cp-new-add">Sil</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="d-flex mb-3 border-bottom justify-content-between flex-wrap align-items-center">
-                            <div class="d-flex pb-3 align-items-center">
-                                <img src="/content/assets/images/card/mercedes-axor.png" alt=""
-                                     class="mr-3 cp-br" width="130">
-                                <div class="mr-3">
-                                    <p class="fs-14 mb-1">Araç Plaka</p>
-                                    <span class="text-black font-w500">42 AHE 87</span>
-                                </div>
-                            </div>
-                            <div class="mr-3 pb-3">
-                                <p class="fs-14 mb-1">Araç Statü</p>
-                                <span class="text-black font-w500">Aktif</span>
-                            </div>
-                            <div class="mr-3 pb-3">
-                                <p class="fs-14 mb-1">Araç Tipi</p>
-                                <span class="text-black font-w500">Tenteli</span>
-                            </div>
-                            <div class="mr-3 pb-3">
-                                <p class="fs-14 mb-1">Araç Sürücü</p>
-                                <span class="text-black font-w500">Yıldırım Kılıç</span>
-                            </div>
-
-
-                            <div class="dropdown pb-3">
-                                <div class="btn-link" role="button" data-toggle="dropdown"
-                                     aria-expanded="false">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                         xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M10 11.9999C10 13.1045 10.8954 13.9999 12 13.9999C13.1046 13.9999 14 13.1045 14 11.9999C14 10.8954 13.1046 9.99994 12 9.99994C10.8954 9.99994 10 10.8954 10 11.9999Z"
-                                              fill="black"></path>
-                                        <path d="M10 4.00006C10 5.10463 10.8954 6.00006 12 6.00006C13.1046 6.00006 14 5.10463 14 4.00006C14 2.89549 13.1046 2.00006 12 2.00006C10.8954 2.00006 10 2.89549 10 4.00006Z"
-                                              fill="black"></path>
-                                        <path d="M10 20C10 21.1046 10.8954 22 12 22C13.1046 22 14 21.1046 14 20C14 18.8954 13.1046 18 12 18C10.8954 18 10 18.8954 10 20Z"
-                                              fill="black"></path>
-                                    </svg>
-                                </div>
-                                <div class="dropdown-menu dropdown-menu-right p-0">
-                                    <button type="button " class="cp-new-add" data-toggle="modal"
-                                            data-target="#modalGrid2">
-                                        Düzenle
-                                    </button>
-                                    <button type="button " class="cp-new-add">Sil</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="d-flex mb-3 border-bottom justify-content-between flex-wrap align-items-center">
-                            <div class="d-flex pb-3 align-items-center">
-                                <img src="/content/assets/images/card/mercedes-axor.png" alt=""
-                                     class="mr-3 cp-br" width="130">
-                                <div class="mr-3">
-                                    <p class="fs-14 mb-1">Araç Plaka</p>
-                                    <span class="text-black font-w500">42 AHE 87</span>
-                                </div>
-                            </div>
-                            <div class="mr-3 pb-3">
-                                <p class="fs-14 mb-1">Araç Statü</p>
-                                <span class="text-black font-w500">Aktif</span>
-                            </div>
-                            <div class="mr-3 pb-3">
-                                <p class="fs-14 mb-1">Araç Tipi</p>
-                                <span class="text-black font-w500">Tenteli</span>
-                            </div>
-                            <div class="mr-3 pb-3">
-                                <p class="fs-14 mb-1">Araç Sürücü</p>
-                                <span class="text-black font-w500">Yıldırım Kılıç</span>
-                            </div>
-
-
-                            <div class="dropdown pb-3">
-                                <div class="btn-link" role="button" data-toggle="dropdown"
-                                     aria-expanded="false">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                         xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M10 11.9999C10 13.1045 10.8954 13.9999 12 13.9999C13.1046 13.9999 14 13.1045 14 11.9999C14 10.8954 13.1046 9.99994 12 9.99994C10.8954 9.99994 10 10.8954 10 11.9999Z"
-                                              fill="black"></path>
-                                        <path d="M10 4.00006C10 5.10463 10.8954 6.00006 12 6.00006C13.1046 6.00006 14 5.10463 14 4.00006C14 2.89549 13.1046 2.00006 12 2.00006C10.8954 2.00006 10 2.89549 10 4.00006Z"
-                                              fill="black"></path>
-                                        <path d="M10 20C10 21.1046 10.8954 22 12 22C13.1046 22 14 21.1046 14 20C14 18.8954 13.1046 18 12 18C10.8954 18 10 18.8954 10 20Z"
-                                              fill="black"></path>
-                                    </svg>
-                                </div>
-                                <div class="dropdown-menu dropdown-menu-right p-0">
-                                    <button type="button " class="cp-new-add" data-toggle="modal"
-                                            data-target="#modalGrid2">
-                                        Düzenle
-                                    </button>
-                                    <button type="button " class="cp-new-add">Sil</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="d-flex mb-3 border-bottom justify-content-between flex-wrap align-items-center">
-                            <div class="d-flex pb-3 align-items-center">
-                                <img src="/content/assets/images/card/mercedes-axor.png" alt=""
-                                     class="mr-3 cp-br" width="130">
-                                <div class="mr-3">
-                                    <p class="fs-14 mb-1">Araç Plaka</p>
-                                    <span class="text-black font-w500">42 AHE 87</span>
-                                </div>
-                            </div>
-                            <div class="mr-3 pb-3">
-                                <p class="fs-14 mb-1">Araç Statü</p>
-                                <span class="text-black font-w500">Aktif</span>
-                            </div>
-                            <div class="mr-3 pb-3">
-                                <p class="fs-14 mb-1">Araç Tipi</p>
-                                <span class="text-black font-w500">Tenteli</span>
-                            </div>
-                            <div class="mr-3 pb-3">
-                                <p class="fs-14 mb-1">Araç Sürücü</p>
-                                <span class="text-black font-w500">Yıldırım Kılıç</span>
-                            </div>
-
-
-                            <div class="dropdown pb-3">
-                                <div class="btn-link" role="button" data-toggle="dropdown"
-                                     aria-expanded="false">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                         xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M10 11.9999C10 13.1045 10.8954 13.9999 12 13.9999C13.1046 13.9999 14 13.1045 14 11.9999C14 10.8954 13.1046 9.99994 12 9.99994C10.8954 9.99994 10 10.8954 10 11.9999Z"
-                                              fill="black"></path>
-                                        <path d="M10 4.00006C10 5.10463 10.8954 6.00006 12 6.00006C13.1046 6.00006 14 5.10463 14 4.00006C14 2.89549 13.1046 2.00006 12 2.00006C10.8954 2.00006 10 2.89549 10 4.00006Z"
-                                              fill="black"></path>
-                                        <path d="M10 20C10 21.1046 10.8954 22 12 22C13.1046 22 14 21.1046 14 20C14 18.8954 13.1046 18 12 18C10.8954 18 10 18.8954 10 20Z"
-                                              fill="black"></path>
-                                    </svg>
-                                </div>
-                                <div class="dropdown-menu dropdown-menu-right p-0">
-                                    <button type="button " class="cp-new-add" data-toggle="modal"
-                                            data-target="#modalGrid2">
-                                        Düzenle
-                                    </button>
-                                    <button type="button " class="cp-new-add">Sil</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="d-flex mb-3 border-bottom justify-content-between flex-wrap align-items-center">
-                            <div class="d-flex pb-3 align-items-center">
-                                <img src="/content/assets/images/card/mercedes-axor.png" alt=""
-                                     class="mr-3 cp-br" width="130">
-                                <div class="mr-3">
-                                    <p class="fs-14 mb-1">Araç Plaka</p>
-                                    <span class="text-black font-w500">42 AHE 87</span>
-                                </div>
-                            </div>
-                            <div class="mr-3 pb-3">
-                                <p class="fs-14 mb-1">Araç Statü</p>
-                                <span class="text-black font-w500">Aktif</span>
-                            </div>
-                            <div class="mr-3 pb-3">
-                                <p class="fs-14 mb-1">Araç Tipi</p>
-                                <span class="text-black font-w500">Tenteli</span>
-                            </div>
-                            <div class="mr-3 pb-3">
-                                <p class="fs-14 mb-1">Araç Sürücü</p>
-                                <span class="text-black font-w500">Yıldırım Kılıç</span>
-                            </div>
-
-
-                            <div class="dropdown pb-3">
-                                <div class="btn-link" role="button" data-toggle="dropdown"
-                                     aria-expanded="false">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                         xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M10 11.9999C10 13.1045 10.8954 13.9999 12 13.9999C13.1046 13.9999 14 13.1045 14 11.9999C14 10.8954 13.1046 9.99994 12 9.99994C10.8954 9.99994 10 10.8954 10 11.9999Z"
-                                              fill="black"></path>
-                                        <path d="M10 4.00006C10 5.10463 10.8954 6.00006 12 6.00006C13.1046 6.00006 14 5.10463 14 4.00006C14 2.89549 13.1046 2.00006 12 2.00006C10.8954 2.00006 10 2.89549 10 4.00006Z"
-                                              fill="black"></path>
-                                        <path d="M10 20C10 21.1046 10.8954 22 12 22C13.1046 22 14 21.1046 14 20C14 18.8954 13.1046 18 12 18C10.8954 18 10 18.8954 10 20Z"
-                                              fill="black"></path>
-                                    </svg>
-                                </div>
-                                <div class="dropdown-menu dropdown-menu-right p-0">
-                                    <button type="button " class="cp-new-add" data-toggle="modal"
-                                            data-target="#modalGrid2">
-                                        Düzenle
-                                    </button>
-                                    <button type="button " class="cp-new-add">Sil</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="d-flex mb-3 border-bottom justify-content-between flex-wrap align-items-center">
-                            <div class="d-flex pb-3 align-items-center">
-                                <img src="/content/assets/images/card/mercedes-axor.png" alt=""
-                                     class="mr-3 cp-br" width="130">
-                                <div class="mr-3">
-                                    <p class="fs-14 mb-1">Araç Plaka</p>
-                                    <span class="text-black font-w500">42 AHE 87</span>
-                                </div>
-                            </div>
-                            <div class="mr-3 pb-3">
-                                <p class="fs-14 mb-1">Araç Statü</p>
-                                <span class="text-black font-w500">Aktif</span>
-                            </div>
-                            <div class="mr-3 pb-3">
-                                <p class="fs-14 mb-1">Araç Tipi</p>
-                                <span class="text-black font-w500">Tenteli</span>
-                            </div>
-                            <div class="mr-3 pb-3">
-                                <p class="fs-14 mb-1">Araç Sürücü</p>
-                                <span class="text-black font-w500">Yıldırım Kılıç</span>
-                            </div>
-
-
-                            <div class="dropdown pb-3">
-                                <div class="btn-link" role="button" data-toggle="dropdown"
-                                     aria-expanded="false">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                         xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M10 11.9999C10 13.1045 10.8954 13.9999 12 13.9999C13.1046 13.9999 14 13.1045 14 11.9999C14 10.8954 13.1046 9.99994 12 9.99994C10.8954 9.99994 10 10.8954 10 11.9999Z"
-                                              fill="black"></path>
-                                        <path d="M10 4.00006C10 5.10463 10.8954 6.00006 12 6.00006C13.1046 6.00006 14 5.10463 14 4.00006C14 2.89549 13.1046 2.00006 12 2.00006C10.8954 2.00006 10 2.89549 10 4.00006Z"
-                                              fill="black"></path>
-                                        <path d="M10 20C10 21.1046 10.8954 22 12 22C13.1046 22 14 21.1046 14 20C14 18.8954 13.1046 18 12 18C10.8954 18 10 18.8954 10 20Z"
-                                              fill="black"></path>
-                                    </svg>
-                                </div>
-                                <div class="dropdown-menu dropdown-menu-right p-0">
-                                    <button type="button " class="cp-new-add" data-toggle="modal"
-                                            data-target="#modalGrid2">
-                                        Düzenle
-                                    </button>
-                                    <button type="button " class="cp-new-add">Sil</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="d-flex mb-3 border-bottom justify-content-between flex-wrap align-items-center">
-                            <div class="d-flex pb-3 align-items-center">
-                                <img src="/content/assets/images/card/mercedes-axor.png" alt=""
-                                     class="mr-3 cp-br" width="130">
-                                <div class="mr-3">
-                                    <p class="fs-14 mb-1">Araç Plaka</p>
-                                    <span class="text-black font-w500">42 AHE 87</span>
-                                </div>
-                            </div>
-                            <div class="mr-3 pb-3">
-                                <p class="fs-14 mb-1">Araç Statü</p>
-                                <span class="text-black font-w500">Aktif</span>
-                            </div>
-                            <div class="mr-3 pb-3">
-                                <p class="fs-14 mb-1">Araç Tipi</p>
-                                <span class="text-black font-w500">Tenteli</span>
-                            </div>
-                            <div class="mr-3 pb-3">
-                                <p class="fs-14 mb-1">Araç Sürücü</p>
-                                <span class="text-black font-w500">Yıldırım Kılıç</span>
-                            </div>
-
-
-                            <div class="dropdown pb-3">
-                                <div class="btn-link" role="button" data-toggle="dropdown"
-                                     aria-expanded="false">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                         xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M10 11.9999C10 13.1045 10.8954 13.9999 12 13.9999C13.1046 13.9999 14 13.1045 14 11.9999C14 10.8954 13.1046 9.99994 12 9.99994C10.8954 9.99994 10 10.8954 10 11.9999Z"
-                                              fill="black"></path>
-                                        <path d="M10 4.00006C10 5.10463 10.8954 6.00006 12 6.00006C13.1046 6.00006 14 5.10463 14 4.00006C14 2.89549 13.1046 2.00006 12 2.00006C10.8954 2.00006 10 2.89549 10 4.00006Z"
-                                              fill="black"></path>
-                                        <path d="M10 20C10 21.1046 10.8954 22 12 22C13.1046 22 14 21.1046 14 20C14 18.8954 13.1046 18 12 18C10.8954 18 10 18.8954 10 20Z"
-                                              fill="black"></path>
-                                    </svg>
-                                </div>
-                                <div class="dropdown-menu dropdown-menu-right p-0">
-                                    <button type="button " class="cp-new-add" data-toggle="modal"
-                                            data-target="#modalGrid2">
-                                        Düzenle
-                                    </button>
-                                    <button type="button " class="cp-new-add">Sil</button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="d-flex border-bottom justify-content-between flex-wrap align-items-center">
-                            <div class="d-flex pb-3 align-items-center">
-                                <img src="/content/assets/images/card/mercedes-axor.png" alt=""
-                                     class="mr-3 cp-br" width="130">
-                                <div class="mr-3">
-                                    <p class="fs-14 mb-1">Araç Plaka</p>
-                                    <span class="text-black font-w500">42 AHE 87</span>
-                                </div>
-                            </div>
-                            <div class="mr-3 pb-3">
-                                <p class="fs-14 mb-1">Araç Statü</p>
-                                <span class="text-black font-w500">Aktif</span>
-                            </div>
-                            <div class="mr-3 pb-3">
-                                <p class="fs-14 mb-1">Araç Tipi</p>
-                                <span class="text-black font-w500">Tenteli</span>
-                            </div>
-                            <div class="mr-3 pb-3">
-                                <p class="fs-14 mb-1">Araç Sürücü</p>
-                                <span class="text-black font-w500">Yıldırım Kılıç</span>
-                            </div>
-
-
-                            <div class="dropdown pb-3">
-                                <div class="btn-link" role="button" data-toggle="dropdown"
-                                     aria-expanded="false">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                         xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M10 11.9999C10 13.1045 10.8954 13.9999 12 13.9999C13.1046 13.9999 14 13.1045 14 11.9999C14 10.8954 13.1046 9.99994 12 9.99994C10.8954 9.99994 10 10.8954 10 11.9999Z"
-                                              fill="black"></path>
-                                        <path d="M10 4.00006C10 5.10463 10.8954 6.00006 12 6.00006C13.1046 6.00006 14 5.10463 14 4.00006C14 2.89549 13.1046 2.00006 12 2.00006C10.8954 2.00006 10 2.89549 10 4.00006Z"
-                                              fill="black"></path>
-                                        <path d="M10 20C10 21.1046 10.8954 22 12 22C13.1046 22 14 21.1046 14 20C14 18.8954 13.1046 18 12 18C10.8954 18 10 18.8954 10 20Z"
-                                              fill="black"></path>
-                                    </svg>
-                                </div>
-                                <div class="dropdown-menu dropdown-menu-right p-0">
-                                    <button type="button " class="cp-new-add" data-toggle="modal"
-                                            data-target="#modalGrid2">
-                                        Düzenle
-                                    </button>
-                                    <button type="button " class="cp-new-add">Sil</button>
-                                </div>
-                            </div>
-                        </div>
-
-
-
+                        }
                     </div>
                 </div>
             </div>
@@ -503,80 +114,79 @@
     </div>
 </div>
 
-<div class="modal fade" id="modalGrid" style="display: none;" aria-hidden="true">
-    <div class="modal-dialog cp-modal-dialog" role="document">
-        <div class="modal-content boradi-4">
-            <div class="modal-header ">
-                <h4 class="modal-title"> <strong>Araç Ekle</strong> </h4>
-                <button type="button" class="close" data-dismiss="modal">
-                    <span>×</span>
-                </button>
-            </div>
-            <div class="modal-body cp-anc-modal-body">
-                <div class="container">
-                    <form>
+@if (User.IsInRole("Koneks Admin"))
+{
+    <div class="modal fade" id="modalGrid" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog cp-modal-dialog" role="document">
+            <div class="modal-content boradi-4">
+                <form method="post" id="carControlForm">
+                    @Html.AntiForgeryToken()
+                    <input id="btnCarMethod" name="carID" value="0" type="hidden" />
+                    <div class="modal-header ">
+                        <h4 class="modal-title"> <strong>Araç Ekle</strong> </h4>
+                        <button type="button" class="close" data-dismiss="modal">
+                            <span>×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body cp-anc-modal-body">
+                        <div class="container">
 
-                        <div class="form-row">
+                            <div class="form-row">
 
 
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Araç Plaka:</label>
-                                    <input type="text" class="form-control" placeholder="Araç Plakanız"
-                                           required>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Araç Plaka:</label>
+                                        <input type="text" class="form-control" name="plaque" id="carControlPlaque" placeholder="Araç Plakanız"
+                                               required>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Sürücü:</label>
-                                    <select class="form-control default-select" id="sel2">
-                                        <option>Personel</option>
-                                        <option>Personel</option>
-                                        <option>Personel</option>
-                                        <option>Personel</option>
-                                        <option>Personel</option>
-                                        <option>Personel</option>
-                                        <option>Personel</option>
-                                        <option>Personel</option>
-                                    </select>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Sürücü:</label>
+                                        <select class="form-control" id="carControlPersonalID" name="personalID">
+                                            @foreach (var personal in Model.PersonalList)
+                                            {
+                                                <option value="@personal.Id">@($"{personal.FirstName} {personal.LastName}")</option>
+                                            }
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Araç Statü:</label>
-                                    <select class="form-control default-select" id="sel1">
-                                        <option>Aktif</option>
-                                        <option>Pasif</option>
-                                    </select>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Araç Statü:</label>
+                                        <select class="form-control" id="carControlCarStatus" name="status">
+                                            <option value="1">Aktif</option>
+                                            <option value="0">Pasif</option>
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Araç Tipi:</label>
-                                    <select class="form-control default-select" id="sel2">
-                                        <option>Tenteli</option>
-                                        <option>Jumbo</option>
-                                        <option>Treylerli Normal</option>
-                                        <option>Treylerli Jumbo</option>
-                                        <option>Normal Açık</option>
-                                        <option>Damperli</option>
-                                        <option>Jumbo Açık</option>
-                                        <option>Lowbed</option>
-                                    </select>
-                                </div>
-                            </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Araç Tipi:</label>
+                                        <select class="form-control" id="carControlCarType" name="carTypeID">
+                                            @foreach (var carType in Model.CarTypeList)
+                                            {
+                                                <option value="@carType.Id">@carType.Name</option>
+                                            }
 
+                                        </select>
+                                    </div>
+                                </div>
+
+                            </div>
                         </div>
-                    </form>
-                </div>
-            </div>
-            <div class="modal-footer border-tn pr-25">
-                <button type="button" class="btn btn-danger light boradi-4"
-                        data-dismiss="modal">
-                    Vazgeç
-                </button>
-                <button type="button" class="btn btn-primary boradi-4">Araç Ekle</button>
+                    </div>
+                    <div class="modal-footer border-tn pr-25">
+                        <button type="button" class="btn btn-danger light boradi-4"
+                                data-dismiss="modal">
+                            Vazgeç
+                        </button>
+                        <button type="submit" class="btn btn-primary boradi-4">Araç Ekle</button>
+                    </div>
+                </form>
+
             </div>
         </div>
     </div>
-</div>
+}

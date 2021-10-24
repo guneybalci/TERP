@@ -10,6 +10,9 @@ namespace TERP.Business.Abstract
     public interface ICarService
     {
         List<Car> GetAll();
+        List<Car> GetAllWithCarTypeAndPersonal();
+
+        Car GetCarWithCarTypeAndPersonalById(int id);
 
         void Add(Car car);
 

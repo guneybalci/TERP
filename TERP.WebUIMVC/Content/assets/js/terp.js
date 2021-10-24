@@ -96,4 +96,37 @@
             $("#updatedPersonalAdress").val("");
             $(".addingPersonal").text("Ekle");
         });
-})(jQuery);
+
+    $("#btnAddNewCar").on("click",
+        function () {
+            $("#btnCarMethod").val("0");
+            $("#carControlForm").trigger("reset");
+        });
+
+    $(".btnCarControlEdit").on("click",
+        function () {
+            var updatedCarId = $(this).attr("value");
+            $("#btnCarMethod").val(updatedCarId);
+            $.ajax({
+                url: '/Car/GetCarById/' + updatedCarId,
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    console.log(data);
+                    $("#carControlPlaque").val(data.Plaque);
+                    $("#carControlPersonalID option[value='" + data.PersonalID + "']").prop('selected', true);
+                    var status = 1;
+                    if (data.Status === false) {
+                        status = 0;
+                    };
+                    $("#carControlCarStatus option[value='" + status + "']").prop('selected', true);
+                    $("#carControlCarType option[value='" + data.CarTypeID + "']").prop('selected', true);
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            })
+        });
+
+
+})(jQuery); 

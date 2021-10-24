@@ -632,6 +632,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Auth\UserRoleProvider.cs" />
+    <Compile Include="Models\CarViewModels.cs" />
     <Compile Include="Models\ChangePasswordViewModel.cs" />
     <Compile Include="Models\LoginViewModels.cs" />
     <Compile Include="Models\UserViewModels.cs" />
