@@ -475,16 +475,19 @@
                             <span class="nav-text">Takvim</span>
                         </a>
                     </li>
-                    <li>
-                        <a class="ai-icon" href="/arac-yonetim" aria-expanded="false">
-                            <i class="flaticon-381-controls"></i>
-                            <span class="nav-text">Araç Kontrol</span>
-                        </a>
-                        <!-- <ul aria-expanded="false">
-                            <li><a href="terp-arac-listesi.html">Araç Listesi</a></li>
-                            <li><a href="terp-arac-listesi-detayli.html">Araç Listesi Detaylı</a></li>
-                        </ul> -->
-                    </li>
+                    @if (User.IsInRole("Koneks Admin"))
+                    {
+                        <li>
+                            <a class="ai-icon" href="/arac-yonetim" aria-expanded="false">
+                                <i class="flaticon-381-controls"></i>
+                                <span class="nav-text">Araç Kontrol</span>
+                            </a>
+                            <!-- <ul aria-expanded="false">
+                                <li><a href="terp-arac-listesi.html">Araç Listesi</a></li>
+                                <li><a href="terp-arac-listesi-detayli.html">Araç Listesi Detaylı</a></li>
+                            </ul> -->
+                        </li>
+                    }
                     <li>
                         <a class="ai-icon" href="/personel-yonetim" aria-expanded="false">
                             <i class="flaticon-381-id-card-1"></i>

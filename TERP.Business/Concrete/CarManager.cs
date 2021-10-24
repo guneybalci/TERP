@@ -23,9 +23,19 @@ namespace TERP.Business.Concrete
             return _carDal.GetAll();
         }
 
+        public List<Car> GetAllWithCarTypeAndPersonal()
+        {
+            return _carDal.GetAllWithCarTypeAndPersonal();
+        }
+
+        public Car GetCarWithCarTypeAndPersonalById(int id)
+        {
+            return _carDal.GetCarWithCarTypeAndPersonalById(id);
+        }
+
         public void Add(Car car)
         {
-           _carDal.Add(car);
+            _carDal.Add(car);
         }
 
         public void DeleteById(int id)
@@ -35,7 +45,7 @@ namespace TERP.Business.Concrete
 
         public void Update(Car car)
         {
-            throw new NotImplementedException();
+            _carDal.Update(car);
         }
 
         public Car GetById(int id)

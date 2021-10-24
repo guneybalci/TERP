@@ -9,5 +9,7 @@ namespace TERP.DataAccess.Abstract
 {
     public interface ICarDal : IEntityRepositoryBase<Car>
     {
+        List<Car> GetAllWithCarTypeAndPersonal();
+        Car GetCarWithCarTypeAndPersonalById(int id);
     }
 }
