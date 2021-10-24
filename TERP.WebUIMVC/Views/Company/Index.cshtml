@@ -7,7 +7,6 @@
     <div class="hp-title">
         <h4 class="hp-h4">Firma Bilgileri</h4>
     </div>
-
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="javascript:void(0)">Anasayfa</a></li>
         <li class="breadcrumb-item active"><a href="javascript:void(0)">Firma Bilgileri</a></li>
@@ -15,20 +14,18 @@
 </div>
 <!-- row -->
 <div class="page-titles form-head d-flex flex-wrap justify-content-end align-items-center mb-4">
-
     @if (User.IsInRole("Koneks Admin"))
     {
-        <a href="javascript:void(0)" class="btn btn-primary btn-rounded mr-3 mb-2 btn-new-company" data-toggle="modal" data-target="#addCompany">
-            <i class="las la-location-arrow scale5 mr-3"></i>
-            Adres Ekle
-        </a>
+        <a href="javascript:void(0)" class="btn btn-primary btn-rounded mr-3 mb-2 btn-new-company" data-toggle="modal" data-target="#addCompany"><i class="las la-location-arrow scale5 mr-3"></i>Adres Ekle</a>
 
-        <div class="modal fade" id="addCompany" style="display: none;" aria-hidden="true">
+        <div id="addCompany" class="modal fade"  style="display: none;" aria-hidden="true">
             <div class="modal-dialog cp-modal-dialog" role="document">
                 <div class="modal-content boradi-4">
                     <form method="post">
 
                         @Html.AntiForgeryToken()
+                        
+
                         <input type="hidden" value="0" id="updatedCompanyId" name="id"/>
                         <div class="modal-header">
                             <h4 class="modal-title comin-title"> <strong>Yeni Firma Ekle</strong> </h4>

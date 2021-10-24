@@ -9,7 +9,7 @@
         <li class="breadcrumb-item active"><a href="javascript:void(0)">Personel Yönetimi</a></li>
     </ol>
 </div>
-
+<!-- row -->
 <div class="row">
     <div class="col-lg-12">
         <div class="card car-list-card">
@@ -18,32 +18,25 @@
                     <h4 class="fs-20 text-black">Personel Listesi</h4>
                     <span class="fs-12"> Bu departmanda personel listenizi ve atamalarınızı yapabilirsiniz. </span>
                 </div>
-
                 @if (User.IsInRole("Koneks Admin"))
                 {
                     <div class="dropdown custom-dropdown mb-0 mt-3 mt-sm-0">
-                        <div class="btn cp-btn-add  cp-sedet cp-br-6" role="button" data-toggle="dropdown" aria-expanded="false">
-                            Personel Ekle
-                            <i class="fa fa-caret-down text-primary ml-3" aria-hidden="true"></i>
-                        </div>
-
+                        <div class="btn cp-btn-add  cp-sedet cp-br-6" role="button" data-toggle="dropdown" aria-expanded="false"> Personel Ekle <i class="fa fa-caret-down text-primary ml-3" aria-hidden="true"></i> </div>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <button type="button" class="cp-new-add addingPersonal" data-toggle="modal" data-target="#addPersonal"> Yeni Personel Ekle </button>
+                            <button type="button" class="cp-new-add  btn-new-personal" data-toggle="modal" data-target="#addPersonal"> Yeni Personel Ekle </button>
                         </div>
                     </div>
 
                     <div id="addPersonal" class="modal fade" style="display: none;" aria-hidden="true">
-
                         <div class="modal-dialog cp-modal-dialog" role="document">
                             <div class="modal-content boradi-4">
                                 <form method="post">
                                     @Html.AntiForgeryToken()
+
+
+                                    <input type="hidden" value="0" id="beupdatedPersonalId" name="id" />
                                     <div class="modal-header">
-
-                                        <input type="hidden" value="0" id="updatedPersonalId" name="id" />
-
                                         <h4 class="modal-title"> <strong>Yeni Personel Ekle</strong> </h4>
-
                                         <button type="button" class="close" data-dismiss="modal">
                                             <span>×</span>
                                         </button>
@@ -55,25 +48,25 @@
 
                                                 <div class="form-group col-md-6">
                                                     <label>Ad</label>
-                                                    <input type="text" id="#updatedPersonalFirstName" class="form-control" value="" name="firstName" required>
+                                                    <input type="text" id="#beupdatedPersonalFirstName" class="form-control" value="" name="firstName" required>
                                                 </div>
 
                                                 <div class="form-group col-md-6">
                                                     <label>Soyad</label>
-                                                    <input type="text" id="updatedPersonalLastName" class="form-control" value="" name="lastName" required>
+                                                    <input type="text" id="beupdatedPersonalLastName" class="form-control" value="" name="lastName" required>
                                                 </div>
 
                                                 <div class="form-group col-md-6">
                                                     <label>E-Posta</label>
-                                                    <input type="email" id="updatedPersonalEmail" class="form-control" value="" name="email">
+                                                    <input type="email" id="beupdatedPersonalEmail" class="form-control" value="" name="email">
                                                 </div>
 
                                                 <div class="form-group col-md-6">
                                                     <label>Telefon</label>
-                                                    <input type="tel" id="updatedPersonalPhone" class="form-control" name="phone" value="" required>
+                                                    <input type="tel" id="beupdatedPersonalPhone" class="form-control" name="phone" value="" required>
                                                 </div>
                                                 <div class="form-group col-md-12">
-                                                    <label >Kullanıcı</label>
+                                                    <label>Kullanıcı</label>
                                                     <select class="form-control" id="personalControlUserId" name="userID">
                                                         @foreach (var user in Model.UserList)
                                                         {
@@ -84,7 +77,7 @@
 
                                                 <div class="form-group col-md-12">
                                                     <label>Adres</label>
-                                                    <textarea id="updatedPersonalAdress" class="form-control cp-anc-ta" name="adress" rows="4"></textarea>
+                                                    <textarea id="beupdatedPersonalAdress" class="form-control cp-anc-ta" name="adress" rows="4"></textarea>
                                                 </div>
 
 
@@ -96,7 +89,7 @@
 
                                         <button type="button" class="btn btn-danger light boradi-4" data-dismiss="modal"> Vazgeç </button>
 
-                                        <button class="btn btn-primary boradi-4" type="submit" class="btn btn-primary boradi-4">Ekle</button>
+                                        <button class="btn btn-primary boradi-4 btn-personal-ekle" type="submit">Ekle</button>
                                     </div>
                                 </form>
 
@@ -135,7 +128,7 @@
                                 @*<th></th>*@
                             </tr>
                         </thead>
-                        <tbody id="customers">
+                        <tbody>
                             @foreach (var personal in Model.PersonalLists)
                             {
                                 <tr class="btn-reveal-trigger">
@@ -161,7 +154,7 @@
                                         </a>
                                     </td>
                                     <td class="py-2">
-                                        <a href="mailto:ricky@example.com">@personal.Email</a>
+                                        <a href="javascript:void(0)">@personal.Email</a>
                                     </td>
                                     <td class="py-2"> <a href="javascript:void(0)">@personal.Phone</a></td>
                                     <td class="py-2 pl-5 wspace-no">@personal.Adress</td>
@@ -171,8 +164,7 @@
                                     {
                                         <td class="py-2 text-right">
                                             <div class="dropdown">
-                                                <button class="btn boradi-btn btn-primary tp-btn-light sharp"
-                                                        type="button" data-toggle="dropdown">
+                                                <button class="btn boradi-btn btn-primary tp-btn-light sharp" type="button" data-toggle="dropdown">
                                                     <span class="fs--1">
                                                         <svg xmlns="http://www.w3.org/2000/svg"
                                                              xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -192,12 +184,8 @@
                                                     </span>
                                                 </button>
                                                 <div class="dropdown-menu dropdown-menu-right border py-0">
-                                                    <button type="button " class="cp-new-add"
-                                                            data-toggle="modal"
-                                                            data-target="#modalcreation">
-                                                        Araç Atama
-                                                    </button>
-                                                    <button type="button" class="cp-new-add updatedPersonal" value="@personal.Id"> Düzenle </button>
+                                                    <button type="button" class="cp-new-add" data-toggle="modal" data-target="#modalcreation"> Araç Atama </button>
+                                                    <button type="button" class="cp-new-add updatePersonal" value="@personal.Id"> Düzenle </button>
                                                     <button type="button" class="cp-new-add">Sil</button>
                                                 </div>
                                             </div>
@@ -206,9 +194,6 @@
                                     }
                                 </tr>
                             }
-
-
-
                         </tbody>
                     </table>
                 </div>

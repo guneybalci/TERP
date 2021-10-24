@@ -1,4 +1,5 @@
 (function ($) {
+    /* User Management Start */
     $(".updateUser").on("click",
         function () {
             var updatedUserId = $(this).attr("value");
@@ -22,8 +23,23 @@
                 }
             });
         });
+    /* User Management End */
 
-    /* Company Management */
+    /* Company Management Start */
+    $(".add-new-company").on("click",
+        function () {
+            $("#updatedCompanyId").val(0);
+            $("#updatedCompanyAdress").val("");
+            $("#updatedCompanyEmail").val("");
+            $("#updatedCompanyEnrolmentNo").val("");
+            $("#updatedCompanyMersisNo").val("");
+            $("#updatedCompanyName").val("");
+            $("#updatedCompanyOfficerFullName").val("");
+            $("#updatedCompanyPhone").val("");
+            $(".btn-company-ekle").text("Ekle");
+        });
+
+
     $(".updateCompany").on("click",
         function () {
             var updatedCompanyId = $(this).attr("value");
@@ -48,36 +64,36 @@
                 }
             });
         });
+    /* Company Management End */
 
-    $(".btn-new-company").on("click",
+
+    /* Peronal Management Start */
+    $(".add-new-personal").on("click",
         function () {
-            $("#updatedCompanyId").val(0);
-            $("#updatedCompanyAdress").val("");
-            $("#updatedCompanyEmail").val("");
-            $("#updatedCompanyEnrolmentNo").val("");
-            $("#updatedCompanyMersisNo").val("");
-            $("#updatedCompanyName").val("");
-            $("#updatedCompanyOfficerFullName").val("");
-            $("#updatedCompanyPhone").val("");
-            $(".btn-company-ekle").text("Ekle");
+            $("#beupdatedPersonalId").val(0);
+            $("#beupdatedPersonalFirstName").val("");
+            $("#beupdatedPersonalLastName").val("");
+            $("#beupdatedPersonalEmail").val("");
+            $("#beupdatedPersonalPhone").val("");
+            $("#beupdatedPersonalAdress").val("");
+            $(".btn-personal-ekle").text("Ekle");
         });
 
-    /* Peronal Management */
-    $(".updatedPersonal").on("click",
+    $(".updatePersonal").on("click",
         function () {
-            var updatedPersonalId = $(this).attr("value");
+            var beupdatedPersonalId = $(this).attr("value");
             $.ajax({
-                url: '/Personal/GetPersonalById/' + updatedPersonalId,
+                url: '/Personal/GetPersonalById/' + beupdatedPersonalId,
                 type: 'GET',
                 dataType: 'json',
                 success: function (data) {
-                    $("#updatedPersonalId").val(data.Id);
-                    $("#updatedPersonalFirstName").val(data.FirstName);
-                    $("#updatedPersonalLastName").val(data.LastName);
-                    $("#updatedPersonalEmail").val(data.Email);
-                    $("#updatedPersonalPhone").val(data.Phone);
-                    $("#updatedPersonalAdress").val(data.Adress);
-                    $(".addingPersonal").text("Güncelle");
+                    $("#beupdatedPersonalId").val(data.Id);
+                    $("#beupdatedPersonalFirstName").val(data.FirstName);
+                    $("#beupdatedPersonalLastName").val(data.LastName);
+                    $("#beupdatedPersonalEmail").val(data.Email);
+                    $("#beupdatedPersonalPhone").val(data.Phone);
+                    $("#beupdatedPersonalAdress").val(data.Adress);
+                    $(".btn-personal-ekle").text("Güncelle");
                     $("#addPersonal").modal();
                 },
                 error: function (err) {
@@ -86,16 +102,8 @@
             })
         });
 
-    $(".addingPersonal").on("click",
-        function () {
-            $("#updatedPersonalId").val(0);
-            $("#updatedPersonalFirstName").val("");
-            $("#updatedPersonalLastName").val("");
-            $("#updatedPersonalEmail").val("");
-            $("#updatedPersonalPhone").val("");
-            $("#updatedPersonalAdress").val("");
-            $(".addingPersonal").text("Ekle");
-        });
+
+    /* Peronal Management End */
 
     $("#btnAddNewCar").on("click",
         function () {
@@ -129,4 +137,4 @@
         });
 
 
-})(jQuery); 
+})(jQuery);

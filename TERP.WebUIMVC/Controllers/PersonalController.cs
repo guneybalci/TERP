@@ -102,10 +102,13 @@ namespace TERP.WebUIMVC.Controllers
             return RedirectToAction("Index");
         }
 
+        [CustomAuthorize(Roles = "Koneks Admin")]
+        [HttpGet]
         public ActionResult GetPersonalById(int id)
         {
             var currentPersonalId = _personalService.GetById(id);
             return Json(currentPersonalId, JsonRequestBehavior.AllowGet);
+
         }
     }
 }
