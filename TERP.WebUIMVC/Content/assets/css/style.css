@@ -2492,6 +2492,8 @@ pre code {
   width: 100%;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
+    min-height: 500px;
+
 }
 .table-responsive > .table-bordered {
   border: 0;
