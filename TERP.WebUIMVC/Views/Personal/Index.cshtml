@@ -26,78 +26,7 @@
                             <button type="button" class="cp-new-add  btn-new-personal" data-toggle="modal" data-target="#addPersonal"> Yeni Personel Ekle </button>
                         </div>
                     </div>
-
-                    <div id="addPersonal" class="modal fade" style="display: none;" aria-hidden="true">
-                        <div class="modal-dialog cp-modal-dialog" role="document">
-                            <div class="modal-content boradi-4">
-                                <form method="post">
-                                    @Html.AntiForgeryToken()
-
-
-                                    <input type="hidden" value="0" id="beupdatedPersonalId" name="id" />
-                                    <div class="modal-header">
-                                        <h4 class="modal-title"> <strong>Yeni Personel Ekle</strong> </h4>
-                                        <button type="button" class="close" data-dismiss="modal">
-                                            <span>×</span>
-                                        </button>
-                                    </div>
-
-                                    <div class="modal-body cp-anc-modal-body">
-                                        <div class="container">
-                                            <div class="form-row">
-
-                                                <div class="form-group col-md-6">
-                                                    <label>Ad</label>
-                                                    <input type="text" id="#beupdatedPersonalFirstName" class="form-control" value="" name="firstName" required>
-                                                </div>
-
-                                                <div class="form-group col-md-6">
-                                                    <label>Soyad</label>
-                                                    <input type="text" id="beupdatedPersonalLastName" class="form-control" value="" name="lastName" required>
-                                                </div>
-
-                                                <div class="form-group col-md-6">
-                                                    <label>E-Posta</label>
-                                                    <input type="email" id="beupdatedPersonalEmail" class="form-control" value="" name="email">
-                                                </div>
-
-                                                <div class="form-group col-md-6">
-                                                    <label>Telefon</label>
-                                                    <input type="tel" id="beupdatedPersonalPhone" class="form-control" name="phone" value="" required>
-                                                </div>
-                                                <div class="form-group col-md-12">
-                                                    <label>Kullanıcı</label>
-                                                    <select class="form-control" id="personalControlUserId" name="userID">
-                                                        @foreach (var user in Model.UserList)
-                                                        {
-                                                            <option value="@user.Id">@user.Username</option>
-                                                        }
-                                                    </select>
-                                                </div>
-
-                                                <div class="form-group col-md-12">
-                                                    <label>Adres</label>
-                                                    <textarea id="beupdatedPersonalAdress" class="form-control cp-anc-ta" name="adress" rows="4"></textarea>
-                                                </div>
-
-
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="modal-footer border-tn pr-25">
-
-                                        <button type="button" class="btn btn-danger light boradi-4" data-dismiss="modal"> Vazgeç </button>
-
-                                        <button class="btn btn-primary boradi-4 btn-personal-ekle" type="submit">Ekle</button>
-                                    </div>
-                                </form>
-
-                            </div>
-                        </div>
-                    </div>
                 }
-
             </div>
             <div class="card-body">
                 @if (TempData["PersonalSuccessResult"] != null)
@@ -185,7 +114,7 @@
                                                 </button>
                                                 <div class="dropdown-menu dropdown-menu-right border py-0">
                                                     <button type="button" class="cp-new-add" data-toggle="modal" data-target="#modalcreation"> Araç Atama </button>
-                                                    <button type="button" class="cp-new-add updatePersonal" value="@personal.Id"> Düzenle </button>
+                                                    <button type="button" class="cp-new-add updatePersonal" value="@personal.Id"  data-target="#addPersonal"> Düzenle </button>
                                                     <button type="button" class="cp-new-add">Sil</button>
                                                 </div>
                                             </div>
@@ -201,6 +130,80 @@
         </div>
     </div>
 </div>
+
+@if (User.IsInRole("Koneks Admin"))
+{
+    <div id="addPersonal" class="modal fade" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog cp-modal-dialog" role="document">
+            <div class="modal-content boradi-4">
+                <form method="post">
+                    @Html.AntiForgeryToken()
+
+
+                    <input type="hidden" value="0" id="beupdatedPersonalId" name="id" />
+                    <div class="modal-header">
+                        <h4 class="modal-title"> <strong>Yeni Personel Ekle</strong> </h4>
+                        <button type="button" class="close" data-dismiss="modal">
+                            <span>×</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body cp-anc-modal-body">
+                        <div class="container">
+                            <div class="form-row">
+
+                                <div class="form-group col-md-6">
+                                    <label>Ad</label>
+                                    <input type="text" id="#beupdatedPersonalFirstName" class="form-control" value="" name="firstName" required>
+                                </div>
+
+                                <div class="form-group col-md-6">
+                                    <label>Soyad</label>
+                                    <input type="text" id="beupdatedPersonalLastName" class="form-control" value="" name="lastName" required>
+                                </div>
+
+                                <div class="form-group col-md-6">
+                                    <label>E-Posta</label>
+                                    <input type="email" id="beupdatedPersonalEmail" class="form-control" value="" name="email">
+                                </div>
+
+                                <div class="form-group col-md-6">
+                                    <label>Telefon</label>
+                                    <input type="tel" id="beupdatedPersonalPhone" class="form-control" name="phone" value="" required>
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label>Kullanıcı</label>
+                                    <select class="form-control" id="personalControlUserId" name="userID">
+                                        @foreach (var user in Model.UserList)
+                                        {
+                                            <option value="@user.Id">@user.Username</option>
+                                        }
+                                    </select>
+                                </div>
+
+                                <div class="form-group col-md-12">
+                                    <label>Adres</label>
+                                    <textarea id="beupdatedPersonalAdress" class="form-control cp-anc-ta" name="adress" rows="4"></textarea>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer border-tn pr-25">
+
+                        <button type="button" class="btn btn-danger light boradi-4" data-dismiss="modal"> Vazgeç </button>
+
+                        <button class="btn btn-primary boradi-4 btn-personal-ekle" type="submit">Ekle</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+}
+
 
 <!-- Araç Atama Modal -->
 @*<div class="modal fade" id="modalcreation" style="display: none;" aria-hidden="true">

@@ -105,6 +105,9 @@
 
     /* Peronal Management End */
 
+
+
+    /* Car Management Start */
     $("#btnAddNewCar").on("click",
         function () {
             $("#btnCarMethod").val("0");
