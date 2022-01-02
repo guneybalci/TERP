@@ -82,6 +82,22 @@ namespace TERP.WebUIMVC.Controllers
             return RedirectToAction("Index");
         }
 
+        [CustomAuthorize(Roles = "Koneks Admin")]
+        public ActionResult Remove(int id)
+        {
+            try
+            {
+                _carService.DeleteById(id);
+                TempData["CarControlSuccessResult"] = "Araç bilgisi silindi.";
+            }
+            catch
+            {
+                TempData["CarControlErrorResult"] = "Araç bilgisi silinemedi!";
+            }
+
+            return RedirectToAction("Index");
+        }
+
         public ActionResult GetCarById(int id)
         {
             var currentCar = _carService.GetCarWithCarTypeAndPersonalById(id);

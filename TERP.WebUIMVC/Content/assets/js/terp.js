@@ -112,18 +112,19 @@
         function () {
             $("#btnCarMethod").val("0");
             $("#carControlForm").trigger("reset");
+            $(".carAddText").text("Araç Ekle");
         });
 
     $(".btnCarControlEdit").on("click",
         function () {
             var updatedCarId = $(this).attr("value");
             $("#btnCarMethod").val(updatedCarId);
+            $(".carAddText").text("Araç Güncelle");
             $.ajax({
                 url: '/Car/GetCarById/' + updatedCarId,
                 type: 'GET',
                 dataType: 'json',
                 success: function (data) {
-                    console.log(data);
                     $("#carControlPlaque").val(data.Plaque);
                     $("#carControlPersonalID option[value='" + data.PersonalID + "']").prop('selected', true);
                     var status = 1;
@@ -136,7 +137,7 @@
                 error: function (err) {
                     console.log(err);
                 }
-            })
+            });
         });
 
 

@@ -96,7 +96,7 @@
                                     </div>
                                     <div class="dropdown-menu dropdown-menu-right p-0">
                                         <button type="button " class="cp-new-add btnCarControlEdit" data-toggle="modal" value="@car.Id" data-target="#modalGrid"> Düzenle </button>
-                                        <button type="button " class="cp-new-add">Sil</button>
+                                        <a href="/car/remove/@car.Id" class="btn cp-new-add" onclick="return confirm('Bu araç bilgisini silmek istediğinize emin misiniz?')">Sil</a>
                                     </div>
                                 </div>
                             </div>
@@ -117,7 +117,7 @@
                     @Html.AntiForgeryToken()
                     <input id="btnCarMethod" name="carID" value="0" type="hidden" />
                     <div class="modal-header ">
-                        <h4 class="modal-title"> <strong>Araç Ekle</strong> </h4>
+                        <h4 class="modal-title"> <strong class="carAddText">Araç Ekle</strong> </h4>
                         <button type="button" class="close" data-dismiss="modal">
                             <span>×</span>
                         </button>
@@ -176,7 +176,7 @@
                                 data-dismiss="modal">
                             Vazgeç
                         </button>
-                        <button type="submit" class="btn btn-primary boradi-4">Araç Ekle</button>
+                        <button type="submit" class="btn btn-primary boradi-4  carAddText">Araç Ekle</button>
                     </div>
                 </form>
 
