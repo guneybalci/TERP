@@ -29,7 +29,7 @@ namespace TERP.WebUIMVC.Controllers
         {
             ViewBag.Roles = _roleService.GetAll();
             var personals = _personalService.GetAllWithUserAndRole().OrderByDescending(x => x.Id)
-                .Where(x => x.IsDeleted == false).ToList();
+                .Where(x => x.User.IsDeleted == false).ToList();
             return View(personals);
         }
 
@@ -75,10 +75,14 @@ namespace TERP.WebUIMVC.Controllers
 
         public ActionResult Delete(int id)
         {
-            var deletedPersonal = _personalService.GetById(id);
-            deletedPersonal.IsDeleted = true;
-            _personalService.Update(deletedPersonal);
-            TempData["UserSuccessResult"] = "Personel başarıyla silindi";
+            //var deletedPersonal = _personalService.GetById(id);
+            //deletedPersonal.IsDeleted = true;
+            //_personalService.Update(deletedPersonal);
+            var deletedUser = _userService.GetById(id);
+            deletedUser.IsActive = false;
+            deletedUser.IsDeleted = true;
+            _userService.Update(deletedUser);
+            TempData["UserSuccessResult"] = "Kullanıcı başarıyla silindi";
             return RedirectToAction("Index");
         }
 

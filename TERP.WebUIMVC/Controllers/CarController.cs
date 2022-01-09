@@ -30,7 +30,7 @@ namespace TERP.WebUIMVC.Controllers
             return View(new CarViewModel()
             {
                 CarList = _carService.GetAllWithCarTypeAndPersonal(),
-                PersonalList = _personalService.GetAll(),
+                PersonalList = _personalService.GetAll().Where(x=>!x.IsDeleted).ToList(),
                 CarTypeList = _carTypeService.GetAll()
             });
         }

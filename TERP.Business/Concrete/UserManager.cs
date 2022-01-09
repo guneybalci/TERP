@@ -24,7 +24,12 @@ namespace TERP.Business.Concrete
 
         public List<User> GetAll()
         {
-           return _userDal.GetAll();
+            return _userDal.GetAll();
+        }
+
+        public User GetById(int id)
+        {
+            return _userDal.Get(x => x.Id == id);
         }
 
         public User GetUserByUsername(string username)

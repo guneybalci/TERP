@@ -26,8 +26,8 @@ namespace TERP.WebUIMVC.Controllers
         {
             return View(new PersonalViewModel()
             {
-                PersonalLists = _personalService.GetAll(),
-                UserList = _userService.GetAll()
+                PersonalLists = _personalService.GetAll().Where(x => !x.IsDeleted).ToList(),
+                UserList = _userService.GetAll().Where(x => (bool)!x.IsDeleted).ToList()
             });
         }
 
@@ -73,6 +73,7 @@ namespace TERP.WebUIMVC.Controllers
                         updatedPersonal.Phone = model.Phone;
                         updatedPersonal.Adress = model.Adress;
                         updatedPersonal.UserID = model.UserID;
+                        _personalService.Update(updatedPersonal);
                         TempData["PersonalSuccessResult"] = "Personel bilgisi güncellendi.";
                     }
                     catch
@@ -91,7 +92,9 @@ namespace TERP.WebUIMVC.Controllers
         {
             try
             {
-                _personalService.DeleteById(id);
+                var updatedPersonal = _personalService.GetById(id);
+                updatedPersonal.IsDeleted = true;
+                _personalService.Update(updatedPersonal);
                 TempData["PersonalSuccessResult"] = "Personel bilgisi silindi.";
             }
             catch
@@ -106,9 +109,18 @@ namespace TERP.WebUIMVC.Controllers
         [HttpGet]
         public ActionResult GetPersonalById(int id)
         {
-            var currentPersonalId = _personalService.GetById(id);
-            return Json(currentPersonalId, JsonRequestBehavior.AllowGet);
-
+            var currentPersonal = _personalService.GetById(id);
+            UpdatePersonalViewModel updatePersonalViewModel = new UpdatePersonalViewModel()
+            {
+                Id = currentPersonal.Id,
+                Adress = currentPersonal.Adress,
+                Email = currentPersonal.Email,
+                FirstName = currentPersonal.FirstName,
+                LastName = currentPersonal.LastName,
+                Phone = currentPersonal.Phone,
+                UserID = currentPersonal.UserID
+            };
+            return Json(updatePersonalViewModel, JsonRequestBehavior.AllowGet);
         }
     }
 }

@@ -15,6 +15,8 @@ namespace TERP.Business.Abstract
 
         List<User> GetAll();
 
+        User GetById(int id);
+
         User GetUserByUsername(string username);
 
         User GetByPersonalId(int id);

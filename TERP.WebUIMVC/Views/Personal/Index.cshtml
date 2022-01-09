@@ -114,8 +114,8 @@
                                                 </button>
                                                 <div class="dropdown-menu dropdown-menu-right border py-0">
                                                     <button type="button" class="cp-new-add" data-toggle="modal" data-target="#modalcreation"> Araç Atama </button>
-                                                    <button type="button" class="cp-new-add updatePersonal" value="@personal.Id"  data-target="#addPersonal"> Düzenle </button>
-                                                    <button type="button" class="cp-new-add">Sil</button>
+                                                    <button type="button" class="cp-new-add updatePersonal" value="@personal.Id" data-target="#addPersonal"> Düzenle </button>
+                                                    <a href="/personal/remove/@personal.Id" class="btn cp-new-add" onclick="return confirm('Bu personel bilgisini silmek istediğinize emin misiniz?')">Sil</a>
                                                 </div>
                                             </div>
                                         </td>
@@ -154,7 +154,7 @@
 
                                 <div class="form-group col-md-6">
                                     <label>Ad</label>
-                                    <input type="text" id="#beupdatedPersonalFirstName" class="form-control" value="" name="firstName" required>
+                                    <input type="text" id="beupdatedPersonalFirstName" class="form-control" value="" name="firstName" required>
                                 </div>
 
                                 <div class="form-group col-md-6">

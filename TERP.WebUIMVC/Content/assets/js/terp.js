@@ -93,13 +93,14 @@
                     $("#beupdatedPersonalEmail").val(data.Email);
                     $("#beupdatedPersonalPhone").val(data.Phone);
                     $("#beupdatedPersonalAdress").val(data.Adress);
+                    $("#personalControlUserId option[value='" + data.UserID + "']").prop('selected', true);
                     $(".btn-personal-ekle").text("Güncelle");
                     $("#addPersonal").modal();
                 },
-                error: function (err) {
+                error: function(err) {
                     console.log(err);
                 }
-            })
+            });
         });
 
 
