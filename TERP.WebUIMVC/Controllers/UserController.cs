@@ -12,6 +12,7 @@ using TERP.WebUIMVC.Models;
 
 namespace TERP.WebUIMVC.Controllers
 {
+    [CustomAuthorize(Roles = ("Koneks Admin"))]
     public class UserController : BaseController
     {
         private IUserService _userService;
@@ -28,9 +29,9 @@ namespace TERP.WebUIMVC.Controllers
         public ActionResult Index()
         {
             ViewBag.Roles = _roleService.GetAll();
-            var personals = _personalService.GetAllWithUserAndRole().OrderByDescending(x => x.Id)
-                .Where(x => x.User.IsDeleted == false).ToList();
-            return View(personals);
+
+            var userList = _userService.GetAll().Where(x => !x.IsDeleted).ToList();
+            return View(userList);
         }
 
         [CustomAuthorize(Roles = "Koneks Admin")]
@@ -49,16 +50,9 @@ namespace TERP.WebUIMVC.Controllers
                 TempData["UserErrorResult"] = "Şifreler birbiri ile eşleşmemektedir.!";
                 return View("Add", new UserViewModel { AddUserViewModel = model, Roles = GetAllRoles() });
             }
-
-            _personalService.Add(new Personal()
+            if (_userService.GetUserByUsername(model.Username) == null)
             {
-                FirstName = model.Name,
-                LastName = model.Lastname,
-                Adress = model.Adress,
-                Email = model.Email,
-                IsDeleted = false,
-                Phone = model.Phone,
-                User = new User()
+                _userService.Add(new User()
                 {
                     Username = model.Username,
                     Password = model.Password,
@@ -66,23 +60,26 @@ namespace TERP.WebUIMVC.Controllers
                     IsDeleted = false,
                     RoleID = model.RoleID,
                 }
-            });
+                  );
+                TempData["UserSuccessResult"] = "Yeni kullanıcı oluşturuldu.";
+            }
+            else
+            {
+                TempData["UserErrorResult"] = "Böyle bir kullanıcı adı zaten daha önce kayıt yapılmış. Farklı bir kullanıcı adı giriniz!";
 
-            TempData["UserSuccessResult"] = "Yeni kullanıcı oluşturuldu.";
+            }
+
+
 
             return RedirectToAction("Index");
         }
 
         public ActionResult Delete(int id)
         {
-            //var deletedPersonal = _personalService.GetById(id);
-            //deletedPersonal.IsDeleted = true;
-            //_personalService.Update(deletedPersonal);
             var deletedUser = _userService.GetById(id);
-            deletedUser.IsActive = false;
             deletedUser.IsDeleted = true;
             _userService.Update(deletedUser);
-            TempData["UserSuccessResult"] = "Kullanıcı başarıyla silindi";
+            TempData["UserSuccessResult"] = "Kullanıcı başarıyla silindi.";
             return RedirectToAction("Index");
         }
 
@@ -92,37 +89,51 @@ namespace TERP.WebUIMVC.Controllers
         }
 
         [HttpGet]
-        public ActionResult GetPersonalByIdWithUserAndRole(int id)
+        public ActionResult GetUserById(int id)
         {
-            var currentPersonal = _personalService.GetAllWithUserAndRole().Select(x => new
+            var currentUser = _userService.GetAll().Select(x => new
             {
                 Id = x.Id,
-                Email = x.Email,
-                Phone = x.Phone,
-                Adress = x.Adress,
-                FirstName = x.FirstName,
-                LastName = x.LastName,
-                UserName = x.User.Username,
-                RoleId = x.User.RoleID,
+                UserName = x.Username,
+                RoleId = x.RoleID,
             }).FirstOrDefault(x => x.Id == id);
-            return Json(currentPersonal, JsonRequestBehavior.AllowGet);
+            return Json(currentUser, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
-        public ActionResult Update(UpdatePersonalUser model)
+        public ActionResult Update(UpdateUser model)
         {
-            var updatedPersonal = _personalService.GetById(model.Id);
-            updatedPersonal.FirstName = model.Name;
-            updatedPersonal.LastName = model.Lastname;
-            updatedPersonal.Email = model.Email;
-            updatedPersonal.Phone = model.Phone;
-            updatedPersonal.Adress = model.Adress;
-            _personalService.Update(updatedPersonal);
-            var updatedUser = _userService.GetByPersonalId(model.Id);
-            updatedUser.RoleID = model.RoleID;
-            updatedUser.Username = model.Username;
-            _userService.Update(updatedUser);
-            TempData["UserSuccessResult"] = "Personel bilgileri güncellendi";
+            var updatedUser = _userService.GetById(model.Id);
+            if (model.Username != updatedUser.Username && _userService.GetUserByUsername(model.Username) != null)
+            {
+                TempData["UserErrorResult"] = "Böyle bir kullanıcı adı zaten daha önce kayıt yapılmış. Farklı bir kullanıcı adı giriniz!";
+            }
+            else
+            {
+                updatedUser.RoleID = model.RoleID;
+                updatedUser.Username = model.Username;
+                _userService.Update(updatedUser);
+                TempData["UserSuccessResult"] = "Personel bilgileri güncellendi";
+            }
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public ActionResult ChangeStatus(int id)
+        {
+            var changedUserStatus = _userService.GetById(id);
+            if (changedUserStatus != null)
+                changedUserStatus.IsActive = !changedUserStatus.IsActive;
+            try
+            {
+                _userService.Update(changedUserStatus);
+                TempData["UserSuccessResult"] = "Kullanıcı durumu güncellendi.";
+            }
+            catch
+            {
+                TempData["UserErrorResult"] = "Kullanıcı durumu güncellenemedi!";
+            }
+
             return RedirectToAction("Index");
         }
     }

@@ -75,6 +75,12 @@ namespace TERP.WebUIMVC
             );
 
             routes.MapRoute(
+               name: "ChangePasswordByUsername",
+               url: "sifre-degistir/{username}",
+               defaults: new { controller = "Login", action = "ChangePasswordByUsername" }
+           );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }

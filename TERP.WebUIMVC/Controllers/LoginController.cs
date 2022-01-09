@@ -37,8 +37,16 @@ namespace TERP.WebUIMVC.Controllers
                 var user = _userService.GetUserByUsernameAndPassword(model.Username, model.Password);
                 if (user != null)
                 {
-                    FormsAuthentication.SetAuthCookie(model.Username, false);
-                    return RedirectPermanent("/");
+                    if (!user.IsDeleted && user.IsActive)
+                    {
+                        FormsAuthentication.SetAuthCookie(model.Username, false);
+                        return RedirectPermanent("/");
+                    }
+                    else
+                    {
+                        ViewBag.LoginError = "Kullanıcı yetkiniz bulunamadı. Yöneticinizle iletişim kurunuz.";
+                        return View(model);
+                    }
                 }
                 else
                 {
@@ -81,6 +89,42 @@ namespace TERP.WebUIMVC.Controllers
                 FormsAuthentication.SignOut();
                 _userService.Update(user);
                 return RedirectToAction("Index");
+            }
+            return View();
+        }
+
+        [CustomAuthorize(Roles = ("Koneks Admin"))]
+        public ActionResult ChangePasswordByUsername(string username)
+        {
+            if (_userService.GetUserByUsername(username) != null)
+            {
+                ViewBag.Username = username;
+                return View("ChangePassword");
+            }
+            else
+            {
+                return RedirectToAction("Index", "User");
+            }
+        }
+
+        [CustomAuthorize(Roles = ("Koneks Admin"))]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ChangePasswordByUsername(ChangePasswordByUsernameViewModel model)
+        {
+            var user = _userService.GetUserByUsername(model.Username);
+            if (model.Password != model.ConfirmPassword)
+            {
+                TempData["UserErrorResult"] = "Şifreler birbiri ile eşleşmemektedir! Tekrar deneyiniz.";
+                return RedirectToAction("Index", "User");
+            }
+
+            if (ModelState.IsValid)
+            {
+                user.Password = model.Password;
+                _userService.Update(user);
+                TempData["UserSuccessResult"] = "Kullanıcı şifresi başarıyla güncellendi.";
+                return RedirectToAction("Index", "User");
             }
             return View();
         }

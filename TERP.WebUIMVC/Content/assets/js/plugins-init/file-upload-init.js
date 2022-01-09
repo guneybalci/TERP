@@ -8,21 +8,21 @@ function readURL(input) {
             var reader = new FileReader();
             reader.onload = function (e) {
                 if (extension == 'pdf'){
-                	$(input).closest('.fileUpload').find(".icon").attr('src','../assets/images/fileupload/file-upload-pdf.svg');
+                	$(input).closest('.fileUpload').find(".icon").attr('src','/content/assets/images/fileupload/file-upload-pdf.svg');
                 }
                 else if (extension == 'docx'){
-                	$(input).closest('.fileUpload').find(".icon").attr('src','../assets/images/fileupload/file-upload-word.svg');
+                	$(input).closest('.fileUpload').find(".icon").attr('src','/content/assets/images/fileupload/file-upload-word.svg');
                 }
                 else if (extension == 'rtf'){
-                	$(input).closest('.fileUpload').find(".icon").attr('src','../assets/images/fileupload/file-upload-rtf.svg');
+                	$(input).closest('.fileUpload').find(".icon").attr('src','/content/assets/images/fileupload/file-upload-rtf.svg');
                 }
-                else if (extension == 'png'){ $(input).closest('.fileUpload').find(".icon").attr('src','../assets/images/fileupload/file-upload-png.svg'); 
+                else if (extension == 'png'){ $(input).closest('.fileUpload').find(".icon").attr('src','/content/assets/images/fileupload/file-upload-png.svg'); 
                 }
                 else if (extension == 'jpg' || extension == 'jpeg'){
-                	$(input).closest('.fileUpload').find(".icon").attr('src','../assets/images/fileupload/file-upload-jpg.svg');
+                	$(input).closest('.fileUpload').find(".icon").attr('src','/content/assets/images/fileupload/file-upload-jpg.svg');
                 }
               else if (extension == 'txt'){
-                	$(input).closest('.fileUpload').find(".icon").attr('src','../assets/images/fileupload/file-upload-txt.svg');
+                	$(input).closest('.fileUpload').find(".icon").attr('src','/content/assets/images/fileupload/file-upload-txt.svg');
                 }
                 else {
                 	//console.log('here=>'+$(input).closest('.uploadDoc').length);
@@ -56,7 +56,7 @@ $(document).ready(function(){
    });
 
    $(".btn-new").on('click',function(){
-        $("#uploader").append('<div class="row uploadDoc"><div class="col-sm-3"><div class="fileUpload btn btn-orange"> <img src="../assets/images/fileupload/file-upload-empty.svg" class="icon"><span class="upl" id="upload">Dosya Ekle</span><input type="file" class="upload up" id="up" onchange="readURL(this);" /></div></div><div class="col-sm-9">	<div class="docErr col-sm-12">Lütfen geçerli dosya yükleyin!</div><input type="text" class="form-control addNote" name="" placeholder="Buradan notunuzu ekleyebilirsiniz.."><a class="btn-check"><i class="fa fa-times"></i> Dosyayı Sil</a></div></div>');
+        $("#uploader").append('<div class="row uploadDoc"><div class="col-sm-3"><div class="fileUpload btn btn-orange"> <img src="~/content/assets/images/fileupload/file-upload-empty.svg" class="icon"><span class="upl" id="upload">Dosya Ekle</span><input type="file" class="upload up" id="up" onchange="readURL(this);" /></div></div><div class="col-sm-9">	<div class="docErr col-sm-12">Lütfen geçerli dosya yükleyin!</div><input type="text" class="form-control addNote" name="" placeholder="Buradan notunuzu ekleyebilirsiniz.."><a class="btn-check"><i class="fa fa-times"></i> Dosyayı Sil</a></div></div>');
    });
     
    $(document).on("click", "a.btn-check" , function() {

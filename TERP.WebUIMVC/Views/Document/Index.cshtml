@@ -19,7 +19,15 @@
 <!-- row -->
 <div class="row">
     <div class="col-lg-12">
-        <div class="card docs-card">
+        <div class="card docs-card" style="padding-top:25px">
+            @if (TempData["DocumentSuccessResult"] != null)
+            {
+                <div class="alert alert-success">@TempData["DocumentSuccessResult"]</div>
+            }
+            @if (TempData["DocumentErrorResult"] != null)
+            {
+                <div class="alert alert-danger">@TempData["DocumentErrorResult"]</div>
+            }
             <div class="card-header docs-header">
                 <h4 class="card-title docs-add-title">Evrak Ekleme</h4>
                 <div class="dropdown custom-dropdown mb-0 mt-3 mt-sm-0">
@@ -28,91 +36,172 @@
                         <i class="fa fa-caret-down text-primary ml-3" aria-hidden="true"></i>
                     </div>
                     <div class="dropdown-menu dropdown-menu-right">
-                        <button type="button " class="cp-new-add" data-toggle="modal" data-target="#modalGrid3">Yeni Evrak Ekle</button>
+                        <button type="button" class="cp-new-add" data-toggle="modal" data-target="#modalGrid3">Yeni Evrak Ekle</button>
                     </div>
                 </div>
+
+
+
+                @if (User.IsInRole("Koneks Admin") || User.IsInRole("Koneks Muhasebe"))
+                {
+
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-responsive-md">
+                                <thead>
+                                    <tr>
+                                        <th class="docs-th">PLAKA NO.</th>
+                                        <th class="docs-th">AD SOYAD</th>
+                                        <th class="docs-th">E-POSTA</th>
+                                        <th class="docs-th">TARİH</th>
+                                        <th class="docs-th">EVRAK DURUMU</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>42 AHE 87</td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <span class="w-space-no">Yıldırım Kılıç</span>
+                                            </div>
+                                        </td>
+                                        <td>example@example.com</td>
+                                        <td>01 August 2020</td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <span class="badge light badge-success">Eklendi</span>
+
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex">
+                                                <a href="#" class="btn btn-primary shadow btn-xs sharp mr-2 boradi-4 boradi-4"><i class="fa fa-pencil"></i></a>
+                                                <a href="#" class="btn btn-danger shadow btn-xs sharp boradi-4 boradi-4"><i class="fa fa-trash"></i></a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>42 AHE 87</td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <span class="w-space-no">Yıldırım Kılıç</span>
+                                            </div>
+                                        </td>
+                                        <td>example@example.com</td>
+                                        <td>01 August 2020</td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <span class="badge light badge-danger">Eklenmedi</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex">
+                                                <a href="#" class="btn btn-primary shadow btn-xs sharp mr-2 boradi-4"><i class="fa fa-pencil"></i></a>
+                                                <a href="#" class="btn btn-danger shadow btn-xs sharp boradi-4"><i class="fa fa-trash"></i></a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>42 AHE 87</td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <span class="w-space-no">Yıldırım Kılıç</span>
+                                            </div>
+                                        </td>
+                                        <td>example@example.com</td>
+                                        <td>01 August 2020</td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <span class="badge light badge-warning">Bekleniyor</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex">
+                                                <a href="#" class="btn btn-primary shadow btn-xs sharp mr-2 boradi-4"><i class="fa fa-pencil"></i></a>
+                                                <a href="#" class="btn btn-danger shadow btn-xs sharp boradi-4"><i class="fa fa-trash"></i></a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                }
             </div>
+        </div>
+    </div>
 
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-responsive-md">
-                        <thead>
-                            <tr>
-                                <th class="docs-th">PLAKA NO.</th>
-                                <th class="docs-th">AD SOYAD</th>
-                                <th class="docs-th">E-POSTA</th>
-                                <th class="docs-th">TARİH</th>
-                                <th class="docs-th">EVRAK DURUMU</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>42 AHE 87</td>
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <span class="w-space-no">Yıldırım Kılıç</span>
-                                    </div>
-                                </td>
-                                <td>example@example.com</td>
-                                <td>01 August 2020</td>
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <span class="badge light badge-success">Eklendi</span>
-
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="d-flex">
-                                        <a href="#" class="btn btn-primary shadow btn-xs sharp mr-2 boradi-4 boradi-4"><i class="fa fa-pencil"></i></a>
-                                        <a href="#" class="btn btn-danger shadow btn-xs sharp boradi-4 boradi-4"><i class="fa fa-trash"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>42 AHE 87</td>
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <span class="w-space-no">Yıldırım Kılıç</span>
-                                    </div>
-                                </td>
-                                <td>example@example.com</td>
-                                <td>01 August 2020</td>
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <span class="badge light badge-danger">Eklenmedi</span>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="d-flex">
-                                        <a href="#" class="btn btn-primary shadow btn-xs sharp mr-2 boradi-4"><i class="fa fa-pencil"></i></a>
-                                        <a href="#" class="btn btn-danger shadow btn-xs sharp boradi-4"><i class="fa fa-trash"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>42 AHE 87</td>
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <span class="w-space-no">Yıldırım Kılıç</span>
-                                    </div>
-                                </td>
-                                <td>example@example.com</td>
-                                <td>01 August 2020</td>
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <span class="badge light badge-warning">Bekleniyor</span>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="d-flex">
-                                        <a href="#" class="btn btn-primary shadow btn-xs sharp mr-2 boradi-4"><i class="fa fa-pencil"></i></a>
-                                        <a href="#" class="btn btn-danger shadow btn-xs sharp boradi-4"><i class="fa fa-trash"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+    <div class="modal fade" id="modalGrid3" style="display: none" aria-hidden="true">
+        <div class="modal-dialog cp-modal-dialog" role="document">
+            <div class="modal-content boradi-4">
+                <div class="modal-header">
+                    <h4 class="modal-title"><strong>Yeni Evrak Ekle</strong></h4>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span>×</span>
+                    </button>
                 </div>
+                <div class="modal-body cp-anc-modal-body">
+                    <div class="container">
+                        <form method="post" enctype="multipart/form-data">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label>Araç Plaka:</label>
+                                    <input type="text" class="form-control" placeholder="Araç Plakanız" readonly value="@ViewBag.Plaque" />
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <div class="form-group">
+                                        <label>Sürücü:</label>
+                                        <input type="text" readonly="readonly" autocomplete="off" class="form-control" id="val-username1"
+                                               name="username" required value="@Context.User.Identity.Name">
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <div class="file-container">
+                                        <div class="file-row it">
+                                            <div class="col-sm-offset-1 col-sm-10" id="one">
+                                                <p class="itp">
+                                                    Lütfen belgeleri yalnızca 'pdf', 'docx', 'rtf', 'jpg', 'jpeg', 'png' ve 'metin' biçiminde yükleyin.
+                                                </p><br>
+                                                <div class="file-row">
+                                                    <div class="col-sm-offset-4 col-sm-4 form-group">
+                                                    </div><!--form-group-->
+                                                </div><!--row-->
+                                                <div id="uploader">
+                                                    <div class="row uploadDoc">
+                                                        <div class="col-sm-3">
+                                                            <div class="fileUpload btn btn-orange">
+                                                                <img src="/Content/assets/images/fileupload/file-upload-empty.svg" class="icon">
+                                                                <span class="upl" id="upload">Dosya Ekle</span>
+                                                                <input type="file" class="upload up" id="up" name="file" required onchange="readURL(this);" />
+                                                            </div><!-- btn-orange -->
+                                                        </div><!-- col-3 -->
+                                                        <div class="col-sm-9">
+                                                            <div class="docErr col-sm-12">Lütfen geçerli dosya yükleyin!</div><!--error-->
+
+                                                            <input type="text" class="form-control addNote" name="fileDescription" required placeholder="Kısa açıklama">
+                                                            <div class="alert alert-danger alert-dismissible fade show fileUploadFind">
+                                                                <button type="button" class="close h-100" data-dismiss="alert" aria-label="Close">
+                                                                    <span><i class="mdi mdi-close"></i></span>
+                                                                </button>
+                                                                <strong>Hay Aksi!</strong> En az bir belge yüklemelisiniz.
+                                                            </div>
+
+                                                        </div><!--col-8-->
+                                                    </div><!--row-->
+                                                </div><!--uploader-->
+                                            </div><!--one-->
+                                        </div><!-- row -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer border-tn pr-25">
+                                <button type="reset" class="btn btn-light boradi-4" data-dismiss="modal">Vazgeç</button>
+                                <button type="submit" class="btn btn-primary boradi-4">Tamamlandı</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>

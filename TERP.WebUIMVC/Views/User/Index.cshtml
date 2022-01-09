@@ -1,6 +1,7 @@
-﻿@model List<TERP.Entities.Concrete.Personal>
+﻿@model List<TERP.Entities.Concrete.User>
 @{
     ViewBag.Title = "Kullanıcı Listesi";
+    var roleList = (List<TERP.Entities.Concrete.Role>)ViewBag.Roles;
 }
 <div class="page-titles">
     <h4>Personel Yönetimi</h4>
@@ -33,31 +34,16 @@
                             <tr>
                                 <th>Rol</th>
                                 <th>Kullanıcı Adı</th>
-                                <th>Ad Soyad</th>
-                                <th>E-Posta</th>
-                                <th>Telefon</th>
-                                <th>Adres</th>
+                                <th>Durum</th>
                             </tr>
                         </thead>
                         <tbody id="customers">
                             @foreach (var item in Model)
                             {
                                 <tr class="btn-reveal-trigger">
-                                    <td class="py-2">@item.User.Role.Name</td>
-                                    <td class="py-2">@item.User.Username</td>
-                                    <td class="py-3">
-                                        <a href="#">
-                                            <div class="media d-flex align-items-center">
-                                                <div class="media-body">
-                                                    <h5 class="mb-0 fs--1">@($"{item.FirstName} {item.LastName}")</h5>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </td>
-
-                                    <td class="py-2"><a href="mailto:@item.Email">@item.Email</a></td>
-                                    <td class="py-2"><a href="tel:@item.Phone">@item.Phone</a></td>
-                                    <td class="py-2 wspace-no">@item.Adress</td>
+                                    <td class="py-2">@roleList.FirstOrDefault(x => x.Id == item.RoleID).Name</td>
+                                    <td class="py-2">@item.Username</td>
+                                    <td class="py-2 @(item.IsActive?"text-success":"text-danger")">@(item.IsActive ? "Aktif" : "Pasif")</td>
                                     <td class="py-2 text-right">
                                         <div class="dropdown">
                                             <button class="btn boradi-btn btn-primary tp-btn-light sharp" type="button" data-toggle="dropdown">
@@ -78,8 +64,10 @@
                                                 </span>
                                             </button>
                                             <div class="dropdown-menu dropdown-menu-right border py-0">
+                                                <a href="/user/changestatus/@item.Id" class="btn cp-new-add" onclick="return confirm('Bu kullanıcının durumunu @(item.IsActive?"pasif":"aktif") yapmak istediğinize emin misiniz?')">@(item.IsActive?"Pasif Yap":"Aktif Yap")</a>
                                                 <button type="button" class="cp-new-add updateUser" value="@item.Id">Düzenle</button>
-                                                <a href="/user/delete/@item.UserID" class="btn cp-new-add" onclick="return confirm('Bu personeli silmek istediğinize emin misiniz?')">Sil</a>
+                                                <a href="/sifre-degistir/@item.Username" class="btn cp-new-add">Şifre Güncelle</a>
+                                                <a href="/user/delete/@item.Id" class="btn cp-new-add" onclick="return confirm('Bu kullanıcıyı silmek istediğinize emin misiniz?')">Sil</a>
                                             </div>
                                         </div>
                                     </td>
@@ -118,28 +106,6 @@
                             <div class="form-group col-md-6">
                                 <label class="" for="">Kullanıcı Adı </label>
                                 <input type="text" class="form-control" id="updatedUsername" name="username" autocomplete="off" placeholder="Kullanıcı adı" />
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label class="" for="">Ad </label>
-                                <input type="text" class="form-control" id="updatedFirstName" name="name" autocomplete="off" placeholder="Ad" />
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label class="" for="">Soyad</label>
-                                <input type="text" class="form-control" id="updatedLastName" name="lastname" autocomplete="off" placeholder="Soyad" />
-                            </div>
-
-                            <div class="form-group col-md-6">
-                                <label>E-Posta</label>
-                                <input type="E-Posta" class="form-control" id="updatedEmail" name="email" value="yildirim@koneks.com" />
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label>Telefon</label>
-                                <input type="tel" id="updatedPhone" name="phone" class="form-control" value="0500 500 0000" required />
-                            </div>
-
-                            <div class="form-group col-md-12">
-                                <label>Adres</label>
-                                <textarea class="form-control cp-anc-ta" name="adress" rows="4" id="updatedAdress"></textarea>
                             </div>
                         </div>
                         <div class="modal-footer pr-25 border-tn">
