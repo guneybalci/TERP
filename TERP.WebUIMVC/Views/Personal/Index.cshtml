@@ -53,7 +53,6 @@
                                 <th class="pl-5 width200">
                                     Adres
                                 </th>
-                                <th>Araç Plaka</th>
                                 @*<th></th>*@
                             </tr>
                         </thead>
@@ -87,7 +86,6 @@
                                     </td>
                                     <td class="py-2"> <a href="javascript:void(0)">@personal.Phone</a></td>
                                     <td class="py-2 pl-5 wspace-no">@personal.Adress</td>
-                                    <td class="py-2">42 AHE 87</td>
 
                                     @if (User.IsInRole("Koneks Admin"))
                                     {
@@ -113,7 +111,6 @@
                                                     </span>
                                                 </button>
                                                 <div class="dropdown-menu dropdown-menu-right border py-0">
-                                                    <button type="button" class="cp-new-add" data-toggle="modal" data-target="#modalcreation"> Araç Atama </button>
                                                     <button type="button" class="cp-new-add updatePersonal" value="@personal.Id" data-target="#addPersonal"> Düzenle </button>
                                                     <a href="/personal/remove/@personal.Id" class="btn cp-new-add" onclick="return confirm('Bu personel bilgisini silmek istediğinize emin misiniz?')">Sil</a>
                                                 </div>
@@ -203,48 +200,6 @@
         </div>
     </div>
 }
-
-
-<!-- Araç Atama Modal -->
-@*<div class="modal fade" id="modalcreation" style="display: none;" aria-hidden="true">
-        <div class="modal-dialog cp-modal-dialog" role="document">
-            <div class="modal-content boradi-4">
-                <div class="modal-header">
-                    <h4 class="modal-title"> <strong>Personel Düzenle</strong> </h4>
-                    <button type="button" class="close" data-dismiss="modal">
-                        <span>×</span>
-                    </button>
-                </div>
-                <div class="modal-body cp-anc-modal-body">
-                    <div class="container">
-                        <form method="post" action="">
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label>Atanmış Plaka:</label>
-                                    <input type="text" class="form-control" placeholder="42 AHE 87" required name="eskiplaka">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label>Atanacak Plaka:</label>
-                                    <input type="text" class="form-control" required name="yeniplaka">
-                                </div>
-
-                            </div>
-
-                            <div class="modal-footer border-tn pr-0">
-                                <button type="button" class="btn btn-danger light boradi-4"
-                                        data-dismiss="modal">
-                                    Vazgeç
-                                </button>
-                                <button type="submit" class="btn btn-primary boradi-4">Güncelle</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>*@
-
 
 @*<div class="modal fade" id="modalGrid" style="display: none;" aria-hidden="true">
         <div class="modal-dialog cp-modal-dialog" role="document">
