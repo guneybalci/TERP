@@ -39,95 +39,93 @@
                         <button type="button" class="cp-new-add" data-toggle="modal" data-target="#modalGrid3">Yeni Evrak Ekle</button>
                     </div>
                 </div>
-
-
-
-                @if (User.IsInRole("Koneks Admin") || User.IsInRole("Koneks Muhasebe"))
-                {
-
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-responsive-md">
-                                <thead>
-                                    <tr>
-                                        <th class="docs-th">PLAKA NO.</th>
-                                        <th class="docs-th">AD SOYAD</th>
-                                        <th class="docs-th">E-POSTA</th>
-                                        <th class="docs-th">TARİH</th>
-                                        <th class="docs-th">EVRAK DURUMU</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>42 AHE 87</td>
-                                        <td>
-                                            <div class="d-flex align-items-center">
-                                                <span class="w-space-no">Yıldırım Kılıç</span>
-                                            </div>
-                                        </td>
-                                        <td>example@example.com</td>
-                                        <td>01 August 2020</td>
-                                        <td>
-                                            <div class="d-flex align-items-center">
-                                                <span class="badge light badge-success">Eklendi</span>
-
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="d-flex">
-                                                <a href="#" class="btn btn-primary shadow btn-xs sharp mr-2 boradi-4 boradi-4"><i class="fa fa-pencil"></i></a>
-                                                <a href="#" class="btn btn-danger shadow btn-xs sharp boradi-4 boradi-4"><i class="fa fa-trash"></i></a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>42 AHE 87</td>
-                                        <td>
-                                            <div class="d-flex align-items-center">
-                                                <span class="w-space-no">Yıldırım Kılıç</span>
-                                            </div>
-                                        </td>
-                                        <td>example@example.com</td>
-                                        <td>01 August 2020</td>
-                                        <td>
-                                            <div class="d-flex align-items-center">
-                                                <span class="badge light badge-danger">Eklenmedi</span>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="d-flex">
-                                                <a href="#" class="btn btn-primary shadow btn-xs sharp mr-2 boradi-4"><i class="fa fa-pencil"></i></a>
-                                                <a href="#" class="btn btn-danger shadow btn-xs sharp boradi-4"><i class="fa fa-trash"></i></a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>42 AHE 87</td>
-                                        <td>
-                                            <div class="d-flex align-items-center">
-                                                <span class="w-space-no">Yıldırım Kılıç</span>
-                                            </div>
-                                        </td>
-                                        <td>example@example.com</td>
-                                        <td>01 August 2020</td>
-                                        <td>
-                                            <div class="d-flex align-items-center">
-                                                <span class="badge light badge-warning">Bekleniyor</span>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="d-flex">
-                                                <a href="#" class="btn btn-primary shadow btn-xs sharp mr-2 boradi-4"><i class="fa fa-pencil"></i></a>
-                                                <a href="#" class="btn btn-danger shadow btn-xs sharp boradi-4"><i class="fa fa-trash"></i></a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                }
             </div>
+
+            @if (User.IsInRole("Koneks Admin") || User.IsInRole("Koneks Muhasebe"))
+            {
+
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-responsive-md">
+                            <thead>
+                                <tr>
+                                    <th class="docs-th">PLAKA NO.</th>
+                                    <th class="docs-th">AD SOYAD</th>
+                                    <th class="docs-th">E-POSTA</th>
+                                    <th class="docs-th">TARİH</th>
+                                    <th class="docs-th">EVRAK DURUMU</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>42 AHE 87</td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <span class="w-space-no">Yıldırım Kılıç</span>
+                                        </div>
+                                    </td>
+                                    <td>example@example.com</td>
+                                    <td>01 August 2020</td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <span class="badge light badge-success">Eklendi</span>
+
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex">
+                                            <a href="#" class="btn btn-primary shadow btn-xs sharp mr-2 boradi-4 boradi-4"><i class="fa fa-pencil"></i></a>
+                                            <a href="#" class="btn btn-danger shadow btn-xs sharp boradi-4 boradi-4"><i class="fa fa-trash"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>42 AHE 87</td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <span class="w-space-no">Yıldırım Kılıç</span>
+                                        </div>
+                                    </td>
+                                    <td>example@example.com</td>
+                                    <td>01 August 2020</td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <span class="badge light badge-danger">Eklenmedi</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex">
+                                            <a href="#" class="btn btn-primary shadow btn-xs sharp mr-2 boradi-4"><i class="fa fa-pencil"></i></a>
+                                            <a href="#" class="btn btn-danger shadow btn-xs sharp boradi-4"><i class="fa fa-trash"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>42 AHE 87</td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <span class="w-space-no">Yıldırım Kılıç</span>
+                                        </div>
+                                    </td>
+                                    <td>example@example.com</td>
+                                    <td>01 August 2020</td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <span class="badge light badge-warning">Bekleniyor</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex">
+                                            <a href="#" class="btn btn-primary shadow btn-xs sharp mr-2 boradi-4"><i class="fa fa-pencil"></i></a>
+                                            <a href="#" class="btn btn-danger shadow btn-xs sharp boradi-4"><i class="fa fa-trash"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            }
         </div>
     </div>
 

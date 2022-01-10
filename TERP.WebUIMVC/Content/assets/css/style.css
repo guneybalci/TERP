@@ -26,6 +26,7 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
 @import url(../vendor/aos/css/aos.min.css);
 @import url(../vendor/perfect-scrollbar/css/perfect-scrollbar.css);
 @import url(../vendor/metismenu/css/metisMenu.min.css);
+@import url(../fonts/PT_Sans_Caption/PTSansCaption-Regular.ttf);
 body::-webkit-scrollbar {
   border-radius: 10px;
   height: 10px;
@@ -261,7 +262,7 @@ section {
 
 body {
     margin: 0;
-    font-family: 'Merriweather', serif;
+    font-family: "Roboto", sans-serif;
     font-size: 0.875rem;
     font-weight: 400;
     line-height: 1.5;

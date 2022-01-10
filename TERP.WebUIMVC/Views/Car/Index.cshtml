@@ -52,15 +52,15 @@
                         @foreach (var car in Model.CarList)
                         {
                             <div class="d-flex mb-3 border-bottom justify-content-between flex-wrap align-items-center">
-                                <div class="d-flex pb-3 align-items-center">
+                                <div class="d-flex pb-3 align-items-center min-width-250">
                                     <img src="/content/assets/images/card/mercedes-axor.png" alt=""
                                          class="mr-3 cp-br" width="130">
-                                    <div class="mr-3">
+                                    <div class="mr-3 d-flex flex-direction-column">
                                         <p class="fs-14 mb-1">Araç Plaka</p>
                                         <span class="text-black font-w500">@car.Plaque</span>
                                     </div>
                                 </div>
-                                <div class="mr-3 pb-3">
+                                <div class="mr-3 pb-3 min-width-200">
                                     <p class="fs-14 mb-1">Araç Statü</p>
                                     @if (car.Status)
                                     {
@@ -71,11 +71,11 @@
                                         <span class="text-black font-w500">Pasif</span>
                                     }
                                 </div>
-                                <div class="mr-3 pb-3">
+                                <div class="mr-3 pb-3 min-width-200">
                                     <p class="fs-14 mb-1">Araç Tipi</p>
                                     <span class="text-black font-w500">@car.CarType.Name.ToString()</span>
                                 </div>
-                                <div class="mr-3 pb-3">
+                                <div class="mr-3 pb-3 min-width-200">
                                     <p class="fs-14 mb-1">Araç Sürücü</p>
                                     <span class="text-black font-w500">@($"{car.Personal.FirstName} {car.Personal.LastName}")</span>
                                 </div>
