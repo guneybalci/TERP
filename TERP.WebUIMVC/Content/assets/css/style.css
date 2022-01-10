@@ -260,15 +260,15 @@ section {
 }
 
 body {
-  margin: 0;
-  font-family: "Roboto", sans-serif;
-  font-size: 0.875rem;
-  font-weight: 400;
-  line-height: 1.5;
-  /* color: #3f3f3f; */
-  color:#181818;
-  text-align: left;
-  background-color: #f9f9f9;
+    margin: 0;
+    font-family: 'Merriweather', serif;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.5;
+    /* color: #3f3f3f; */
+    color: #181818;
+    text-align: left;
+    background-color: #f9f9f9;
 }
 
 [tabindex="-1"]:focus:not(:focus-visible) {
