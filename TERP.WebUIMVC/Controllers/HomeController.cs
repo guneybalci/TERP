@@ -11,18 +11,13 @@ namespace TERP.WebUIMVC.Controllers
 {
     public class HomeController : BaseController
     {
-
-        private ICarService _carService;
-
         public HomeController()
         {
-            _carService = new CarManager();
+
         }
         public ActionResult Index()
         {
-            return View(new CarViewModel() { 
-                CarList = _carService.GetAllWithCarTypeAndPersonal(), 
-            });
+            return View();
         }
     }
 }

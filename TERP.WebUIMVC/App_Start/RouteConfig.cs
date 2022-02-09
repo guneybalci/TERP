@@ -69,6 +69,12 @@ namespace TERP.WebUIMVC
             );
 
             routes.MapRoute(
+                name: "LogOutPage",
+                url: "kullanici-cikis",
+                defaults: new { controller = "Login", action = "LogOut" }
+            );
+
+            routes.MapRoute(
                 name: "ChangePassword",
                 url: "sifre-degistir",
                 defaults: new { controller = "Login", action = "ChangePassword" }

@@ -62,6 +62,7 @@ namespace TERP.WebUIMVC.Controllers
         public ActionResult LogOut()
         {
             FormsAuthentication.SignOut();
+            
             return RedirectPermanent("/");
         }
 

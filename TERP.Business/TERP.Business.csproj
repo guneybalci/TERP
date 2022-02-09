@@ -45,6 +45,8 @@
     <Compile Include="Abstract\ICarTypeService.cs" />
     <Compile Include="Abstract\ICompanyService.cs" />
     <Compile Include="Abstract\IDocumentService.cs" />
+    <Compile Include="Abstract\ILogService.cs" />
+    <Compile Include="Abstract\INoteService.cs" />
     <Compile Include="Abstract\IPersonalService.cs" />
     <Compile Include="Abstract\IRoleService.cs" />
     <Compile Include="Abstract\IUserService.cs" />
@@ -52,6 +54,8 @@
     <Compile Include="Concrete\CarTypeManager.cs" />
     <Compile Include="Concrete\CompanyManager.cs" />
     <Compile Include="Concrete\DocumentManager.cs" />
+    <Compile Include="Concrete\LogManager.cs" />
+    <Compile Include="Concrete\NoteManager.cs" />
     <Compile Include="Concrete\PersonalManager.cs" />
     <Compile Include="Concrete\RoleManager.cs" />
     <Compile Include="Concrete\UserManager.cs" />

@@ -24,9 +24,24 @@ namespace TERP.Business.Concrete
             _documentDal.Add(document);
         }
 
+        public void Delete(Document document)
+        {
+            _documentDal.Delete(document);
+        }
+
         public List<Document> GetAll()
         {
             return _documentDal.GetAll();
+        }
+
+        public List<Document> GetAllWithPersonalAndCar()
+        {
+            return _documentDal.GetAllWithPersonalAndCar();
+        }
+
+        public List<Document> GetAllWithPersonalAndCarByPersonalId(int id)
+        {
+            return _documentDal.GetAllWithPersonalAndCarByPersonalId(id);
         }
 
         public Document GetById(int id)

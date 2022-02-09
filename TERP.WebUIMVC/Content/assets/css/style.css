@@ -19400,7 +19400,7 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
   height: calc(100vh - 195px);
 }
 .chatbox .contacts_body {
-  height: calc(100vh - 120px);
+  height: calc(100vh - 230px);
 }
 .chatbox .card-header {
   background: #f4f7ff;

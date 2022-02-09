@@ -1,4 +1,38 @@
 (function ($) {
+
+    /*Gets all notes*/
+    $.ajax({
+        url: '/note/GetAllNotes',
+        type: "GET",
+        responseType: "json",
+        success: function (data) {
+            for (var i = 0; i < data.length; i++) {
+                var newListItem = `
+                    <li class="active" id="note-${data[i].Id}">
+                        <div class="d-flex bd-highlight">
+                            <div class="user_info">
+                                <span>${data[i].Description}</span>
+                                <p>${data[i].CreatedDate}</p>
+                            </div>
+                            <div class="ml-auto">
+                                <button value="${data[i].Id}" id="btnRemoveNote" class="btn btn-danger btn-xs sharp boradi-4">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </li>
+                 `;
+                $("#noteList").append(newListItem);
+            }
+
+            $("#notesCount").text(data.length);
+        },
+        error: function (err) {
+            console.log(err);
+        }
+    });
+
+
     /* User Management Start */
     $(".updateUser").on("click",
         function () {
@@ -92,7 +126,7 @@
                     $(".btn-personal-ekle").text("Güncelle");
                     $("#addPersonal").modal();
                 },
-                error: function(err) {
+                error: function (err) {
                     console.log(err);
                 }
             });
@@ -135,6 +169,62 @@
                 }
             });
         });
+
+    /* Note */
+    $("#btnAddNote").on("click", function () {
+        $.noteText = $("#noteText").val();
+        $.ajax({
+            url: '/note/addNote',
+            type: "POST",
+            dataType: "json",
+            data: { description: $.noteText },
+            success: function (data) {
+                var newListItem = `
+                    <li class="active" id="note-${data.Id}">
+                        <div class="d-flex bd-highlight">
+                            <div class="user_info">
+                                <span>${data.Description}</span>
+                                <p>${data.CreatedDate}</p>
+                            </div>
+                            <div class="ml-auto">
+                                <button value="${data.Id}" id="btnRemoveNote" class="btn btn-danger btn-xs sharp boradi-4">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </li>
+                 `;
+                $("#noteList").append(newListItem);
+                $("#noteText").val("");
+                var nCount = parseInt($("#notesCount").text());
+                nCount = nCount + 1;
+                $("#notesCount").text(nCount);
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
+    });
+
+    $(document).on("click", "#btnRemoveNote", function () {
+        var currentNoteId = $(this).attr("value");
+        $.ajax({
+            url: '/Note/RemoveNoteById/' + currentNoteId,
+            type: 'GET',
+            dataType: 'text',
+            success: function (data) {
+                if (data === "success") {
+                    $("#note-" + currentNoteId).remove();
+                    var nCount = parseInt($("#notesCount").text());
+                    nCount = nCount - 1;
+                    $("#notesCount").text(nCount);
+                }
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
+    });
 
 
 })(jQuery);

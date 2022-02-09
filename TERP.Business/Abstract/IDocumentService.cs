@@ -13,9 +13,15 @@ namespace TERP.Business.Abstract
 
         void Update(Document document);
 
+        void Delete(Document document);
+
         List<Document> GetAll();
 
         Document GetById(int id);
+
+        List<Document> GetAllWithPersonalAndCarByPersonalId(int id);
+
+        List<Document> GetAllWithPersonalAndCar();
 
     }
 }
