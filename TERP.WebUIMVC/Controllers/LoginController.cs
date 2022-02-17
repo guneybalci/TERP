@@ -40,7 +40,7 @@ namespace TERP.WebUIMVC.Controllers
                     if (!user.IsDeleted && user.IsActive)
                     {
                         FormsAuthentication.SetAuthCookie(model.Username, false);
-                        return RedirectPermanent("/");
+                        return RedirectToAction("Index", "Home");
                     }
                     else
                     {
@@ -62,8 +62,8 @@ namespace TERP.WebUIMVC.Controllers
         public ActionResult LogOut()
         {
             FormsAuthentication.SignOut();
-            
-            return RedirectPermanent("/");
+
+            return RedirectToAction("Index", "Home");
         }
 
         [CustomAuthorize]
